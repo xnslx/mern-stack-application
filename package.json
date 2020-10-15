@@ -1,18 +1,23 @@
 {
-  "name": "mern_stack_application",
-  "version": "1.0.0",
-  "description": "mern stack",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Xian",
-  "license": "MIT",
-  "dependencies": {
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.5"
-  }
+    "name": "mern_stack_application",
+    "version": "1.0.0",
+    "description": "mern stack",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon app.js",
+        "start-server": "node app.js"
+    },
+    "author": "Xian",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "mongodb": "^3.6.2",
+        "mongoose": "^5.10.9"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.5"
+    }
 }
