@@ -6,9 +6,13 @@ const mongodb = require('mongodb');
 const mongoose = require('mongoose');
 const dbUrl = require('./keys').URL;
 
+const authRoutes = require('./routes/auth');
+
 // const dbUrl = process.env.URL;
 
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(authRoutes);
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true
