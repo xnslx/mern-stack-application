@@ -1,5 +1,6 @@
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
+const { validationResult } = require('express-validator');
 
 exports.getSignup = (req, res, next) => {
     console.log('req.body', req.body)
@@ -48,8 +49,13 @@ exports.getLogin = (req, res, next) => {
 }
 
 exports.postLogin = (req, res, next) => {
+    const errors = validationResult(req);
     const email = req.body.email;
     const password = req.body.password;
+    // console.log(errors.errors)
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    }
     User.findOne({ email: email }).then(user => {
         if (!user) {
             return res.status(404).json('Email not found!')
@@ -58,9 +64,9 @@ exports.postLogin = (req, res, next) => {
                 .compare(password, user.password)
                 .then(isMatch => {
                     if (isMatch) {
-                        res.json('log in successfully!')
+                        res.json('Log in successfully!')
                     } else {
-                        res.json('password is wrong!')
+                        res.json('Password is wrong!')
                     }
                 })
         }
