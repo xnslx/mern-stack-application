@@ -10,12 +10,15 @@ const authRoutes = require('./routes/auth');
 
 // const dbUrl = process.env.URL;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(authRoutes);
+app.use(bodyParser.json())
+
+app.use('/signup', authRoutes);
 
 mongoose.connect(dbUrl, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }).then(() => {
     console.log('Mongodb successfully connected!')
 }).catch(err => {
