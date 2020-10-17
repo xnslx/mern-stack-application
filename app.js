@@ -14,7 +14,7 @@ const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.json())
 
-app.use('/signup', authRoutes);
+app.use('/', authRoutes);
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
