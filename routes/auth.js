@@ -1,5 +1,5 @@
 const express = require('express');
-const { body } = require('express-validator');
+const { check, body } = require('express-validator');
 const router = express.Router();
 
 const authController = require('../controllers/auth');
@@ -21,6 +21,11 @@ router.post('/signup', [
                 }
             })
     })
+    .normalizeEmail(),
+    body('password', 'Password has to be valid.')
+    .isLength({ min: 5, max: 20 })
+    .isAlphanumeric()
+    .trim()
 ], authController.postSignup)
 
 router.get('/login', authController.getLogin);

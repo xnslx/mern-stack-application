@@ -18,6 +18,10 @@ exports.postSignup = (req, res, next) => {
     const name = req.body.name;
     const email = req.body.email;
     const password = req.body.password;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() })
+    }
     User
         .findOne({ email: email })
         .then(user => {
@@ -54,11 +58,11 @@ exports.postLogin = (req, res, next) => {
     const password = req.body.password;
     // console.log(errors.errors)
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() })
+        return res.status(422).json({ errors: errors.array() })
     }
     User.findOne({ email: email }).then(user => {
         if (!user) {
-            return res.status(404).json('Email not found!')
+            return res.status(401).json('Email not found!')
         } else {
             bcrypt
                 .compare(password, user.password)
