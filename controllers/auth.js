@@ -1,6 +1,8 @@
+require('dotenv').config();
 const User = require('../models/users');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 
 exports.getSignup = (req, res, next) => {
     console.log('req.body', req.body)
@@ -67,10 +69,13 @@ exports.postLogin = (req, res, next) => {
             bcrypt
                 .compare(password, user.password)
                 .then(isMatch => {
-                    if (isMatch) {
-                        res.json('Log in successfully!')
-                    } else {
+                    if (!isMatch) {
                         res.json('Password is wrong!')
+                    } else {
+                        const username = req.body.email;
+                        const user = { name: username }
+                        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+                        res.json({ token: token })
                     }
                 })
         }
