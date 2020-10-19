@@ -4,6 +4,7 @@ const router = express.Router();
 
 const authController = require('../controllers/auth');
 const User = require('../models/users');
+const isAuth = require('../middleware/is-auth');
 
 router.get('/signup', authController.getSignup)
 
@@ -28,7 +29,7 @@ router.post('/signup', [
     .trim()
 ], authController.postSignup)
 
-router.get('/login', authController.getLogin);
+router.get('/login', isAuth.authenticationToken, authController.getLogin);
 
 router.post('/login', [
     body('email')
