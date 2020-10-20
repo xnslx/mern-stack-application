@@ -1,5 +1,5 @@
 {
-    "name": "mern_stack_application",
+    "name": "client",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
