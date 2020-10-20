@@ -4,15 +4,19 @@
     "description": "mern stack",
     "main": "app.js",
     "scripts": {
+        "client-install": "npm install --prefix client",
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "nodemon app.js",
-        "start-server": "node app.js"
+        "server": "node app.js",
+        "client": "npm start --prefix client",
+        "dev": "concurrently \"npm run server\" \"npm run client\""
     },
     "author": "Xian",
     "license": "MIT",
     "dependencies": {
         "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
+        "concurrently": "^5.3.0",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-validator": "^6.6.1",
