@@ -11,7 +11,7 @@ router.get('/signup', authController.getSignup)
 router.post('/signup', [
     body('name')
     .trim(),
-    body('email')
+    check('email')
     .isEmail()
     .withMessage('Please enter a valid email')
     .custom((value, { req }) => {
@@ -29,7 +29,7 @@ router.post('/signup', [
     .trim()
 ], authController.postSignup)
 
-router.get('/login', isAuth.authenticationToken, authController.getLogin);
+router.get('/login', authController.getLogin);
 
 router.post('/login', [
     body('email')

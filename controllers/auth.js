@@ -24,29 +24,21 @@ exports.postSignup = (req, res, next) => {
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() })
     }
-    User
-        .findOne({ email: email })
-        .then(user => {
-            if (user) {
-                return res.status(400).json('email already exists!')
-            } else {
-                bcrypt
-                    .hash(password, 10)
-                    .then(hashedPassword => {
-                        const newUser = new User({
-                            name: name,
-                            email: email,
-                            password: hashedPassword
-                        })
-                        return newUser.save()
-                    })
-                    .then(() => {
-                        res.status(201).json('you successfully sign up!')
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            }
+    bcrypt
+        .hash(password, 10)
+        .then(hashedPassword => {
+            const newUser = new User({
+                name: name,
+                email: email,
+                password: hashedPassword
+            })
+            return newUser.save();
+        })
+        .then(result => {
+            res.status(201).json('you successfully sign up!');
+        })
+        .catch(err => {
+            console.log(err)
         })
 }
 

@@ -14,21 +14,25 @@ const Signup = () => {
         password:password
     }
 
-    const postUserInfo = (userInfo) => {
-        axios.post('http://localhost:3001/signup', {newUser}).then(result => {
+    // const postUserInfo = (userInfo) => {
+    //     axios.post('/signup', newUser).then(result => {
+    //         console.log(result)
+    //     }).catch(err => {
+    //         console.log(err)
+    //     })
+    // }
+
+    // useEffect(() => {
+    //     postUserInfo()
+    // },[]);
+
+    const submitHandler = (e, userInfo) => {
+        e.preventDefault();
+        axios.post('/signup', newUser).then(result => {
             console.log(result)
         }).catch(err => {
             console.log(err)
         })
-    }
-
-    useEffect(() => {
-        postUserInfo()
-    },[]);
-
-    const submitHandler = (e) => {
-        e.preventDefault();
-        postUserInfo()
     }
     return (
         <div>
