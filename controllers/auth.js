@@ -35,7 +35,8 @@ exports.postSignup = (req, res, next) => {
             return newUser.save();
         })
         .then(result => {
-            res.status(201).json('you successfully sign up!');
+            console.log('result', result)
+            res.status(201).json({ message: 'you successfully sign up!', userId: result._id });
         })
         .catch(err => {
             console.log(err)
