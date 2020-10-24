@@ -54,7 +54,7 @@ const Signup = () => {
                     <div>
                         <label htmlFor="email">Email</label>
                         <input 
-                            type="text"
+                            type="email"
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />
@@ -62,7 +62,7 @@ const Signup = () => {
                     <div>
                         <label htmlFor="password">Password</label>
                         <input 
-                            type="text"
+                            type="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                         />
@@ -70,7 +70,7 @@ const Signup = () => {
                     <div>
                         <label htmlFor="confirmPassword">Confirm Password</label>
                         <input 
-                            type="text"
+                            type="password"
                             value={confirmPassword}
                             onChange={e => setConfirmPassword(e.target.value)}
                         />
