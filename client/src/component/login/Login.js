@@ -12,11 +12,11 @@ const Login = () => {
             <div>
                 <form action="">
                     <div>
-                        <label for="email">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input type="text"/>
                     </div>
                     <div>
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input type="text"/>
                     </div>
                     <button type="submit">LOG IN</button>
