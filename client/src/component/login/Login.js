@@ -1,7 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
+import setAuthToken from '../../middleware/middleware';
 import {Link} from 'react-router-dom';
 
+
 const Login = () => {
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const currentUser = {
+        email: email,
+        password: password
+    }
+
+    const loginSubmitHandler = (e, userInfo) => {
+        e.preventDefault()
+        axios.post('/login', currentUser)
+            .then(result => {
+                const {token} = result.data;
+                localStorage.setItem('jwtToken', token)
+                setAuthToken(token)
+                console.log(result)
+        }).catch(err => {
+            console.log(err)
+        })
+    }
     return (
         <div>
             <Link to='/' >BACK TO HOME</Link>
@@ -10,14 +34,24 @@ const Login = () => {
             <br/>
             <br/>
             <div>
-                <form action="">
+                <form action="" onSubmit={loginSubmitHandler}>
                     <div>
                         <label htmlFor="email">Email</label>
-                        <input type="text"/>
+                        <input 
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
-                        <input type="text"/>
+                        <input 
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                        />
                     </div>
                     <button type="submit">LOG IN</button>
                 </form>

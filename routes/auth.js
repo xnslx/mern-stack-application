@@ -27,16 +27,17 @@ router.post('/signup', [
     body('password', 'Password has to be valid.')
     .isLength({ min: 5, max: 20 })
     .isAlphanumeric()
-    .trim(),
-    check('confirmPassword')
-    .custom((value, { req }) => {
-        if (value !== req.body.password) {
-            throw new Error('Password have to be matched!')
-        } else {
-            return true;
-        }
-    })
     .trim()
+    // body('confirmPassword')
+    // .custom((value, { req }) => {
+    //     console.log('value', value)
+    //     if (value !== req.body.password) {
+    //         throw new Error('Password has to be matched!')
+    //     } else {
+    //         return true;
+    //     }
+    // })
+    // .trim()
 ], authController.postSignup)
 
 router.get('/login', authController.getLogin);
