@@ -3,7 +3,7 @@ import './App.css';
 import {Switch, BrowserRouter as Router, Route} from 'react-router-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import rootReducer from './reducer/reducer';
+import rootReducer from './reducer/index';
 import Nav from './component/nav/Nav';
 import Main from './component/main/Main';
 import Signup from './component/signup/Signup';

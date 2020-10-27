@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { signupUser } from '../../action/action';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
 
-const Signup = () => {
+const Signup = (props) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -26,13 +29,9 @@ const Signup = () => {
     //     postUserInfo()
     // },[]);
 
-    const submitHandler = (e, userInfo) => {
+    const submitHandler = (e) => {
         e.preventDefault();
-        axios.post('/signup', newUser).then(result => {
-            console.log(result)
-        }).catch(err => {
-            console.log(err)
-        })
+        signupUser(newUser, props.history)
     }
     return (
         <div>
@@ -86,4 +85,13 @@ const Signup = () => {
     )
 };
 
-export default Signup;
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Signup));
+
+
