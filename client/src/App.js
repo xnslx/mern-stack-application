@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import {Switch, BrowserRouter as Router, Route} from 'react-router-dom';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
+import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import rootReducer from './reducer/index';
 import Nav from './component/nav/Nav';
@@ -10,7 +11,10 @@ import Signup from './component/signup/Signup';
 import Login from './component/login/Login';
 import Dashboard from './component/dashboard/Dashboard';
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+const store = createStore(rootReducer, compose(
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+))
 
 function App() {
   return (

@@ -1,7 +1,9 @@
 import * as actionTypes from '../action/type';
+const isEmpty = require('is-empty');
 
 const initialState = {
-    isAuthenticated: false
+    isAuthenticated: false,
+    user: {}
 }
 
 const authReducer = (state = initialState, action) => {
@@ -9,7 +11,8 @@ const authReducer = (state = initialState, action) => {
         case actionTypes.SET_CURRENT_USER:
             return {
                 ...state,
-                isAuthenticated: false
+                isAuthenticated: !isEmpty(action.payload),
+                user: action.payload
             }
         default:
             return state

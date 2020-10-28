@@ -1,10 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import setAuthToken from '../../middleware/middleware';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router';
+import { loginUser } from '../../action/action';
+import {SET_CURRENT_USER} from '../../action/type';
 
 
-const Login = () => {
+const Login = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,18 +18,34 @@ const Login = () => {
         password: password
     }
 
-    const loginSubmitHandler = (e, userInfo) => {
-        e.preventDefault()
-        axios.post('/login', currentUser)
-            .then(result => {
-                const {token} = result.data;
-                localStorage.setItem('jwtToken', token)
-                setAuthToken(token)
-                console.log(result)
-        }).catch(err => {
-            console.log(err)
-        })
+    const loginSubmitHandler = (e) => {
+        e.preventDefault();
+        // loginUser(currentUser)
+        props.dispatch(loginUser(currentUser))
+        // if(props.auth.isAuthenticated) {
+        //     props.history.push('/dashboard')
+        // }
+        // axios.post('/login', currentUser)
+        //     .then(result => {
+        //         const {token} = result.data;
+        //         localStorage.setItem('jwtToken', token)
+        //         setAuthToken(token)
+        //         console.log(result)
+        // }).catch(err => {
+        //     console.log(err)
+        // })
+
     }
+    const pushUserToDashboard = () => {
+        if(props.auth.isAuthenticated) {
+            props.history.push('/dashboard')
+        }
+    }
+
+    useEffect(() => {
+        pushUserToDashboard()
+    }, []);
+
     return (
         <div>
             <Link to='/' >BACK TO HOME</Link>
@@ -60,4 +80,12 @@ const Login = () => {
     )
 };
 
-export default Login;
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        auth: state.auth
+    }
+}
+
+
+export default connect(mapStateToProps)(withRouter(Login));
