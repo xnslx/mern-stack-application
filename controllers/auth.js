@@ -70,10 +70,11 @@ exports.postLogin = (req, res, next) => {
                 } else {
                     const user = {
                         email: loadedUser.email,
-                        userId: loadedUser._id.toString()
+                        userId: loadedUser._id.toString(),
+                        userName: loadedUser.name
                     }
                     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
-                    res.json({ token: token, userId: user.userId })
+                    res.json({ token: token, userId: user.userId, userName: user.userName })
                 }
             })
     })

@@ -5,11 +5,12 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import { loginUser } from '../../action/action';
+import Dashboard from '../dashboard/Dashboard';
 import {SET_CURRENT_USER} from '../../action/type';
 
 
 const Login = (props) => {
-
+    // console.log('props', props)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -18,33 +19,16 @@ const Login = (props) => {
         password: password
     }
 
+    // useEffect(() => {
+    //     if(props.auth.isAuthenticated) {
+    //         props.history.push('/dashboard')
+    //     }
+    // }, []);
+
     const loginSubmitHandler = (e) => {
         e.preventDefault();
-        // loginUser(currentUser)
-        props.dispatch(loginUser(currentUser))
-        // if(props.auth.isAuthenticated) {
-        //     props.history.push('/dashboard')
-        // }
-        // axios.post('/login', currentUser)
-        //     .then(result => {
-        //         const {token} = result.data;
-        //         localStorage.setItem('jwtToken', token)
-        //         setAuthToken(token)
-        //         console.log(result)
-        // }).catch(err => {
-        //     console.log(err)
-        // })
-
+        props.dispatch(loginUser(currentUser, props.history));
     }
-    const pushUserToDashboard = () => {
-        if(props.auth.isAuthenticated) {
-            props.history.push('/dashboard')
-        }
-    }
-
-    useEffect(() => {
-        pushUserToDashboard()
-    }, []);
 
     return (
         <div>

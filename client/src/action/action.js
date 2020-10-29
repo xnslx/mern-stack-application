@@ -14,7 +14,7 @@ export const signupUser = (userInfo, history) => {
         })
 }
 
-export const loginUser = (currentUser) => (dispatch) => {
+export const loginUser = (currentUser, history) => (dispatch) => {
     axios.post('/login', currentUser)
         .then(result => {
             const { token } = result.data;
@@ -22,6 +22,7 @@ export const loginUser = (currentUser) => (dispatch) => {
             setAuthToken(token)
                 // console.log('result', result);
             dispatch(setCurrentUser(jwt.decode(token)))
+            history.push('/dashboard')
         })
         .catch(err => {
             console.log(err)
