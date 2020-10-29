@@ -1,10 +1,18 @@
+import { GET_ERROR } from '../action/type';
+
 const initialState = {
     hasError: false
 }
 
 const errorReducer = (state = initialState, action) => {
     switch (action.type) {
-        default: return state
+        case 'GET_ERROR':
+            return {
+                ...state,
+                hasError: action.payload
+            }
+        default:
+            return state
     }
 }
 
