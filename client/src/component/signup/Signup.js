@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { signupUser } from '../../action/action';
+import { signupUser,getErrorMessage } from '../../action/action';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
 
 const Signup = (props) => {
+    // console.log('props', props)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState({})
+
 
     const newUser = {
         name:name,
@@ -17,29 +20,41 @@ const Signup = (props) => {
         password:password
     }
 
-    // const postUserInfo = (userInfo) => {
-    //     axios.post('/signup', newUser).then(result => {
-    //         console.log(result)
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // }
+    useEffect(() => {
+        getErrorMessage()
+    }, [props.error])
 
-    // useEffect(() => {
-    //     postUserInfo()
-    // },[]);
+    const getErrorMessage = () => {
+        if(props.error !== null) {
+        setError(props.error.errors)
+        }
+    }
 
+    console.log('error', error)
+        
     const submitHandler = (e) => {
         e.preventDefault();
-        signupUser(newUser, props.history)
+        props.dispatch(signupUser(newUser, props.history))
     }
+
+    let errorMessage;
+    if(error.length >0) {
+        error.forEach(err => (errorMessage =
+            <ul>
+                <li>{err.msg}</li>
+            </ul>
+        ))
+    } else {
+        errorMessage = ''
+    }
+
     return (
         <div>
             <Link to='/' >BACK TO HOME</Link>
             <h3>Sign up below</h3>
             <h5>Already have an account? <Link to='/login'>Log in</Link></h5>
             <br/>
-            <br/>
+            {errorMessage}
             <div>
                 <form action="" onSubmit={submitHandler}>
                     <div>
@@ -86,12 +101,12 @@ const Signup = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
+    // console.log('state', state)
     return {
-        auth: state.auth
+        auth: state.auth,
+        error: state.error
     }
 }
-
 export default connect(mapStateToProps)(withRouter(Signup));
 
 

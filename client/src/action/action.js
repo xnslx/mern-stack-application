@@ -1,16 +1,20 @@
 import axios from 'axios';
 import setAuthToken from '../middleware/middleware';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER } from './type';
+import { SET_CURRENT_USER, GET_ERROR } from './type';
 
-export const signupUser = (userInfo, history) => {
+export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
         .then(result => {
             history.push('/login')
             console.log(result)
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
         })
 }
 
@@ -25,7 +29,11 @@ export const loginUser = (currentUser, history) => (dispatch) => {
             history.push('/dashboard')
         })
         .catch(err => {
-            console.log(err)
+            // console.log(err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
         })
 }
 
@@ -41,4 +49,11 @@ export const logoutUser = (history) => (dispatch) => {
     setAuthToken(false);
     dispatch(setCurrentUser({}))
     history.push('/')
+}
+
+export const getErrorMessage = (error) => {
+    return {
+        type: 'GET_ERROR',
+        payload: error
+    }
 }
