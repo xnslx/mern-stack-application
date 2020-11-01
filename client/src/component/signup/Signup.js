@@ -17,7 +17,8 @@ const Signup = (props) => {
     const newUser = {
         name:name,
         email:email,
-        password:password
+        password:password,
+        confirmPassword:confirmPassword
     }
 
     useEffect(() => {
@@ -47,6 +48,7 @@ const Signup = (props) => {
     } else {
         errorMessage = ''
     }
+
 
     return (
         <div>
