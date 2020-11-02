@@ -38,16 +38,16 @@ const Signup = (props) => {
         props.dispatch(signupUser(newUser, props.history))
     }
 
-    let errorMessage;
-    if(error.length >0) {
-        error.forEach(err => (errorMessage =
-            <ul>
-                <li>{err.msg}</li>
-            </ul>
-        ))
-    } else {
-        errorMessage = ''
-    }
+    // let errorMessage;
+    // if(error.length >0) {
+    //     error.forEach(err => errorMessage =(
+    //         <ul>
+    //             <li>{err.msg}</li>
+    //         </ul>
+    //     ))
+    // } else {
+    //     errorMessage = ''
+    // }
 
 
     return (
@@ -56,7 +56,7 @@ const Signup = (props) => {
             <h3>Sign up below</h3>
             <h5>Already have an account? <Link to='/login'>Log in</Link></h5>
             <br/>
-            {errorMessage}
+            {error.length > 0? <ul>{error.map((err,index) => <li key={index}>{err.msg}</li>)}</ul> : null}
             <div>
                 <form action="" onSubmit={submitHandler}>
                     <div>
