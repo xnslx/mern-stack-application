@@ -10,20 +10,28 @@ import {SET_CURRENT_USER} from '../../action/type';
 
 
 const Login = (props) => {
-    // console.log('props', props)
+    console.log('props', props)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState({});
 
     const currentUser = {
         email: email,
         password: password
     }
 
-    // useEffect(() => {
-    //     if(props.auth.isAuthenticated) {
-    //         props.history.push('/dashboard')
-    //     }
-    // }, []);
+
+    useEffect(() => {
+        getErrorMessage()
+    }, [props.error])
+
+    const getErrorMessage = () => {
+        if(props.error !== null) {
+        setError(props.error.errors)
+        }
+    }
+
+    console.log('error', error)
 
     const loginSubmitHandler = (e) => {
         e.preventDefault();
@@ -37,6 +45,7 @@ const Login = (props) => {
             <h5>Don't have an account? <Link to='/signup'>Sign up</Link></h5>
             <br/>
             <br/>
+            {error.length > 0? <ul>{error.map((err,index) => <li key={index}>{err.msg}</li>)}</ul> : null}
             <div>
                 <form action="" onSubmit={loginSubmitHandler}>
                     <div>
@@ -67,7 +76,8 @@ const Login = (props) => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
-        auth: state.auth
+        auth: state.auth,
+        error: state.error
     }
 }
 
