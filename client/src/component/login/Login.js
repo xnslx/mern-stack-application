@@ -4,7 +4,7 @@ import setAuthToken from '../../middleware/middleware';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import { loginUser } from '../../action/action';
+import { loginUser} from '../../action/action';
 import Dashboard from '../dashboard/Dashboard';
 import {SET_CURRENT_USER} from '../../action/type';
 
@@ -27,7 +27,7 @@ const Login = (props) => {
 
     const getErrorMessage = () => {
         if(props.error !== null) {
-        setError(props.error.errors)
+        setError(props.error.errors);
         }
     }
 
