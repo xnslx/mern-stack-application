@@ -106,7 +106,7 @@ const mapStateToProps = (state) => {
     // console.log('state', state)
     return {
         auth: state.auth,
-        error: state.error
+        error: state.error.message
     }
 }
 export default connect(mapStateToProps)(withRouter(Signup));

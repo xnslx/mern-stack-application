@@ -15,6 +15,9 @@ export const signupUser = (userInfo, history) => (dispatch) => {
                 type: 'GET_ERROR',
                 payload: err.response.data
             })
+            dispatch({
+                type: 'CLEAR_ERROR'
+            })
         })
 }
 
@@ -33,6 +36,9 @@ export const loginUser = (currentUser, history) => (dispatch) => {
             dispatch({
                 type: 'GET_ERROR',
                 payload: err.response.data
+            })
+            dispatch({
+                type: 'CLEAR_ERROR'
             })
         })
 }
