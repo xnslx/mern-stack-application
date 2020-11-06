@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import {Route, Redirect} from 'react-router-dom';
 import Dashboard from './dashboard/Dashboard';
@@ -13,7 +13,7 @@ const PrivateRoute = (props) => {
             {...props.rest}
             render={props => {
                 if(isAuthenticated === true) {
-                    return <Component {...props}/>
+                    return <Dashboard {...props}/>
                 } else {
                     return (
                         <Redirect 
