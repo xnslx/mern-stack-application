@@ -69,6 +69,7 @@ const Login = (props) => {
                     <button type="submit">LOG IN</button>
                 </form>
             </div>
+            <a href="/findpassword">Forget Password</a>
         </div>
     )
 };
