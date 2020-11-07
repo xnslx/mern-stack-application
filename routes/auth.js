@@ -56,4 +56,11 @@ router.post('/login', [
 
 router.post('/logout', authController.postLogout)
 
+router.post('/findpassword', [
+    body('email')
+    .isEmail()
+    .withMessage('Please enter a valid email.')
+    .normalizeEmail()
+], authController.postFindPassword)
+
 module.exports = router;
