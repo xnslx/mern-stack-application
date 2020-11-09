@@ -63,4 +63,13 @@ router.post('/findpassword', [
     .normalizeEmail()
 ], authController.postFindPassword)
 
+router.get('/findpassword/:token', authController.getFindPassword)
+
+router.post('/updatepassword', [
+    body('password', 'Password has to be valid.')
+    .isLength({ min: 5, max: 20 })
+    .isAlphanumeric()
+    .trim()
+], authController.postUpdatePassword)
+
 module.exports = router;

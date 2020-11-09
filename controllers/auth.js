@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 
 exports.getSignup = (req, res, next) => {
-    console.log('req.body', req.body)
+    // console.log('req.body', req.body)
     User
         .find()
         .then(result => {
@@ -99,6 +99,10 @@ exports.postFindPassword = (req, res, next) => {
         const token = crypto.randomBytes(32).toString('hex');
         user.resetToken = token;
         user.resetTokenExpiration = Date.now() + 3600000;
+        return user.save()
+    }).then(result => {
+        console.log('result', result)
+        const token = result.resetToken
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -111,7 +115,7 @@ exports.postFindPassword = (req, res, next) => {
             to: req.body.email,
             subject: 'Reset Password',
             html: `
-                <p>Click this <a href="http://localhost:3001/findpassword/{token}">link</a> to set a new password. </p>
+                <p>Click this <a href="http://localhost:3001/findpassword/${token}">link</a> to set a new password. </p>
             `
         }
         transporter.sendMail(mailOptions, (err, data) => {
@@ -121,4 +125,47 @@ exports.postFindPassword = (req, res, next) => {
             return res.status(201).json('Email sent!')
         })
     })
+
+}
+
+exports.getFindPassword = (req, res, next) => {
+    const token = req.params.token;
+    User.findOne({ resetToken: token }).then(user => {
+        if (user === null) {
+            res.json('password link is invalid')
+        } else {
+            res.status(200).json('password link accepted')
+        }
+    })
+}
+
+exports.postUpdatePassword = (req, res, next) => {
+    console.log('postUpdatePassword', req.body)
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() })
+    }
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+    const userId = req.body.userId;
+    const passwordToken = req.body.passwordToken;
+    let resetUser;
+    User.findOne({ resetToken: passwordToken, resetTokenExpiration: { $gt: Date.now() }, _id: userId })
+        .then(user => {
+            console.log('user', user)
+            resetUser = user;
+            return bcrypt.hash(confirmPassword, 12)
+        })
+        .then(hashedPassword => {
+            resetUser.password = hashedPassword;
+            resetUser.resetToken = undefined;
+            resetUser.resetTokenExpiration = undefined;
+            return resetUser.save()
+        })
+        .then(() => {
+            res.status(200).json('password updated')
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
