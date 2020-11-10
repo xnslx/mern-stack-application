@@ -1,11 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {retrievePassword} from '../../action/action';
 
-const FindPassword = () => {
-    const [email, setEmail] = useState('')
+const FindPassword = (props) => {
+    const [email, setEmail] = useState('');
+
+    const findPasswordHandler = (e, email) => {
+        e.preventDefault();
+        props.dispatch(retrievePassword(email))
+    }
     return (
         <div>
         <p>Type your email to reset the password.</p>
-            <form action="">
+            <form action="" onSubmit={findPasswordHandler}>
                 <label htmlFor="email">Email</label>
                 <input 
                     type="email"
@@ -19,4 +26,11 @@ const FindPassword = () => {
     )
 };
 
-export default FindPassword;
+const mapStateToProps = (state) => {
+    return {
+        auth: state.auth,
+        error: state.error.message
+    }
+}
+
+export default connect(mapStateToProps)(FindPassword);

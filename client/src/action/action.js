@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../middleware/middleware';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR } from './type';
+import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD } from './type';
 
 export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
@@ -68,4 +68,14 @@ export const clearError = () => {
     return {
         type: 'CLEAR_ERROR'
     }
+}
+
+export const retrievePassword = (email) => (dispatch) => {
+    axios.post('/findpassword', email)
+        .then(result => {
+            console.log('result', result)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
