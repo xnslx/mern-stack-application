@@ -3,11 +3,16 @@ import {connect} from 'react-redux';
 import {retrievePassword} from '../../action/action';
 
 const FindPassword = (props) => {
+    console.log('props', props)
     const [email, setEmail] = useState('');
 
-    const findPasswordHandler = (e, email) => {
+    const verifiedEmail = {
+        email: email
+    }
+
+    const findPasswordHandler = (e) => {
         e.preventDefault();
-        props.dispatch(retrievePassword(email))
+        props.dispatch(retrievePassword(verifiedEmail))
     }
     return (
         <div>
@@ -27,6 +32,7 @@ const FindPassword = (props) => {
 };
 
 const mapStateToProps = (state) => {
+    console.log('state', state)
     return {
         auth: state.auth,
         error: state.error.message

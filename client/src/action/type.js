@@ -3,3 +3,4 @@ export const IS_LOADING = 'IS_LOADING';
 export const GET_ERROR = 'GET_ERROR';
 export const CLEAR_ERROR = 'CLEAR_ERROR';
 export const RETRIEVE_PASSWORD = 'RETRIEVE_PASSWORD';
+export const SET_FINDPASSWORD_USER = 'SET_FINDPASSWORD_USER';
