@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../middleware/middleware';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD } from './type';
+import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA } from './type';
 
 export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
@@ -70,12 +70,25 @@ export const clearError = () => {
     }
 }
 
+export const getBackendData = result => {
+    console.log('result', result)
+    return {
+        type: 'GET_BACKEND_DATA',
+        payload: result
+    }
+}
+
 export const retrievePassword = (email) => (dispatch) => {
     axios.post('/findpassword', email)
         .then(result => {
             console.log('result', result)
+            dispatch(getBackendData(result.data))
         })
         .catch(err => {
-            console.log(err)
+            console.log('err', err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
         })
 }

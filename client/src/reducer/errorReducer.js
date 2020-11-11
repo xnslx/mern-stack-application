@@ -1,7 +1,8 @@
 import { GET_ERROR, CLEAR_ERROR } from '../action/type';
 
 const initialState = {
-    message: null
+    message: null,
+    hasError: false
 };
 
 const errorReducer = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const errorReducer = (state = initialState, action) => {
         case 'GET_ERROR':
             return {
                 ...state,
-                message: action.payload
+                message: action.payload,
+                hasError: true
             }
         case 'CLEAR_ERROR':
             return {
