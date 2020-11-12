@@ -12,6 +12,7 @@ import Login from './component/login/Login';
 import Dashboard from './component/dashboard/Dashboard';
 import PrivateRoute from './component/PrivateRoute';
 import FindPassword from './component/findpassword/FindPassword';
+import ResetPassword from './component/resetPassword/ResetPassword';
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(thunk),
@@ -30,6 +31,7 @@ function App() {
             <PrivateRoute  exact path='/dashboard' component={Dashboard}/>
             <Route path='/' exact component={Main}/>
             <Route path='/findpassword' component={FindPassword}/>
+            <Route path='findpassword/:token' component={ResetPassword}/>
           </Switch>
         </div>
       </Router>

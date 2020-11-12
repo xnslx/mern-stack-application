@@ -26,7 +26,8 @@ const FindPassword = (props) => {
 
     const findPasswordHandler = (e) => {
         e.preventDefault();
-        props.dispatch(retrievePassword(verifiedEmail))
+        props.dispatch(retrievePassword(verifiedEmail));
+        setEmail('')
     }
 
 
