@@ -31,7 +31,7 @@ function App() {
             <PrivateRoute  exact path='/dashboard' component={Dashboard}/>
             <Route path='/' exact component={Main}/>
             <Route path='/findpassword' component={FindPassword}/>
-            <Route path='findpassword/:token' component={ResetPassword}/>
+            <Route path='/updatepassword/:token' component={ResetPassword}/>
           </Switch>
         </div>
       </Router>

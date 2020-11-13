@@ -115,7 +115,7 @@ exports.postFindPassword = (req, res, next) => {
             to: req.body.email,
             subject: 'Reset Password',
             html: `
-                <p>Click this <a href="http://localhost:3001/findpassword/${token}">link</a> to set a new password. </p>
+                <p>Click this <a href="http://localhost:3000/updatepassword/${token}">link</a> to set a new password. </p>
             `
         }
         transporter.sendMail(mailOptions, (err, data) => {
@@ -125,7 +125,6 @@ exports.postFindPassword = (req, res, next) => {
             return res.status(201).json('Email sent!')
         })
     })
-
 }
 
 exports.getFindPassword = (req, res, next) => {
@@ -134,7 +133,7 @@ exports.getFindPassword = (req, res, next) => {
         if (user === null) {
             res.json('password link is invalid')
         } else {
-            res.status(200).json('password link accepted')
+            res.status(201).json('password link accepted')
         }
     })
 }
