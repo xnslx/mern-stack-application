@@ -65,7 +65,7 @@ router.post('/findpassword', [
 
 router.get('/updatepassword/:token', authController.getFindPassword)
 
-router.post('/updatepassword/:token', [
+router.post('/updatepassword', [
     body('password', 'Password has to be valid.')
     .isLength({ min: 5, max: 20 })
     .isAlphanumeric()

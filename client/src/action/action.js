@@ -92,3 +92,18 @@ export const retrievePassword = (email) => (dispatch) => {
             })
         })
 }
+
+export const resetPassword = (verifiedPassword) => (dispatch) => {
+    axios.post('/updatepassword', verifiedPassword)
+        .then(result => {
+            console.log('result', result)
+            dispatch(getBackendData(result.data))
+        })
+        .catch(err => {
+            console.log('err', err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
+        })
+}

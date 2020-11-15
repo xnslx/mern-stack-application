@@ -20,6 +20,12 @@ const authReducer = (state = initialState, action) => {
                 isAuthenticated: false,
                 user: action.payload
             }
+        case actionTypes.RESET_PASSWORD:
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: action.payload
+            }
         default:
             return state
     }

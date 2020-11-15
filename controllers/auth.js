@@ -130,10 +130,16 @@ exports.postFindPassword = (req, res, next) => {
 exports.getFindPassword = (req, res, next) => {
     const token = req.params.token;
     User.findOne({ resetToken: token }).then(user => {
+        console.log('user', user)
         if (user === null) {
             res.json('password link is invalid')
         } else {
-            res.status(201).json('password link accepted')
+            res.status(201).json({
+                message: 'password link accepted',
+                userId: user._id,
+                passwordToken: user.resetToken,
+                password: user.password
+            })
         }
     })
 }

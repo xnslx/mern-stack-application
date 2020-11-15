@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
+// import {resetPassword} from '../../action/action';
 import axios from 'axios';
 
 const ResetPassword = (props) => {
@@ -8,20 +9,37 @@ const ResetPassword = (props) => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState({})
+    
     const verifiedPassword = {
         password:password,
         confirmPassword: confirmPassword
     }
     const token = props.match.params.token;
+    console.log(password)
 
     const resetPasswordHandler = (e) => {
         e.preventDefault();
-        axios.post(`/updatepassword/${token}`, verifiedPassword).then(result => {
-            console.log('result',result)
+    }
+
+    useEffect(() => {
+        axios.get('/updatepassword/'+ token).then(result => {
+                console.log('result',result)
+                if(result.data.message === 'password link accepted') {
+                    setError(null)
+                }
+            }).catch(err => {
+                console.log(err)
+            })
+    },[])
+
+    useEffect(() => {
+        axios.post('/updatepassword', verifiedPassword).then(result => {
+            console.log(result)
         }).catch(err => {
             console.log(err)
         })
-    }
+    },[])
+
 
     return (
         <div>
@@ -47,5 +65,14 @@ const ResetPassword = (props) => {
         </div>
     )
 };
+
+// const mapStateToProps = (state) => {
+//     console.log('state', state)
+//     return {
+//         auth: state.auth,
+//         error: state.error,
+//         backendData: state.backendData.backendData
+//     }
+// }
 
 export default withRouter(ResetPassword);
