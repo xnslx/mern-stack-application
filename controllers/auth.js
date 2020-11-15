@@ -138,14 +138,15 @@ exports.getFindPassword = (req, res, next) => {
                 message: 'password link accepted',
                 userId: user._id,
                 passwordToken: user.resetToken,
-                password: user.password
+                password: user.password,
+                resetTokenExpiration: user.resetTokenExpiration
             })
         }
     })
 }
 
 exports.postUpdatePassword = (req, res, next) => {
-    console.log('postUpdatePassword', req.body)
+    console.log('req.body', req.body)
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() })

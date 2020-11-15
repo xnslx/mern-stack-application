@@ -8,14 +8,16 @@ const ResetPassword = (props) => {
     // console.log('props', props)
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState({})
+    const [error, setError] = useState({});
+    const [resetTokenExpiration, setResetTokenExpiration] = useState('');
+    const [userId, setUserId] = useState('')
     
     const verifiedPassword = {
         password:password,
         confirmPassword: confirmPassword
     }
     const token = props.match.params.token;
-    console.log(password)
+
 
     const resetPasswordHandler = (e) => {
         e.preventDefault();
@@ -25,7 +27,8 @@ const ResetPassword = (props) => {
         axios.get('/updatepassword/'+ token).then(result => {
                 console.log('result',result)
                 if(result.data.message === 'password link accepted') {
-                    setError(null)
+                    setUserId(result.data.userId)
+                    setResetTokenExpiration(result.data.resetTokenExpiration)
                 }
             }).catch(err => {
                 console.log(err)
@@ -33,7 +36,9 @@ const ResetPassword = (props) => {
     },[])
 
     useEffect(() => {
-        axios.post('/updatepassword', verifiedPassword).then(result => {
+        axios.post('/updatepassword', {
+            password:password, confirmPassword:confirmPassword, passwordToken: token, resetTokenExpiration: resetTokenExpiration, userId: userId
+        }).then(result => {
             console.log(result)
         }).catch(err => {
             console.log(err)
