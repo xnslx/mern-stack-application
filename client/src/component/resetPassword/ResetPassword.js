@@ -23,8 +23,10 @@ const ResetPassword = (props) => {
     const changeHandler = (e) => {
         setFormData({...formData, [e.target.value]: e.target.value})
     }
-
-    useEffect(() => {
+    
+    const resetPasswordHandler = (e) => {
+        console.log('i am clicked')
+        e.preventDefault();
         axios.post('/updatepassword', {
             password:password,confirmPassword:confirmPassword,passwordToken:token
         }).then(result => {
@@ -35,42 +37,30 @@ const ResetPassword = (props) => {
         }).catch(err => {
             console.log(err)
         })
-    },[])
-    
-    const resetPasswordHandler = (e) => {
-        e.preventDefault();
-        // axios.post('/updatepassword', {
-        //     password:password,confirmPassword:confirmPassword,passwordToken:token
-        // }).then(result => {
-        //     console.log('result', result)
-        //     if(result.data.message === 'password updated') {
-        //         props.history.push('/login')
-        //     }
-        // }).catch(err => {
-        //     console.log(err)
-        // })
     }
 
 
     return (
         <div>
             <form action="" onSubmit={resetPasswordHandler}>
-                <label htmlFor="password">Password</label>
-                <input 
-                    type="password" 
-                    id="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                />
-            </form>
-            <form action="">
-                <label htmlFor="confirmPassword">Confirm Password</label>
-                <input 
-                    type="password" 
-                    id="confirmPassword"
-                    value={confirmPassword}
-                    onChange={e => setConfirmPassword(e.target.value)}
-                />
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password"
+                        value={password}
+                        onChange={e => setPassword(e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword"
+                        value={confirmPassword}
+                        onChange={e => setConfirmPassword(e.target.value)}
+                    />
+                </div>
                 <button type="submit">Submit</button>
             </form>
         </div>
