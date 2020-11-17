@@ -5,12 +5,14 @@ import {withRouter} from 'react-router';
 import axios from 'axios';
 
 const ResetPassword = (props) => {
-    // console.log('props', props)
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState({});
-    const [resetTokenExpiration, setResetTokenExpiration] = useState('');
+    // const [resetTokenExpiration, setResetTokenExpiration] = useState('');
     const [userId, setUserId] = useState('')
+    const [formData, setFormData] = useState({
+        password:'', confirmPassword:''
+    })
     
     const verifiedPassword = {
         password:password,
@@ -18,32 +20,36 @@ const ResetPassword = (props) => {
     }
     const token = props.match.params.token;
 
-
-    const resetPasswordHandler = (e) => {
-        e.preventDefault();
+    const changeHandler = (e) => {
+        setFormData({...formData, [e.target.value]: e.target.value})
     }
 
     useEffect(() => {
-        axios.get('/updatepassword/'+ token).then(result => {
-                console.log('result',result)
-                if(result.data.message === 'password link accepted') {
-                    setUserId(result.data.userId)
-                    setResetTokenExpiration(result.data.resetTokenExpiration)
-                }
-            }).catch(err => {
-                console.log(err)
-            })
-    },[])
-
-    useEffect(() => {
         axios.post('/updatepassword', {
-            password:password, confirmPassword:confirmPassword, passwordToken: token, resetTokenExpiration: resetTokenExpiration, userId: userId
+            password:password,confirmPassword:confirmPassword,passwordToken:token
         }).then(result => {
-            console.log(result)
+            console.log('result', result)
+            if(result.data.message === 'password updated') {
+                props.history.push('/login')
+            }
         }).catch(err => {
             console.log(err)
         })
     },[])
+    
+    const resetPasswordHandler = (e) => {
+        e.preventDefault();
+        // axios.post('/updatepassword', {
+        //     password:password,confirmPassword:confirmPassword,passwordToken:token
+        // }).then(result => {
+        //     console.log('result', result)
+        //     if(result.data.message === 'password updated') {
+        //         props.history.push('/login')
+        //     }
+        // }).catch(err => {
+        //     console.log(err)
+        // })
+    }
 
 
     return (

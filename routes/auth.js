@@ -63,7 +63,7 @@ router.post('/findpassword', [
     .normalizeEmail()
 ], authController.postFindPassword)
 
-router.get('/updatepassword/:token', authController.getFindPassword)
+// router.get('/updatepassword/:token', authController.getFindPassword)
 
 router.post('/updatepassword', [
     body('password', 'Password has to be valid.')

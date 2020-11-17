@@ -115,7 +115,7 @@ exports.postFindPassword = (req, res, next) => {
             to: req.body.email,
             subject: 'Reset Password',
             html: `
-                <p>Click this <a href="http://localhost:3000/updatepassword/${token}">link</a> to set a new password. </p>
+                <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password. </p>
             `
         }
         transporter.sendMail(mailOptions, (err, data) => {
@@ -127,23 +127,21 @@ exports.postFindPassword = (req, res, next) => {
     })
 }
 
-exports.getFindPassword = (req, res, next) => {
-    const token = req.params.token;
-    User.findOne({ resetToken: token }).then(user => {
-        console.log('user', user)
-        if (user === null) {
-            res.json('password link is invalid')
-        } else {
-            res.status(201).json({
-                message: 'password link accepted',
-                userId: user._id,
-                passwordToken: user.resetToken,
-                password: user.password,
-                resetTokenExpiration: user.resetTokenExpiration
-            })
-        }
-    })
-}
+// exports.getFindPassword = (req, res, next) => {
+//     const token = req.params.token;
+//     console.log('token', token)
+//     User.findOne({ resetToken: token }).then(user => {
+//         console.log('user', user)
+//         if (user === null) {
+//             res.json('password link is invalid')
+//         } else {
+//             res.status(201).json({
+//                 message: 'password link accepted',
+//                 userId: user._id
+//             })
+//         }
+//     })
+// }
 
 exports.postUpdatePassword = (req, res, next) => {
     console.log('req.body', req.body)
@@ -153,10 +151,10 @@ exports.postUpdatePassword = (req, res, next) => {
     }
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
-    const userId = req.body.userId;
+    // const userId = req.body.userId;
     const passwordToken = req.body.passwordToken;
     let resetUser;
-    User.findOne({ resetToken: passwordToken, resetTokenExpiration: { $gt: Date.now() }, _id: userId })
+    User.findOne({ resetToken: passwordToken })
         .then(user => {
             console.log('user', user)
             resetUser = user;
@@ -169,7 +167,7 @@ exports.postUpdatePassword = (req, res, next) => {
             return resetUser.save()
         })
         .then(() => {
-            res.status(200).json('password updated')
+            res.status(201).json({ message: 'password updated' })
         })
         .catch(err => {
             console.log(err)
