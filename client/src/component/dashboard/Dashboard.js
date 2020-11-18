@@ -4,7 +4,6 @@ import {withRouter} from 'react-router';
 import {logoutUser} from '../../action/action';
 
 const Dashboard = (props) => {
-    console.log('props', props)
 
     const logoutHandler = () => {
         props.dispatch(logoutUser(props.history))
@@ -20,7 +19,6 @@ const Dashboard = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         auth: state.auth
     }

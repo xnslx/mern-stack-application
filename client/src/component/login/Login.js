@@ -10,7 +10,6 @@ import {SET_CURRENT_USER} from '../../action/type';
 
 
 const Login = (props) => {
-    console.log('props', props)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState({});

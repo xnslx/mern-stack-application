@@ -31,23 +31,12 @@ const Signup = (props) => {
         }
     }
 
-    console.log('error', error)
+    // console.log('error', error)
         
     const submitHandler = (e) => {
         e.preventDefault();
         props.dispatch(signupUser(newUser, props.history))
     }
-
-    // let errorMessage;
-    // if(error.length >0) {
-    //     error.forEach(err => errorMessage =(
-    //         <ul>
-    //             <li>{err.msg}</li>
-    //         </ul>
-    //     ))
-    // } else {
-    //     errorMessage = ''
-    // }
 
 
     return (

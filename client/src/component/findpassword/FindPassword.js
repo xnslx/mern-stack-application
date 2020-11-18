@@ -4,7 +4,6 @@ import {retrievePassword} from '../../action/action';
 import {Link} from 'react-router-dom';
 
 const FindPassword = (props) => {
-    console.log('props', props)
     const [email, setEmail] = useState('');
     const [error, setError] = useState({});
 
