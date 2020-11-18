@@ -69,6 +69,16 @@ router.post('/updatepassword', [
     body('password', 'Password has to be valid.')
     .isLength({ min: 5, max: 20 })
     .isAlphanumeric()
+    .trim(),
+    body('confirmPassword')
+    .custom((value, { req }) => {
+        console.log('value', value)
+        if (value !== req.body.password) {
+            throw new Error('Password has to be matched!')
+        } else {
+            return true;
+        }
+    })
     .trim()
 ], authController.postUpdatePassword)
 
