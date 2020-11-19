@@ -71,7 +71,7 @@ export const clearError = () => {
 }
 
 export const getBackendData = result => {
-    console.log('result', result)
+    // console.log('result', result)
     return {
         type: 'GET_BACKEND_DATA',
         payload: result
