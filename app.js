@@ -6,7 +6,7 @@ const mongodb = require('mongodb');
 const mongoose = require('mongoose');
 
 const authRoutes = require('./routes/auth');
-
+const productsRoutes = require('./routes/products');
 const dbUrl = process.env.URL;
 
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,6 +20,7 @@ app.use((req, res, next) => {
     next();
 })
 app.use('/', authRoutes);
+app.use('/products', productsRoutes);
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
