@@ -151,7 +151,6 @@ exports.postUpdatePassword = (req, res, next) => {
     }
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
-    // const userId = req.body.userId;
     const passwordToken = req.body.passwordToken;
     let resetUser;
     User.findOne({ resetToken: passwordToken })
