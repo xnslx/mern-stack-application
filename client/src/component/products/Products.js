@@ -18,7 +18,7 @@ const Products = () => {
         <div>
             {products.map(product => (
                 <ul key={product._id}>
-                    <img src={product.image} alt=""/>
+                    <img src={product.image} alt="" style={{height: '200px', width:'auto'}}/>
                     <li>{product.name}</li>
                     <li>$ {product.price}</li>
                 </ul>

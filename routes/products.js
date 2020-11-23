@@ -7,4 +7,6 @@ const Products = require('../models/products');
 
 router.get('/productslist', productsController.getProductsList);
 
+router.get('/productslist/:id', productsController.getProductsDetail)
+
 module.exports = router;

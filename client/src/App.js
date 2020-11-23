@@ -25,7 +25,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <div>
-          {/* <Nav /> */}
+          <Nav />
           <Switch>
             <Route path='/signup' component={Signup}/>
             <Route path='/login' component={Login}/>

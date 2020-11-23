@@ -2,9 +2,10 @@ import React from 'react'
 
 const Nav = () => {
     return (
-        <div>
-            <h3>MERN STACK APPLICATION</h3>
-        </div>
+        <ul>
+            <li>Shop</li>
+            <li>Contact</li>
+        </ul>
     )
 };
 
