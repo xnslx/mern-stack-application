@@ -22,37 +22,20 @@ exports.getProductsDetail = (req, res, next) => {
         })
 }
 
-exports.getProductsCategory = (req, res, next) => {
+exports.getProductsSearchResult = (req, res, next) => {
+    let query = {};
     const productCategory = req.query.category;
     const productSize = req.query.size;
     const productGender = req.query.gender
-    console.log('req.query', req.query)
-    console.log('req.params', req.params)
-    Products.find({ $or: [{ category: productCategory }, { size: productSize }, { gender: productGender }] })
-        .then(product => {
-            console.log('product', product)
-            res.status(201).json(product)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    let payload = { "category": productCategory, "size": productSize, "gender": productGender }
+    if (payload.category && payload.category.length > 0) query.category = { $in: payload.category }
+    if (payload.size && payload.size.length > 0) query.size = { $in: payload.size };
+    if (payload.gender && payload.gender.length > 0) query.gender = { $in: payload.gender };
+    console.log('query', query)
+    Products.find(query).then(product => {
+        // console.log(product)
+        res.status(201).json(product)
+    }).catch(err => {
+        console.log(err)
+    })
 }
-
-// exports.getProductsCategory = (req, res, next) => {
-//     console.log('req.query', req.query)
-//     let query = {};
-//     const productCategory = req.query.category;
-//     const productSize = req.query.size;
-//     const productGender = req.query.gender
-//     let payload = { 'gender': productGender, 'size': productSize, 'category': productCategory };
-//     if (payload.gender && payload.gender.length > 0) query.gender = payload.gender
-//     if (payload.size && payload.gender.size > 0) query.size = payload.size
-//     if (payload.category && payload.category.length > 0) query.category = payload.category
-//     console.log('query', query)
-//     Products.find({ gender: query.gender, size: query.size, category: query.category }).then(product => {
-//         // console.log(product)
-//         res.status(201).json(product)
-//     }).catch(err => {
-//         console.log(err)
-//     })
-// }
