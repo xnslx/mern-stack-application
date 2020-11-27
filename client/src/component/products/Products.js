@@ -2,9 +2,12 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import ProductDetail from '../products/ProductDetail';
 import {Link} from 'react-router-dom';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classes from '../products/Products.module.css';
+import FilterSort from '../ui/FilterSort';
 
 const Products = () => {
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         axios.get('/products/productslist')
@@ -18,6 +21,7 @@ const Products = () => {
 
     return (
         <>
+            <FilterSort />
             <div>
                 {products.map(product => (
                     <Link to={'/' + product._id} key={product._id} >

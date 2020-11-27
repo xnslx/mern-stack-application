@@ -1,0 +1,37 @@
+.Modal {
+    background-color: transparent;
+    height: 100vh;
+}
+
+.Header {
+    font-weight: 600;
+}
+
+.Title {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.Button {
+    background-color: transparent;
+    border: none;
+    position: relative;
+    right: -90%;
+    font-size: 24px;
+    color: rgb(196, 196, 196);
+    top: -20px;
+}
+
+.List {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.ListItem {
+    /* background-color: red; */
+    margin: 8px auto;
+}
+
+.Label {
+    padding-left: 12px;
+}
