@@ -1,6 +1,7 @@
 .Modal {
     background-color: transparent;
     height: 100vh;
+    overflow-y: scroll;
 }
 
 .Header {
@@ -22,6 +23,21 @@
     top: -20px;
 }
 
+.ApplyButton {
+    width: 80vw;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    height: 44px;
+    justify-content: center;
+    padding-top: 12px;
+    border: none;
+    background-color: #fc5359;
+    color: #1a1918;
+    font-weight: 600;
+}
+
 .List {
     list-style: none;
     margin-bottom: 40px;
@@ -29,7 +45,7 @@
 
 .ListItem {
     /* background-color: red; */
-    margin: 8px auto;
+    margin: 12px auto;
 }
 
 .Label {

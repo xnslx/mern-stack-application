@@ -22,7 +22,7 @@ exports.getProductsDetail = (req, res, next) => {
         })
 }
 
-exports.getProductsSearchResult = (req, res, next) => {
+exports.postProductsSearchResult = (req, res, next) => {
     let query = {};
     const productCategory = req.query.category;
     const productSize = req.query.size;
