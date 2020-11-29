@@ -16,18 +16,29 @@ const FilterSort = () => {
     const productsSize = size;
     const productsCategory = category;
 
-    const [checkedItems, setCheckedItems] = useState(new Map())
+    const [checkedItems, setCheckedItems] = useState({});
 
     const changeHandler = (e) => {
-        const isChecked = e.target.checked;
-        const item = e.target.value;
-        setCheckedItems(checkedItems.set(item, isChecked))
+        setCheckedItems({...checkedItems, [e.target.value]: e.target.checked});
     }
 
-    console.log('checkedItems', checkedItems)
+    const genderQuery = Object.keys(checkedItems);
+    // console.log(genderQuery)
+    let query;
+    if(genderQuery) {
+        genderQuery.forEach(item => {
+            return query = item
+        })
+    }
+    console.log(query)
+    // console.log('checkedItems', checkedItems)
     
     const submitHandler = () => {
-
+        axios.post(`/products?gender=${query}`).then(result => {
+            console.log(result)
+        }).catch(err => {
+            console.log(err)
+        })
     }
 
     return (
@@ -45,7 +56,7 @@ const FilterSort = () => {
                             {productsGender.map(item => (
                                 <li key={item.id} className={classes.ListItem}>
                                     <label className={classes.Label}>
-                                        <input type="checkbox" value={item.value} onChange={changeHandler}/>{item.value}
+                                        <input type="checkbox" value={item.value} onChange={changeHandler} />{item.value}
                                     </label>
                                 </li>
                             ))}
@@ -55,7 +66,7 @@ const FilterSort = () => {
                             {productsSize.map(item => (
                                 <li key={item.id} className={classes.ListItem}>
                                     <label className={classes.Label}>
-                                        <input type="checkbox" value={item.value}/>{item.value}
+                                        <input type="checkbox" value={item.value} onChange={changeHandler} />{item.value}
                                     </label>
                                 </li>
                             ))}
