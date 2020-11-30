@@ -22,16 +22,37 @@ const FilterSort = () => {
         setCheckedItems({...checkedItems, [e.target.value]: e.target.checked});
     }
 
-    const genderQuery = Object.keys(checkedItems);
-    console.log(genderQuery)
-    let genderParams = genderQuery.map(item => {
-        return 'gender=' + item;
+    // const genderQuery = Object.keys(checkedItems);
+
+    // let genderParams = genderQuery.map(item => {
+    //     return 'gender=' + item;
+    // }).join('&')
+
+    // const sizeQuery = Object.keys(checkedItems)
+    // let sizeParams = sizeQuery.map(item => {
+    //     return 'size=' + item;
+    // }).join('&')
+
+    // const categoryQuery = Object.keys(checkedItems)
+    // let categoryParams = categoryQuery.map(item => {
+    //     return 'category=' + item;
+    // }).join('&')
+
+    let query = Object.keys(checkedItems);
+    let params = query.map(item => {
+        console.log('item' ,item)
+        if(productsGender.find(prod => prod.value === item)){
+            return 'gender=' + item
+        } else if (productsSize.find(prod => prod.value === item)) {
+            return 'size=' + item
+        } else {
+            return 'category=' + item
+        }
     }).join('&')
 
-    console.log('checkedItems', checkedItems)
     
     const submitHandler = () => {
-        axios.post('/products?' + genderParams)
+        axios.post('/products?' + params)
             .then(result => {
                 console.log(result)
             })
@@ -39,6 +60,7 @@ const FilterSort = () => {
                 console.log(err)
             })
     }
+
 
     return (
         <div>
@@ -75,7 +97,7 @@ const FilterSort = () => {
                             {productsCategory.map(item => (
                                 <li key={item.id} className={classes.ListItem}>
                                     <label className={classes.Label}>
-                                        <input type="checkbox" value={item.value}/>{item.value}
+                                        <input type="checkbox" value={item.value} onChange={changeHandler}/>{item.value}
                                     </label>
                                 </li>
                             ))}

@@ -36,19 +36,19 @@ export const size = [{
     },
     {
         id: v4(),
-        value: '2T month'
+        value: '2T'
     },
     {
         id: v4(),
-        value: '3T month'
+        value: '3T'
     },
     {
         id: v4(),
-        value: '4T month'
+        value: '4T'
     },
     {
         id: v4(),
-        value: '5T month'
+        value: '5T'
     }
 ]
 
