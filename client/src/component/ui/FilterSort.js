@@ -23,22 +23,21 @@ const FilterSort = () => {
     }
 
     const genderQuery = Object.keys(checkedItems);
-    // console.log(genderQuery)
-    let query;
-    if(genderQuery) {
-        genderQuery.forEach(item => {
-            return query = item
-        })
-    }
-    console.log(query)
-    // console.log('checkedItems', checkedItems)
+    console.log(genderQuery)
+    let genderParams = genderQuery.map(item => {
+        return 'gender=' + item;
+    }).join('&')
+
+    console.log('checkedItems', checkedItems)
     
     const submitHandler = () => {
-        axios.post(`/products?gender=${query}`).then(result => {
-            console.log(result)
-        }).catch(err => {
-            console.log(err)
-        })
+        axios.post('/products?' + genderParams)
+            .then(result => {
+                console.log(result)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
     return (
