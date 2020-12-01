@@ -18,28 +18,22 @@ const FilterSort = () => {
 
     const [checkedItems, setCheckedItems] = useState({});
 
+    console.log('checkedItems', checkedItems)
+
     const changeHandler = (e) => {
         setCheckedItems({...checkedItems, [e.target.value]: e.target.checked});
     }
 
-    // const genderQuery = Object.keys(checkedItems);
+    let queryArray = [];
+    let needToBeFilteredQuery = Object.entries(checkedItems).forEach(([key,value]) => {
+        if(value === true) {
+            queryArray.push(key)
+        }
+    });
 
-    // let genderParams = genderQuery.map(item => {
-    //     return 'gender=' + item;
-    // }).join('&')
+    console.log(queryArray);
 
-    // const sizeQuery = Object.keys(checkedItems)
-    // let sizeParams = sizeQuery.map(item => {
-    //     return 'size=' + item;
-    // }).join('&')
-
-    // const categoryQuery = Object.keys(checkedItems)
-    // let categoryParams = categoryQuery.map(item => {
-    //     return 'category=' + item;
-    // }).join('&')
-
-    let query = Object.keys(checkedItems);
-    let params = query.map(item => {
+    let params = queryArray.map(item => {
         console.log('item' ,item)
         if(productsGender.find(prod => prod.value === item)){
             return 'gender=' + item
@@ -49,6 +43,7 @@ const FilterSort = () => {
             return 'category=' + item
         }
     }).join('&')
+
 
     
     const submitHandler = () => {
