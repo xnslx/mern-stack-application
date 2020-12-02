@@ -9,6 +9,8 @@ router.get('/productslist', productsController.getProductsList);
 
 router.get('/productslist/:id', productsController.getProductsDetail);
 
+router.get('/filteredproducts', productsController.getProductsSearchResult)
+
 router.post('/', productsController.postProductsSearchResult);
 
 module.exports = router;

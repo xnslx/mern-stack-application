@@ -1,15 +1,19 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,useContext} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classes from './FilterSort.module.css';
 import axios from 'axios';
 import {gender, size, category} from './objects';
+import {useHistory} from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
-const FilterSort = () => {
+const FilterSort = (props) => {
+    console.log(props)
     const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
 
     const productsGender = gender;
@@ -19,6 +23,7 @@ const FilterSort = () => {
     const [checkedItems, setCheckedItems] = useState({});
 
     console.log('checkedItems', checkedItems)
+
 
     const changeHandler = (e) => {
         setCheckedItems({...checkedItems, [e.target.value]: e.target.checked});
@@ -45,11 +50,12 @@ const FilterSort = () => {
     }).join('&')
 
 
-    
+    let history = useHistory()
     const submitHandler = () => {
         axios.post('/products?' + params)
             .then(result => {
                 console.log(result)
+                props.parentCallback(result.data)
             })
             .catch(err => {
                 console.log(err)
@@ -59,7 +65,7 @@ const FilterSort = () => {
 
     return (
         <div>
-            <FontAwesomeIcon icon="filter" onClick={handleShow}/>
+            <FontAwesomeIcon icon="filter" onClick={handleShow}/>FILTER & SORT
             <Modal show={show} onHide={handleClose} className={classes.Modal}>
                 <Modal.Header className={classes.Header}>
                     <Modal.Title className={classes.Title}>Filter & Sort</Modal.Title>

@@ -15,6 +15,7 @@ import FindPassword from './component/findpassword/FindPassword';
 import ResetPassword from './component/resetPassword/ResetPassword';
 // import Products from './component/products/Products';
 import ProductDetail from './component/products/ProductDetail';
+import FilteredProductsList from './component/products/FilteredProductsList';
 import {faFilter} from '@fortawesome/free-solid-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
 library.add(faFilter);
@@ -39,6 +40,7 @@ function App() {
             <Route path='/findpassword' component={FindPassword}/>
             <Route path='/reset/:token' component={ResetPassword}/>
             <Route path='/:prodId' component={ProductDetail}/>
+            {/* <Route path='/filteredproducts' component={FilteredProductsList}/> */}
           </Switch>
         </div>
       </Router>

@@ -6,9 +6,10 @@ import {Link} from 'react-router-dom';
 import classes from '../products/Products.module.css';
 import FilterSort from '../ui/FilterSort';
 
-
-const Products = () => {
+const Products = (props) => {
+    console.log(props)
     const [products, setProducts] = useState([]);
+    const [resultProducts, setResultsProducts] = useState([])
 
     useEffect(() => {
         axios.get('/products/productslist')
@@ -20,9 +21,13 @@ const Products = () => {
             })
     }, [])
 
+    const callbackHandler = () => {
+        setResultsProducts()
+    }
+
     return (
         <>
-            <FilterSort />
+            <FilterSort parentCallback={callbackHandler}/>
             <div>
                 {products.map(product => (
                     <Link to={'/' + product._id} key={product._id} >

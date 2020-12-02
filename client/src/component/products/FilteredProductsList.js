@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const FilteredProductsList = () => {
+const FilteredProductsList = (props) => {
+    console.log(props)
+
     return (
         <div>
             
