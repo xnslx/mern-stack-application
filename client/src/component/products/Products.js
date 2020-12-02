@@ -9,7 +9,6 @@ import FilterSort from '../ui/FilterSort';
 const Products = (props) => {
     console.log(props)
     const [products, setProducts] = useState([]);
-    const [resultProducts, setResultsProducts] = useState([])
 
     useEffect(() => {
         axios.get('/products/productslist')
@@ -21,8 +20,8 @@ const Products = (props) => {
             })
     }, [])
 
-    const callbackHandler = () => {
-        setResultsProducts()
+    const callbackHandler = (result) => {
+        setProducts(result)
     }
 
     return (

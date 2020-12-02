@@ -40,7 +40,6 @@ function App() {
             <Route path='/findpassword' component={FindPassword}/>
             <Route path='/reset/:token' component={ResetPassword}/>
             <Route path='/:prodId' component={ProductDetail}/>
-            {/* <Route path='/filteredproducts' component={FilteredProductsList}/> */}
           </Switch>
         </div>
       </Router>
