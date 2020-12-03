@@ -6,8 +6,7 @@ import {Link} from 'react-router-dom';
 import classes from '../products/Products.module.css';
 import FilterSort from '../ui/FilterSort';
 
-const Products = (props) => {
-    console.log(props)
+const Products = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {

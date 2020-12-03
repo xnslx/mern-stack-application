@@ -9,7 +9,7 @@ import {useHistory} from 'react-router-dom';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const FilterSort = (props) => {
-    console.log(props)
+    // console.log(props)
     const [show, setShow] = useState(false);
     const handleClose = () => {
         setShow(false);
@@ -22,7 +22,7 @@ const FilterSort = (props) => {
 
     const [checkedItems, setCheckedItems] = useState({});
 
-    console.log('checkedItems', checkedItems)
+    // console.log('checkedItems', checkedItems)
 
 
     const changeHandler = (e) => {
@@ -36,10 +36,10 @@ const FilterSort = (props) => {
         }
     });
 
-    console.log(queryArray);
+    // console.log(queryArray);
 
     let params = queryArray.map(item => {
-        console.log('item' ,item)
+        // console.log('item' ,item)
         if(productsGender.find(prod => prod.value === item)){
             return 'gender=' + item
         } else if (productsSize.find(prod => prod.value === item)) {
@@ -54,7 +54,7 @@ const FilterSort = (props) => {
     const submitHandler = () => {
         axios.post('/products?' + params)
             .then(result => {
-                console.log(result)
+                // console.log(result)
                 props.parentCallback(result.data)
             })
             .catch(err => {
