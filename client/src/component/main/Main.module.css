@@ -1,0 +1,19 @@
+.Container {
+    /* background-color: green; */
+    height: 60px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.List {
+    list-style: none;
+    margin: auto 12px;
+    margin-right: 20px;
+}
+
+.Nav {
+    /* background-color: green; */
+    height: 60px;
+    position: sticky;
+    top: 0;
+}

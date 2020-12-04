@@ -16,10 +16,10 @@ import ResetPassword from './component/resetPassword/ResetPassword';
 // import Products from './component/products/Products';
 import ProductDetail from './component/products/ProductDetail';
 import FilteredProductsList from './component/products/FilteredProductsList';
-import {faFilter} from '@fortawesome/free-solid-svg-icons';
-import {faHeart} from '@fortawesome/free-regular-svg-icons';
+import {faFilter, faCartPlus} from '@fortawesome/free-solid-svg-icons';
+import {faHeart, faUser} from '@fortawesome/free-regular-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
-library.add(faFilter, faHeart);
+library.add(faFilter, faHeart,faCartPlus,faUser);
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(thunk),

@@ -65,7 +65,7 @@ const FilterSort = (props) => {
 
     return (
         <div>
-            <FontAwesomeIcon icon="filter" onClick={handleShow}/>FILTER & SORT
+            <FontAwesomeIcon icon="filter" onClick={handleShow} className={classes.FilterIcon}/>FILTER & SORT
             <Modal show={show} onHide={handleClose} className={classes.Modal}>
                 <Modal.Header className={classes.Header}>
                     <Modal.Title className={classes.Title}>Filter & Sort</Modal.Title>

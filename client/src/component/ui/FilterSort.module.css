@@ -51,3 +51,9 @@
 .Label {
     padding-left: 12px;
 }
+
+.FilterIcon {
+    position: relative;
+    margin-left: 60vw;
+    padding-right: 8px;
+}

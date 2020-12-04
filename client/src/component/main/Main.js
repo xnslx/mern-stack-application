@@ -1,23 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Signup from '../signup/Signup';
-import Login from '../login/Login';
+// import { Link } from 'react-router-dom';
+// import Signup from '../signup/Signup';
+// import Login from '../login/Login';
 import Products from '../products/Products';
-import ProductDetail from '../products/ProductDetail';
+import classes from './Main.module.css';
+// import ProductDetail from '../products/ProductDetail';
 // import {Switch, Route} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Nav from '../nav/Nav';
 
 const Main = () => {
     return (
-        <div>
-            {/* <p><strong>Build</strong> a login/auth app with MERN STACK</p>
-            <h5>Create a minimal full-stack app with user authentication via JWT token</h5> */}
-            <Link to='/signup' ><button>SIGN UP</button></Link>
-            <Link to='/login' ><button>LOG IN</button></Link>
+        <nav className={classes.Nav}>
+            <Nav />
+            <ul className={classes.Container}>
+                <li className={classes.List}>
+                    <FontAwesomeIcon icon={['far', 'user']}/>
+                </li>
+                <li className={classes.List}>
+                    <FontAwesomeIcon icon={['fas', 'cart-plus']} />
+                </li>
+                <li className={classes.List}>
+                    <FontAwesomeIcon icon={['far', 'heart']}/>
+                </li>
+            </ul>
             <Products/>
-            {/* <Switch>
-                <Route path='/:prodId' component={ProductDetail}/>
-            </Switch> */}
-        </div>
+        </nav>
     )
 };
 

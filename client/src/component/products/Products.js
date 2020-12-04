@@ -24,7 +24,7 @@ const Products = () => {
     }
 
     return (
-        <>
+        <div className={classes.Container}>
             <FilterSort parentCallback={callbackHandler}/>
             <div>
                 {products.map(product => (
@@ -38,7 +38,7 @@ const Products = () => {
                     </Link>
                 ))}
             </div>
-        </>
+        </div>
     )
 };
 
