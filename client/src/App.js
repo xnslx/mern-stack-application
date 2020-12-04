@@ -17,8 +17,9 @@ import ResetPassword from './component/resetPassword/ResetPassword';
 import ProductDetail from './component/products/ProductDetail';
 import FilteredProductsList from './component/products/FilteredProductsList';
 import {faFilter} from '@fortawesome/free-solid-svg-icons';
+import {faHeart} from '@fortawesome/free-regular-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
-library.add(faFilter);
+library.add(faFilter, faHeart);
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(thunk),
