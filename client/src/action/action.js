@@ -29,7 +29,7 @@ export const loginUser = (currentUser, history) => (dispatch) => {
             setAuthToken(token)
                 // console.log('result', result);
             dispatch(setCurrentUser(jwt.decode(token)))
-            history.push('/dashboard')
+            history.push('/')
         })
         .catch(err => {
             // console.log(err)

@@ -4,9 +4,13 @@ import Login from '../login/Login';
 import { Link } from 'react-router-dom';
 import {bubble as Menu} from 'react-burger-menu';
 import classes from './Nav.module.css';
+import {connect} from 'react-redux';
+import {logoutUser} from '../../action/action';
+import {withRouter} from 'react-router';
 
 
-const Nav = () => {
+const Nav = (props) => {
+    console.log('props',props)
     var styles = {
   bmBurgerButton: {
     position: 'fixed',
@@ -33,9 +37,10 @@ const Nav = () => {
     height: '100%'
   },
   bmMenu: {
-    background: '#373a47',
+    background: '#fafafa',
     padding: '2.5em 1.5em 0',
-    fontSize: '1.15em'
+    fontSize: '1.15em',
+    width:'100%'
   },
   bmMorphShape: {
     fill: '#373a47'
@@ -51,16 +56,32 @@ const Nav = () => {
     background: 'rgba(0, 0, 0, 0.3)'
   }
 }
+
+let stateButton;
+
+const logoutHandler = () => {
+        props.dispatch(logoutUser(props.history))
+    }
     return (
         <Menu styles={styles}>
-            <ul>
-                <li>Shop</li>
-                <li>Contact</li>
-                <Link to='/signup' ><button>SIGN UP</button></Link>
-                <Link to='/login' ><button>LOG IN</button></Link>
+            <ul className={classes.List}>
+                <li className={classes.ListItem}>Shop</li>
+                <li className={classes.ListItem}>Contact</li>
+                <li className={classes.ListItem}>About</li>
+                {props.auth.isAuthenticated? stateButton=(<button className={classes.Button} onClick={logoutHandler}>LOG OUT</button>) : stateButton=(<Link to='/login' ><button className={classes.Button}>LOG IN</button></Link>)}
+                <Link to='/signup' ><button className={classes.Button}>SIGN UP</button></Link>
+                {/* <Link to='/login' ><button className={classes.Button}>LOG IN</button></Link> */}
             </ul>
         </Menu>
     )
 };
 
-export default Nav;
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        auth: state.auth,
+        error: state.error.message
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(Nav));

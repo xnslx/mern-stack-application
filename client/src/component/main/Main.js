@@ -8,14 +8,16 @@ import classes from './Main.module.css';
 // import {Switch, Route} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Nav from '../nav/Nav';
+import {connect} from 'react-redux';
 
-const Main = () => {
+const Main = (props) => {
     return (
-        <nav className={classes.Nav}>
+        <nav>
             <Nav />
             <ul className={classes.Container}>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']}/>
+                    <span>{props.auth.user.userName}</span>
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['fas', 'cart-plus']} />
@@ -29,4 +31,12 @@ const Main = () => {
     )
 };
 
-export default Main;
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        auth: state.auth,
+        error: state.error.message
+    }
+}
+
+export default connect(mapStateToProps)(Main);
