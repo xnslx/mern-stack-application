@@ -1,4 +1,5 @@
 const Products = require('../models/products');
+const User = require('../models/users');
 
 exports.getProductsList = (req, res, next) => {
     Products.find()
@@ -57,4 +58,14 @@ exports.getProductsSearchResult = (req, res, next) => {
     }).catch(err => {
         console.log(err)
     })
+}
+
+exports.postAddFavorites = (req, res, next) => {
+    const userId = req.body._id;
+    User.find(userId).then(user => {
+        res.status(200).json('added successfully!')
+    }).catch(err => {
+        console.log(err)
+    })
+
 }

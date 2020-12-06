@@ -16,7 +16,12 @@ const userSchema = new Schema({
         required: true
     },
     resetToken: String,
-    resetTokenExpiration: Date
+    resetTokenExpiration: Date,
+    favoriteList: {
+        items: [{
+            productId: { type: Schema.Types.ObjectId, ref: 'Products', required: true }
+        }]
+    }
 })
 
 module.exports = mongoose.model('User', userSchema)
