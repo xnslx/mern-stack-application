@@ -71,9 +71,10 @@ exports.postLogin = (req, res, next) => {
                     res.json('Password is wrong!')
                 } else {
                     const user = {
-                        email: loadedUser.email,
                         userId: loadedUser._id.toString(),
-                        userName: loadedUser.name
+                        name: loadedUser.name,
+                        email: loadedUser.email,
+                        password: loadedUser.password
                     }
                     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
                     res.json({ token: token, userId: user.userId, userName: user.userName })

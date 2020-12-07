@@ -61,11 +61,24 @@ exports.getProductsSearchResult = (req, res, next) => {
 }
 
 exports.postAddFavorites = (req, res, next) => {
-    const userId = req.body._id;
-    User.find(userId).then(user => {
-        res.status(200).json('added successfully!')
-    }).catch(err => {
-        console.log(err)
-    })
-
+    console.log('req.user', req.user)
+    console.log('req.body', req.body.productId)
+    console.log('req.body', req.body)
+    const prodId = req.body.productId;
+    const userId = req.body.userId;
+    const newUser = new User(req.user)
+    Products.find({ _id: prodId })
+        .then(product => {
+            console.log('product', product)
+            const [productItem] = product
+            console.log(productItem)
+            return newUser.addToFavoritesList(productItem)
+        })
+        .then(result => {
+            console.log(result)
+            res.status(200).json('product added to favorites list!')
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }

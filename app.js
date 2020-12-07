@@ -9,9 +9,9 @@ const dbUrl = process.env.URL;
 const authRoutes = require('./routes/auth');
 const productsRoutes = require('./routes/products');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
