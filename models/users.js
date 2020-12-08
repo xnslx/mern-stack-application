@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    userId: {
-        type: Schema.Types.ObjectId,
-        required: true
-    },
     name: {
         type: String,
         required: true
@@ -23,29 +19,28 @@ const userSchema = new Schema({
     resetTokenExpiration: Date,
     favoriteList: {
         items: [{
-            productId: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+            productId: { type: Schema.Types.ObjectId, ref: 'Products', required: true }
         }]
     }
 })
 
 userSchema.methods.addToFavoritesList = function(product) {
-    console.log('productfromcontroller', product)
-    const newlyAddedToFavListIndex = this.favoriteList.items.findIndex(prod => {
-        console.log('prod', prod)
-        return prod.productId.toString() === product.productId.toString()
+    console.log('addToFavoritesList', product)
+    const newlyAddedToFavListItemIndex = this.favoriteList.items.findIndex(prod => {
+        return prod.productId.toString() === product._id.toString()
     })
-    const updatedFavListItems = [...this.favoriteList.items];
-    if (newlyAddedToFavListIndex >= 0) {
-        return updatedFavListItems
+    console.log('newlyAddedToFavListItemIndex', newlyAddedToFavListItemIndex)
+    const updatedFavListItems = [...this.favoriteList.items]
+    if (newlyAddedToFavListItemIndex >= 0) {
+        return;
     } else {
-        updatedFavListItems.push({
-            productId: product._id
-        })
+        updatedFavListItems.push({ productId: product._id })
     }
-    const updatedFavList = {
+    const updatedList = {
         items: updatedFavListItems
     }
-    this.favoriteList = updatedFavList;
+    this.favoriteList = updatedList
+    console.log('updatedFavListItems', updatedFavListItems)
     return this.save()
 }
 
