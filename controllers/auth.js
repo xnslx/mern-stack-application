@@ -5,6 +5,7 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const mongoose = require('mongoose')
 
 exports.getSignup = (req, res, next) => {
     // console.log('req.body', req.body)
@@ -55,29 +56,27 @@ exports.postLogin = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     // console.log(errors.errors)
-    let loadedUser;
+    // let loadedUser;
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() })
     }
     User.findOne({ email: email }).then(user => {
+        console.log('user', user._id)
         if (!user) {
             return res.status(401).json('Email not found!')
         }
-        loadedUser = user;
         bcrypt
             .compare(password, user.password)
             .then(isMatch => {
                 if (!isMatch) {
                     res.json('Password is wrong!')
                 } else {
-                    const user = {
-                        userId: loadedUser._id.toString(),
-                        name: loadedUser.name,
-                        email: loadedUser.email,
-                        password: loadedUser.password
-                    }
-                    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
-                    res.json({ token: token, userId: user.userId, userName: user.userName })
+                    // const authUser = {
+                    //     userId: user._id,
+                    //     email: user.email
+                    // }
+                    const token = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+                    res.json({ token: token, user: { id: user._id, email: user.email, name: user.name } })
                 }
             })
     })

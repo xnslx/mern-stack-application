@@ -32,7 +32,7 @@ userSchema.methods.addToFavoritesList = function(product) {
     console.log('newlyAddedToFavListItemIndex', newlyAddedToFavListItemIndex)
     const updatedFavListItems = [...this.favoriteList.items]
     if (newlyAddedToFavListItemIndex >= 0) {
-        return;
+        return updatedFavListItems;
     } else {
         updatedFavListItems.push({ productId: product._id })
     }

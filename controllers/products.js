@@ -1,5 +1,6 @@
 const Products = require('../models/products');
 const User = require('../models/users');
+const mongoose = require('mongoose')
 
 exports.getProductsList = (req, res, next) => {
     Products.find()
@@ -62,11 +63,14 @@ exports.getProductsSearchResult = (req, res, next) => {
 
 exports.postAddFavorites = (req, res, next) => {
     const prodId = req.body.productId;
-    const newUser = new User(req.user)
+    console.log('req.user', req.user)
     Products.findById(prodId)
         .then(product => {
             console.log('product', product)
-            return newUser.addToFavoritesList(product)
+            return User.findById(mongoose.Types.ObjectId(req.user.id))
+                .then(user => {
+                    return user.addToFavoritesList(product)
+                })
         })
         .then(result => {
             console.log('result', result)
