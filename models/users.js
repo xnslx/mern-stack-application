@@ -49,9 +49,9 @@ userSchema.methods.removeProductFromFavList = function(productId) {
     //     return prod.productId.toString() === productId.toString()
     // })
     // const removedProductItem = this.favoriteList.items.splice(needToBeRemovedProductIndex, 1)
-    // console.log('removedProductItem', removedProductItem)
     // console.log('this.favoriteList.items', this.favoriteList.items)
-    // return this.save(this.favoriteList.items)
+    // return this.save()
+
     const updatedFavList = this.favoriteList.items.filter(prod => {
         return prod.productId.toString() !== productId.toString()
     })

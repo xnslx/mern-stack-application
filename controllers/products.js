@@ -73,7 +73,7 @@ exports.postAddFavorites = (req, res, next) => {
                 })
         })
         .then(result => {
-            console.log('result', result)
+            // console.log('result', result)
             res.status(200).json('product added to favorites list!')
         })
         .catch(err => {
@@ -83,18 +83,14 @@ exports.postAddFavorites = (req, res, next) => {
 
 exports.postRemoveFavorites = (req, res, next) => {
     const prodId = req.body.productId;
-    console.log('req.user', req.user)
-    Products.findById(prodId)
-        .then(productId => {
-            console.log('productId', productId)
-            return User.findById(mongoose.Types.ObjectId(req.user.id))
-                .then(user => {
-                    return user.removeProductFromFavList(productId)
-                })
+
+    User.findById(mongoose.Types.ObjectId(req.user.id))
+        .then(user => {
+            return user.removeProductFromFavList(prodId)
         })
         .then(result => {
             console.log('result', result)
-            res.status(200).json('product has been removed from favorites list!')
+            res.status(200).json('product has been removed from favorite list.')
         })
         .catch(err => {
             console.log(err)
