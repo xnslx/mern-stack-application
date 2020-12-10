@@ -17,4 +17,6 @@ router.post('/', productsController.postProductsSearchResult);
 
 router.post('/addfavorites', isAuth.authenticateToken, productsController.postAddFavorites);
 
+router.post('/removefavorites', isAuth.authenticateToken, productsController.postRemoveFavorites)
+
 module.exports = router;
