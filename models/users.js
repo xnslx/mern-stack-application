@@ -25,11 +25,9 @@ const userSchema = new Schema({
 })
 
 userSchema.methods.addToFavoritesList = function(product) {
-    // console.log('addToFavoritesList', product)
     const newlyAddedToFavListItemIndex = this.favoriteList.items.findIndex(prod => {
-            return prod.productId.toString() === product._id.toString()
-        })
-        // console.log('newlyAddedToFavListItemIndex', newlyAddedToFavListItemIndex)
+        return prod.productId.toString() === product._id.toString()
+    })
     const updatedFavListItems = [...this.favoriteList.items]
     if (newlyAddedToFavListItemIndex >= 0) {
         return updatedFavListItems;
@@ -40,7 +38,6 @@ userSchema.methods.addToFavoritesList = function(product) {
         items: updatedFavListItems
     }
     this.favoriteList = updatedList
-        // console.log('updatedFavListItems', updatedFavListItems)
     return this.save()
 }
 
@@ -56,7 +53,6 @@ userSchema.methods.removeProductFromFavList = function(productId) {
         return prod.productId.toString() !== productId.toString()
     })
     this.favoriteList.items = updatedFavList;
-    console.log('updatedFavList', updatedFavList)
     return this.save()
 }
 

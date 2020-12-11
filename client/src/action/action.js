@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../middleware/middleware';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA } from './type';
+import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA, ADD_PRODUCT_FAVORITE_LIST, REMOVE_PRODUCT_FAVORITE_LIST } from './type';
 
 export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
@@ -102,6 +102,34 @@ export const resetPassword = (verifiedPassword, history) => (dispatch) => {
         })
         .catch(err => {
             console.log('err', err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
+        })
+}
+
+export const addProductToFavList = (productId) => (dispatch) => {
+    axios.post('/products/addfavorites', productId)
+        .then(result => {
+            console.log('result', result)
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
+        })
+}
+
+export const removeProductFromFavList = (prodId) => (dispatch) => {
+    axios.post('/products/removefavorites', prodId)
+        .then(result => {
+            console.log('result', result)
+        })
+        .catch(err => {
+            console.log(err)
             dispatch({
                 type: 'GET_ERROR',
                 payload: err.response.data

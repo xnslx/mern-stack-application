@@ -5,8 +5,10 @@ import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classes from '../products/Products.module.css';
 import FilterSort from '../ui/FilterSort';
+import {connect} from 'react-redux';
+import {addProductToFavList, removeProductFromFavList} from '../../action/action';
 
-const Products = () => {
+const Products = (props) => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -23,17 +25,24 @@ const Products = () => {
         setProducts(result)
     }
 
+    const addToFavListHandler = (e, productId) => {
+        console.log('e.target.id', e.target.value)
+        e.preventDefault();
+        props.dispatch(addProductToFavList(e.target.value))
+
+    }
+
     return (
         <div className={classes.Container}>
             <FilterSort parentCallback={callbackHandler}/>
             <div>
                 {products.map(product => (
                     <Link to={'/' + product._id} key={product._id} >
-                        <ul>
+                        <ul id={product._id}>
                             <img src={product.image} alt="" style={{height: '200px', width:'auto'}}/>
                             <li>{product.name}</li>
                             <li>$ {product.price}</li>
-                            <FontAwesomeIcon icon={['far', 'heart']}/>
+                            <button onClick={addToFavListHandler} value={product._id}>Favorite</button>
                         </ul>
                     </Link>
                 ))}
@@ -42,4 +51,13 @@ const Products = () => {
     )
 };
 
-export default Products;
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        auth: state.auth,
+        error: state.error.message,
+        favoriteList:state.favoriteList.favoriteList
+    }
+}
+
+export default connect(mapStateToProps)(Products);
