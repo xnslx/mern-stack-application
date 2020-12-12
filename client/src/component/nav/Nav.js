@@ -10,7 +10,7 @@ import {withRouter} from 'react-router';
 
 
 const Nav = (props) => {
-    console.log('props',props)
+    // console.log('props',props)
     var styles = {
   bmBurgerButton: {
     position: 'fixed',
@@ -77,7 +77,7 @@ const logoutHandler = () => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
+    // console.log('state', state)
     return {
         auth: state.auth,
         error: state.error.message

@@ -110,9 +110,12 @@ export const resetPassword = (verifiedPassword, history) => (dispatch) => {
 }
 
 export const addProductToFavList = (productId) => (dispatch) => {
-    axios.post('/products/addfavorites', productId)
+    console.log('productId', productId)
+    axios.post('/products/addfavorites', { productId: productId })
         .then(result => {
             console.log('result', result)
+                // dispatch(getBackendData(result.data))
+            dispatch({ type: 'ADD_PRODUCT_FAVORITE_LIST', payload: productId })
         })
         .catch(err => {
             console.log(err)
@@ -127,6 +130,7 @@ export const removeProductFromFavList = (prodId) => (dispatch) => {
     axios.post('/products/removefavorites', prodId)
         .then(result => {
             console.log('result', result)
+            dispatch({ type: 'REMOVE_PRODUCT_FAVORITE_LIST', payload: prodId })
         })
         .catch(err => {
             console.log(err)

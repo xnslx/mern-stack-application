@@ -3,6 +3,8 @@ import axios from 'axios';
 import ProductDetail from '../products/ProductDetail';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
+import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import classes from '../products/Products.module.css';
 import FilterSort from '../ui/FilterSort';
 import {connect} from 'react-redux';
@@ -10,6 +12,8 @@ import {addProductToFavList, removeProductFromFavList} from '../../action/action
 
 const Products = (props) => {
     const [products, setProducts] = useState([]);
+    const [like, setLike] = useState(false);
+    const [favList, setFavList] = useState([])
 
     useEffect(() => {
         axios.get('/products/productslist')
@@ -25,11 +29,23 @@ const Products = (props) => {
         setProducts(result)
     }
 
-    const addToFavListHandler = (e, productId) => {
+    const addToFavListHandler = (e) => {
         console.log('e.target.id', e.target.value)
         e.preventDefault();
-        props.dispatch(addProductToFavList(e.target.value))
+        // setLike(!like)
+        // props.dispatch(addProductToFavList(e.target.value))
+        if(like) {
+            props.dispatch(addProductToFavList(e.target.value))
+        } else {
+            props.dispatch(removeProductFromFavList(e.target.value))
+        }
+    }
 
+    let button;
+    if(like) {
+        button =(<FontAwesomeIcon icon={fasStar}/>)
+    } else {
+        button =(<FontAwesomeIcon icon={farStar}/>)
     }
 
     return (
@@ -42,7 +58,16 @@ const Products = (props) => {
                             <img src={product.image} alt="" style={{height: '200px', width:'auto'}}/>
                             <li>{product.name}</li>
                             <li>$ {product.price}</li>
-                            <button onClick={addToFavListHandler} value={product._id}>Favorite</button>
+                            <button onClick={addToFavListHandler} value={product._id} className={classes.Button}>{button}</button>
+                            {/* <button onClick={() => {
+                                if(favList.includes(product)) {
+                                    props.dispatch(removeProductFromFavList(product._id))
+                                } else {
+                                    props.dispatch(addProductToFavList(product._id))
+                                }
+                            }}>
+                            {favList.includes(product) ? <FontAwesomeIcon icon={farStar}/> : <FontAwesomeIcon icon={fasStar}/>}
+                            </button> */}
                         </ul>
                     </Link>
                 ))}
@@ -59,5 +84,6 @@ const mapStateToProps = (state) => {
         favoriteList:state.favoriteList.favoriteList
     }
 }
+
 
 export default connect(mapStateToProps)(Products);

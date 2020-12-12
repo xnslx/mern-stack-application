@@ -32,7 +32,7 @@ const Main = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
+    // console.log('state', state)
     return {
         auth: state.auth,
         error: state.error.message
