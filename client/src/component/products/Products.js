@@ -29,23 +29,23 @@ const Products = (props) => {
         setProducts(result)
     }
 
-    const addToFavListHandler = (e) => {
-        console.log('e.target.id', e.target.value)
-        e.preventDefault();
-        // setLike(!like)
-        // props.dispatch(addProductToFavList(e.target.value))
-        if(like) {
-            props.dispatch(addProductToFavList(e.target.value))
+    const toggleFavListHandler = (e, productId) => {
+        if(props.favoriteList.includes(productId)) {
+            e.preventDefault()
+            props.dispatch(removeProductFromFavList(productId))
+            setLike({[productId]: false})
         } else {
-            props.dispatch(removeProductFromFavList(e.target.value))
+            e.preventDefault()
+            props.dispatch(addProductToFavList(productId))
+            setLike({[productId]: true})
         }
     }
 
     let button;
     if(like) {
-        button =(<FontAwesomeIcon icon={fasStar}/>)
+        button =(<FontAwesomeIcon icon={["fas", "star"]} />)
     } else {
-        button =(<FontAwesomeIcon icon={farStar}/>)
+        button =(<FontAwesomeIcon icon={["far", "star"]} />)
     }
 
     return (
@@ -58,16 +58,8 @@ const Products = (props) => {
                             <img src={product.image} alt="" style={{height: '200px', width:'auto'}}/>
                             <li>{product.name}</li>
                             <li>$ {product.price}</li>
-                            <button onClick={addToFavListHandler} value={product._id} className={classes.Button}>{button}</button>
-                            {/* <button onClick={() => {
-                                if(favList.includes(product)) {
-                                    props.dispatch(removeProductFromFavList(product._id))
-                                } else {
-                                    props.dispatch(addProductToFavList(product._id))
-                                }
-                            }}>
-                            {favList.includes(product) ? <FontAwesomeIcon icon={farStar}/> : <FontAwesomeIcon icon={fasStar}/>}
-                            </button> */}
+                            <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)}><span>{like[product._id]? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}</span>
+                            </button>
                         </ul>
                     </Link>
                 ))}

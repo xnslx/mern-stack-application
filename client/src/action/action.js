@@ -126,11 +126,12 @@ export const addProductToFavList = (productId) => (dispatch) => {
         })
 }
 
-export const removeProductFromFavList = (prodId) => (dispatch) => {
-    axios.post('/products/removefavorites', prodId)
+export const removeProductFromFavList = (productId) => (dispatch) => {
+    console.log('productId', productId)
+    axios.post('/products/removefavorites', productId)
         .then(result => {
             console.log('result', result)
-            dispatch({ type: 'REMOVE_PRODUCT_FAVORITE_LIST', payload: prodId })
+            dispatch({ type: 'REMOVE_PRODUCT_FAVORITE_LIST', payload: productId })
         })
         .catch(err => {
             console.log(err)

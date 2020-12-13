@@ -42,18 +42,18 @@ userSchema.methods.addToFavoritesList = function(product) {
 }
 
 userSchema.methods.removeProductFromFavList = function(productId) {
-    // const needToBeRemovedProductIndex = this.favoriteList.items.findIndex(prod => {
-    //     return prod.productId.toString() === productId.toString()
-    // })
-    // const removedProductItem = this.favoriteList.items.splice(needToBeRemovedProductIndex, 1)
-    // console.log('this.favoriteList.items', this.favoriteList.items)
-    // return this.save()
-
-    const updatedFavList = this.favoriteList.items.filter(prod => {
-        return prod.productId.toString() !== productId.toString()
+    const needToBeRemovedProductIndex = this.favoriteList.items.findIndex(prod => {
+        return prod.productId === productId
     })
-    this.favoriteList.items = updatedFavList;
+    const removedProductItem = this.favoriteList.items.splice(needToBeRemovedProductIndex, 1)
+    console.log('this.favoriteList.items', this.favoriteList.items)
     return this.save()
+
+    // const updatedFavList = this.favoriteList.items.filter(prod => {
+    //     return prod.productId !== productId
+    // })
+    // this.favoriteList.items = updatedFavList;
+    // return this.save()
 }
 
 
