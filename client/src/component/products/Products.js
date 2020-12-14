@@ -41,24 +41,17 @@ const Products = (props) => {
         }
     }
 
-    let button;
-    if(like) {
-        button =(<FontAwesomeIcon icon={["fas", "star"]} />)
-    } else {
-        button =(<FontAwesomeIcon icon={["far", "star"]} />)
-    }
-
     return (
         <div className={classes.Container}>
             <FilterSort parentCallback={callbackHandler}/>
-            <div>
+            <div className={classes.ProductContainer}>
                 {products.map(product => (
-                    <Link to={'/' + product._id} key={product._id} >
-                        <ul id={product._id}>
-                            <img src={product.image} alt="" style={{height: '200px', width:'auto'}}/>
-                            <li>{product.name}</li>
-                            <li>$ {product.price}</li>
-                            <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)}><span>{like[product._id]? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}</span>
+                    <Link to={'/' + product._id} key={product._id} className={classes.Link}>
+                        <ul id={product._id} className={classes.Product}>
+                            <img src={product.image} alt="" className={classes.Image}/>
+                            <li className={classes.List}>{product.name}</li>
+                            <li className={classes.List}>${product.price}</li>
+                            <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)} ><span>{like[product._id]? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}</span>
                             </button>
                         </ul>
                     </Link>

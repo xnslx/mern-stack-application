@@ -1,10 +1,48 @@
 .Button {
     background-color: transparent;
     border-style: none;
+    position: absolute;
+    display: block;
+    margin-top: -24%;
+    margin-left: 2%;
+    font-size: 20px;
 }
 
+.Container {
+    /* background-color: red; */
+    position: relative;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-/* .Container {
-    background-color: red;
-    justify-content: center;
-} */
+.ProductContainer {
+    /* background-color: yellow; */
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.Product {
+    /* background-color: yellow; */
+    list-style: none;
+    text-decoration: none;
+    padding-inline-start: 4px;
+}
+
+.List {
+    color: black;
+    font-weight: 400;
+    font-size: 14px;
+    /* background-color: green; */
+    margin-top: 8px;
+}
+
+.Image {
+    width: 160px;
+    height: auto;
+}
+
+.Link {
+    text-decoration: none;
+}
