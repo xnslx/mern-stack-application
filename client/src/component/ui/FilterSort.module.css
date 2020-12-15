@@ -54,6 +54,7 @@
 
 .FilterIcon {
     position: relative;
-    margin-left: 60vw;
+    /* margin-right: 10vw; */
+    margin-left: 50vw;
     padding-right: 8px;
 }

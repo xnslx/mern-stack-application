@@ -13,8 +13,12 @@ import {addProductToFavList, removeProductFromFavList} from '../../action/action
 const Products = (props) => {
     const [products, setProducts] = useState([]);
     const [like, setLike] = useState(false);
-    const [favList, setFavList] = useState([])
+    const [favList, setFavList] = useState([]);
 
+
+
+    console.log('props.favoriteList', props.favoriteList)
+    const likedItemsList = props.favoriteList;
     useEffect(() => {
         axios.get('/products/productslist')
             .then(products => {
@@ -37,7 +41,10 @@ const Products = (props) => {
         } else {
             e.preventDefault()
             props.dispatch(addProductToFavList(productId))
-            setLike({[productId]: true})
+            setLike(prev => ({
+                ...prev,
+                [productId]: true
+            }))
         }
     }
 
@@ -51,7 +58,7 @@ const Products = (props) => {
                             <img src={product.image} alt="" className={classes.Image}/>
                             <li className={classes.List}>{product.name}</li>
                             <li className={classes.List}>${product.price}</li>
-                            <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)} ><span>{like[product._id]? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}</span>
+                            <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)} >{like[product._id]? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            
                             </button>
                         </ul>
                     </Link>
