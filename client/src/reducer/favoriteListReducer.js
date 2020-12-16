@@ -5,7 +5,6 @@ const initialState = {
 }
 
 const favoriteListReducer = (state = initialState, action) => {
-    console.log('action', action)
     switch (action.type) {
         case actionTypes.ADD_PRODUCT_FAVORITE_LIST:
             if (state.favoriteList.includes(action.payload)) {

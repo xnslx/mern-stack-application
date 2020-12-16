@@ -24,11 +24,11 @@ export const signupUser = (userInfo, history) => (dispatch) => {
 export const loginUser = (currentUser, history) => (dispatch) => {
     axios.post('/login', currentUser)
         .then(result => {
-            const { token } = result.data;
+            const { token, user } = result.data;
             localStorage.setItem('jwtToken', token)
             setAuthToken(token)
-                // console.log('result', result);
-            dispatch(setCurrentUser(jwt.decode(token)))
+            console.log('result', result);
+            dispatch(setCurrentUser(jwt.decode(token), user))
             history.push('/')
         })
         .catch(err => {
@@ -43,10 +43,11 @@ export const loginUser = (currentUser, history) => (dispatch) => {
         })
 }
 
-export const setCurrentUser = (user) => {
+export const setCurrentUser = (user, userInfo) => {
     return {
         type: 'SET_CURRENT_USER',
-        payload: user
+        payload: user,
+        userInfo: userInfo
     }
 }
 
@@ -110,7 +111,7 @@ export const resetPassword = (verifiedPassword, history) => (dispatch) => {
 }
 
 export const addProductToFavList = (productId) => (dispatch) => {
-    console.log('productId', productId)
+    // console.log('productId', productId)
     axios.post('/products/addfavorites', { productId: productId })
         .then(result => {
             console.log('result', result)
@@ -127,7 +128,7 @@ export const addProductToFavList = (productId) => (dispatch) => {
 }
 
 export const removeProductFromFavList = (productId) => (dispatch) => {
-    console.log('productId', productId)
+    // console.log('productId', productId)
     axios.post('/products/removefavorites', productId)
         .then(result => {
             console.log('result', result)

@@ -9,6 +9,8 @@ import classes from '../products/Products.module.css';
 import FilterSort from '../ui/FilterSort';
 import {connect} from 'react-redux';
 import {addProductToFavList, removeProductFromFavList} from '../../action/action';
+import {Popover, OverlayTrigger} from 'react-bootstrap';
+import {withRouter} from 'react-router';
 
 const Products = (props) => {
     const [products, setProducts] = useState([]);
@@ -16,9 +18,6 @@ const Products = (props) => {
     const [favList, setFavList] = useState([]);
 
 
-
-    console.log('props.favoriteList', props.favoriteList)
-    const likedItemsList = props.favoriteList;
     useEffect(() => {
         axios.get('/products/productslist')
             .then(products => {
@@ -33,11 +32,33 @@ const Products = (props) => {
         setProducts(result)
     }
 
+    // const toggleFavListHandler = (e, productId) => {
+    //     if(props.favoriteList.includes(productId)) {
+    //         e.preventDefault()
+    //         props.dispatch(removeProductFromFavList(productId))
+    //         setLike(prev => ({
+    //             ...prev,
+    //             [productId]: false
+    //         }))
+    //     } else {
+    //         e.preventDefault()
+    //         props.dispatch(addProductToFavList(productId))
+    //         setLike(prev => ({
+    //             ...prev,
+    //             [productId]: true
+    //         }))
+    //     }
+    // }
+
     const toggleFavListHandler = (e, productId) => {
-        if(props.favoriteList.includes(productId)) {
+        if(props.auth.isAuthenticated) {
+            if(props.favoriteList.includes(productId)) {
             e.preventDefault()
             props.dispatch(removeProductFromFavList(productId))
-            setLike({[productId]: false})
+            setLike(prev => ({
+                ...prev,
+                [productId]: false
+            }))
         } else {
             e.preventDefault()
             props.dispatch(addProductToFavList(productId))
@@ -46,22 +67,37 @@ const Products = (props) => {
                 [productId]: true
             }))
         }
+        } else {
+            props.history.push('/login')
+        }
+        
     }
+
+
+    // const popover = (
+    //     <Popover id="popover-basic">
+    //         <Popover.Title as="h3">Popover right</Popover.Title>
+    //         <Popover.Content>
+    //         And here's some <strong>amazing</strong> content. It's very engaging.
+    //         right?
+    //         </Popover.Content>
+    //     </Popover>
+    // );
 
     return (
         <div className={classes.Container}>
             <FilterSort parentCallback={callbackHandler}/>
             <div className={classes.ProductContainer}>
                 {products.map(product => (
-                    <Link to={'/' + product._id} key={product._id} className={classes.Link}>
+                    <div key={product._id} className={classes.Link}>
                         <ul id={product._id} className={classes.Product}>
-                            <img src={product.image} alt="" className={classes.Image}/>
+                            <a href={'/' + product._id}><img src={product.image} alt="" className={classes.Image} /></a>
                             <li className={classes.List}>{product.name}</li>
                             <li className={classes.List}>${product.price}</li>
                             <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)} >{like[product._id]? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            
                             </button>
                         </ul>
-                    </Link>
+                    </div>
                 ))}
             </div>
         </div>
@@ -78,4 +114,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(Products);
+export default connect(mapStateToProps)(withRouter(Products));
