@@ -68,7 +68,7 @@ exports.postAddFavorites = (req, res, next) => {
     Products.findById(prodId)
         .then(product => {
             console.log('product', product)
-            return User.findById(mongoose.Types.ObjectId(req.user.id))
+            return User.findById(mongoose.Types.ObjectId(req.user.userId))
                 .then(user => {
                     return user.addToFavoritesList(product)
                 })

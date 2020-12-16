@@ -61,7 +61,7 @@ exports.postLogin = (req, res, next) => {
         return res.status(422).json({ errors: errors.array() })
     }
     User.findOne({ email: email }).then(user => {
-        console.log('user', user._id)
+        console.log('user', user)
         if (!user) {
             return res.status(401).json('Email not found!')
         }
@@ -74,10 +74,10 @@ exports.postLogin = (req, res, next) => {
                     const authUser = {
                         userId: user._id,
                         email: user.email,
-                        userName: user.userName
+                        userName: user.name
                     }
-                    const token = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
-                    res.json({ token: token, user: { id: user._id, email: user.email, name: user.name } })
+                    const token = jwt.sign(authUser, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+                    res.json({ token: token, user: authUser })
                 }
             })
     })

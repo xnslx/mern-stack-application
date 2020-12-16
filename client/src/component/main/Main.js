@@ -19,14 +19,14 @@ const Main = (props) => {
             <ul className={classes.Container}>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']}/>
-                    <span>{props.auth.user.name}</span>
+                    <span>{props.auth.user.userName}</span>
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['fas', 'cart-plus']} />
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'heart']}/>
-                    <span>{props.favoriteList.length}</span>
+                    <span>{props.auth.isAuthenticated? props.favoriteList.length: ''}</span>
                 </li>
             </ul>
             <Products/>
