@@ -28,7 +28,7 @@ export const loginUser = (currentUser, history) => (dispatch) => {
             localStorage.setItem('jwtToken', token)
             setAuthToken(token)
             console.log('result', result);
-            dispatch(setCurrentUser(jwt.decode(token), user))
+            dispatch(setCurrentUser(jwt.decode(token)))
             history.push('/')
         })
         .catch(err => {
@@ -43,11 +43,10 @@ export const loginUser = (currentUser, history) => (dispatch) => {
         })
 }
 
-export const setCurrentUser = (user, userInfo) => {
+export const setCurrentUser = (user) => {
     return {
         type: 'SET_CURRENT_USER',
-        payload: user,
-        userInfo: userInfo
+        payload: user
     }
 }
 

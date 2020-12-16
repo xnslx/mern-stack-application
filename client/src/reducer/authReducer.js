@@ -13,7 +13,7 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuthenticated: !isEmpty(action.payload),
-                user: action.userInfo
+                user: action.payload
             }
         case actionTypes.RETRIEVE_PASSWORD:
             return {
