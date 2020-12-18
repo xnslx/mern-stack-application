@@ -9,7 +9,7 @@ const FavListDetail = (props) => {
     const [favList, setFavList] = useState([])
     useEffect(() => {
         axios.get('/products/favoritelist').then(result => {
-            console.log(result)
+            console.log(result.data)
             setFavList(result.data)
         }).catch(err => {
             console.log(err)
@@ -17,7 +17,15 @@ const FavListDetail = (props) => {
     },[])
     return (
         <div>
-            
+            {favList.map(product => (
+                <ul key={product._id}>
+                    <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
+                    <li>{product.productId.name}</li>
+                    <li>{product.productId.price}</li>
+                    <button>Remove</button>
+                    <button>Add to shopping cart</button>
+                </ul>
+            ))}
         </div>
     )
 };

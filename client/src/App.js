@@ -33,6 +33,7 @@ function App() {
       <Router>
         <div>
           <Nav />
+          <Route path='/favoritelist' component={FavListDetail}/>
           <Switch>
             <Route path='/signup' component={Signup}/>
             <Route path='/login' component={Login}/>
@@ -42,7 +43,7 @@ function App() {
             <Route path='/findpassword' component={FindPassword}/>
             <Route path='/reset/:token' component={ResetPassword}/>
             <Route path='/:prodId' component={ProductDetail}/>
-            <Route path='/favoritelist' component={FavListDetail}/>
+            {/* <Route path='/favoritelist' component={FavListDetail}/> */}
           </Switch>
         </div>
       </Router>
