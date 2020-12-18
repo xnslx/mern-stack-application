@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../middleware/middleware';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA, ADD_PRODUCT_FAVORITE_LIST, REMOVE_PRODUCT_FAVORITE_LIST } from './type';
+import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA, ADD_PRODUCT_FAVORITE_LIST, REMOVE_PRODUCT_FAVORITE_LIST, GET_PRODUCT_FAVORITE_LIST } from './type';
 
 export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
@@ -132,6 +132,20 @@ export const removeProductFromFavList = (productId) => (dispatch) => {
         .then(result => {
             console.log('result', result)
             dispatch({ type: 'REMOVE_PRODUCT_FAVORITE_LIST', payload: productId })
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
+        })
+}
+
+export const getProductFavList = (product) => (dispatch) => {
+    axios.get('/products/favoritelist').then(result => {
+            console.log(result)
+            dispatch({ type: 'GET_PRODUCT_FAVORITE_LIST', payload: result })
         })
         .catch(err => {
             console.log(err)

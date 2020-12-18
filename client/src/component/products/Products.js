@@ -9,7 +9,7 @@ import classes from '../products/Products.module.css';
 import FilterSort from '../ui/FilterSort';
 import {connect} from 'react-redux';
 import {addProductToFavList, removeProductFromFavList} from '../../action/action';
-import {Popover, OverlayTrigger} from 'react-bootstrap';
+// import {Popover, OverlayTrigger} from 'react-bootstrap';
 import {withRouter} from 'react-router';
 
 const Products = (props) => {
@@ -32,23 +32,6 @@ const Products = (props) => {
         setProducts(result)
     }
 
-    // const toggleFavListHandler = (e, productId) => {
-    //     if(props.favoriteList.includes(productId)) {
-    //         e.preventDefault()
-    //         props.dispatch(removeProductFromFavList(productId))
-    //         setLike(prev => ({
-    //             ...prev,
-    //             [productId]: false
-    //         }))
-    //     } else {
-    //         e.preventDefault()
-    //         props.dispatch(addProductToFavList(productId))
-    //         setLike(prev => ({
-    //             ...prev,
-    //             [productId]: true
-    //         }))
-    //     }
-    // }
 
     const toggleFavListHandler = (e, productId) => {
         if(props.auth.isAuthenticated) {
@@ -73,16 +56,6 @@ const Products = (props) => {
         
     }
 
-
-    // const popover = (
-    //     <Popover id="popover-basic">
-    //         <Popover.Title as="h3">Popover right</Popover.Title>
-    //         <Popover.Content>
-    //         And here's some <strong>amazing</strong> content. It's very engaging.
-    //         right?
-    //         </Popover.Content>
-    //     </Popover>
-    // );
 
     return (
         <div className={classes.Container}>

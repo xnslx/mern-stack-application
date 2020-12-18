@@ -80,11 +80,12 @@ exports.postAddFavorites = (req, res, next) => {
         .catch(err => {
             console.log(err)
         })
+
 }
 
 exports.postRemoveFavorites = (req, res, next) => {
     const prodId = req.body.productId;
-    User.findById(mongoose.Types.ObjectId(req.user.id))
+    User.findById(mongoose.Types.ObjectId(req.user.userId))
         .then(user => {
             return user.removeProductFromFavList(prodId)
         })
@@ -94,5 +95,20 @@ exports.postRemoveFavorites = (req, res, next) => {
         })
         .catch(err => {
             console.log(err)
+        })
+}
+
+exports.getFavoriteList = (req, res, next) => {
+    User.findById(mongoose.Types.ObjectId(req.user.userId))
+        .then(user => {
+            return user.populate('favoriteList.items.productId')
+                .execPopulate()
+                .then(result => {
+                    console.log(result)
+                    res.status(200).json(result.favoriteList.items)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         })
 }

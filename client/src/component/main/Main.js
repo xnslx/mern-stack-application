@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 // import { Link } from 'react-router-dom';
 // import Signup from '../signup/Signup';
 // import Login from '../login/Login';
@@ -8,25 +8,49 @@ import classes from './Main.module.css';
 // import {Switch, Route} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Nav from '../nav/Nav';
+import favoriteList from '../favlistdetail/FavListDetail';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
+import {Link} from 'react-router-dom';
+import axios from 'axios';
+import {getProductFavList} from '../../action/action';
 
 const Main = (props) => {
+    const [favList, setFavList] = useState([])
+    const [isMounted, setIsMounted] = useState(false);
+    const [showData, setShowData] = useState('')
 
+    const showDetailHandler = () => {
+        // props.dispatch(getProductFavList())
+        props.history.push('/favoritelist')
+    }
+
+
+    if(props.auth.isAuthenticated){
+        axios.get('/products/favoritelist').then(result => {
+            console.log(result)
+            setShowData(result.data.length)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    } 
+    
+    
     return (
         <nav>
             <Nav />
             <ul className={classes.Container}>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']}/>
-                    <span>{props.auth.user.userName}</span>
+                    <span>{props.auth.user.userName? props.auth.user.userName.split(" ")[0] : ''}</span>
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['fas', 'cart-plus']} />
                 </li>
                 <li className={classes.List}>
-                    <FontAwesomeIcon icon={['far', 'heart']}/>
-                    <span>{props.auth.isAuthenticated? props.favoriteList.length: ''}</span>
+                    <FontAwesomeIcon icon={['far', 'heart']} onClick={showDetailHandler}/>
+                    <span>{showData}</span>
                 </li>
             </ul>
             <Products/>
@@ -35,7 +59,7 @@ const Main = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    // console.log('state', state)
+    console.log('state', state)
     return {
         auth: state.auth,
         error: state.error.message,
@@ -43,4 +67,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(withRouter(Main));
+export default withRouter(connect(mapStateToProps)(Main));

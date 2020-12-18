@@ -70,7 +70,6 @@ const logoutHandler = () => {
                 <li className={classes.ListItem}>About</li>
                 {props.auth.isAuthenticated? stateButton=(<button className={classes.Button} onClick={logoutHandler}>LOG OUT</button>) : stateButton=(<Link to='/login' ><button className={classes.Button}>LOG IN</button></Link>)}
                 <Link to='/signup' ><button className={classes.Button}>SIGN UP</button></Link>
-                {/* <Link to='/login' ><button className={classes.Button}>LOG IN</button></Link> */}
             </ul>
         </Menu>
     )
