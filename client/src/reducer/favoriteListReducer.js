@@ -7,11 +7,9 @@ const initialState = {
 const favoriteListReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_PRODUCT_FAVORITE_LIST:
-            if (state.favoriteList.includes(action.payload)) {
-                return {...state, favoriteList: state.favoriteList }
-            } else {
-                const updatedItem = state.favoriteList.concat(action.payload)
-                return {...state, favoriteList: updatedItem }
+            return {
+                ...state,
+                favoriteList: [...state.favoriteList, action.payload]
             }
         case actionTypes.REMOVE_PRODUCT_FAVORITE_LIST:
             return {

@@ -114,7 +114,6 @@ export const addProductToFavList = (productId) => (dispatch) => {
     axios.post('/products/addfavorites', { productId: productId })
         .then(result => {
             console.log('result', result)
-                // dispatch(getBackendData(result.data))
             dispatch({ type: 'ADD_PRODUCT_FAVORITE_LIST', payload: productId })
         })
         .catch(err => {
