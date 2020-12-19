@@ -42,16 +42,19 @@ userSchema.methods.addToFavoritesList = function(product) {
 }
 
 userSchema.methods.removeProductFromFavList = function(productId) {
+    console.log('removeProductFromFavList', productId)
     const needToBeRemovedProductIndex = this.favoriteList.items.findIndex(prod => {
-        return prod.productId === productId
+        return prod.productId.toString() === productId.toString()
     })
     const removedProductItem = this.favoriteList.items.splice(needToBeRemovedProductIndex, 1)
-    console.log('this.favoriteList.items', this.favoriteList.items)
+    console.log('removedProductItem', removedProductItem)
+    this.favoriteList = this.favoriteList
     return this.save()
 
     // const updatedFavList = this.favoriteList.items.filter(prod => {
     //     return prod.productId !== productId
     // })
+    // console.log('updatedFavList', updatedFavList)
     // this.favoriteList.items = updatedFavList;
     // return this.save()
 }

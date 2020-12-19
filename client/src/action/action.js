@@ -114,6 +114,7 @@ export const addProductToFavList = (productId) => (dispatch) => {
     axios.post('/products/addfavorites', { productId: productId })
         .then(result => {
             console.log('result', result)
+                // dispatch(getBackendData(result.data))
             dispatch({ type: 'ADD_PRODUCT_FAVORITE_LIST', payload: productId })
         })
         .catch(err => {
@@ -126,8 +127,8 @@ export const addProductToFavList = (productId) => (dispatch) => {
 }
 
 export const removeProductFromFavList = (productId) => (dispatch) => {
-    // console.log('productId', productId)
-    axios.post('/products/removefavorites', productId)
+    console.log('productId', productId)
+    axios.post('/products/removefavorites', { productId: productId })
         .then(result => {
             console.log('result', result)
             dispatch({ type: 'REMOVE_PRODUCT_FAVORITE_LIST', payload: productId })
@@ -144,7 +145,7 @@ export const removeProductFromFavList = (productId) => (dispatch) => {
 export const getProductFavList = (product) => (dispatch) => {
     axios.get('/products/favoritelist').then(result => {
             console.log(result)
-            dispatch({ type: 'GET_PRODUCT_FAVORITE_LIST', payload: result })
+            dispatch({ type: 'GET_PRODUCT_FAVORITE_LIST', payload: product })
         })
         .catch(err => {
             console.log(err)

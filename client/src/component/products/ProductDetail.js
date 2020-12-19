@@ -4,7 +4,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 
 const ProductDetail = (props) => {
-    console.log('props', props)
+    // console.log('props', props)
     const [productDetail, setProductDetail] = useState([])
 
     useEffect(() => {
@@ -16,7 +16,7 @@ const ProductDetail = (props) => {
         })
     },[])
 
-    console.log('productDetail', productDetail)
+    // console.log('productDetail', productDetail)
     return (
         <>
             <Link to='/' >BACK</Link>

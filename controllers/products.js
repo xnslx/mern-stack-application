@@ -85,6 +85,7 @@ exports.postAddFavorites = (req, res, next) => {
 
 exports.postRemoveFavorites = (req, res, next) => {
     const prodId = req.body.productId;
+    console.log('postRemoveFavorites', prodId)
     User.findById(mongoose.Types.ObjectId(req.user.userId))
         .then(user => {
             return user.removeProductFromFavList(prodId)
@@ -97,6 +98,7 @@ exports.postRemoveFavorites = (req, res, next) => {
             console.log(err)
         })
 }
+
 
 exports.getFavoriteList = (req, res, next) => {
     User.findById(mongoose.Types.ObjectId(req.user.userId))

@@ -26,15 +26,15 @@ const Main = (props) => {
     }
 
 
-    if(props.auth.isAuthenticated){
-        axios.get('/products/favoritelist').then(result => {
-            console.log(result)
-            setShowData(result.data.length)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    } 
+    // if(props.auth.isAuthenticated){
+    //     axios.get('/products/favoritelist').then(result => {
+    //         console.log(result)
+    //         setShowData(result.data.length)
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+    // } 
     
     
     return (
@@ -50,7 +50,7 @@ const Main = (props) => {
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'heart']} onClick={showDetailHandler}/>
-                    <span>{showData}</span>
+                    {/* <span>{props.auth.isAuthenticated? props.favoriteList.length : ''}</span> */}
                 </li>
             </ul>
             <Products/>
