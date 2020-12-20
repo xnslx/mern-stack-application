@@ -17,7 +17,8 @@ const FavListDetail = (props) => {
         })
     },[])
 
-    const removeProductHandler = (productId) => {
+    const removeProductHandler = (e,productId) => {
+        console.log(productId)
         props.dispatch(removeProductFromFavList(productId))
     }
     return (
@@ -27,7 +28,7 @@ const FavListDetail = (props) => {
                     <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
                     <li>{product.productId.name}</li>
                     <li>{product.productId.price}</li>
-                    <button onClick={removeProductHandler}>Remove</button>
+                    <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button>
                     <button>Add to shopping cart</button>
                 </ul>
             ))}

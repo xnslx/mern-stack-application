@@ -8,7 +8,7 @@ import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import classes from '../products/Products.module.css';
 import FilterSort from '../ui/FilterSort';
 import {connect} from 'react-redux';
-import {addProductToFavList, removeProductFromFavList} from '../../action/action';
+import {addProductToFavList, removeProductFromFavList, getProductFavList} from '../../action/action';
 // import {Popover, OverlayTrigger} from 'react-bootstrap';
 import {withRouter} from 'react-router';
 
@@ -21,12 +21,13 @@ const Products = (props) => {
     useEffect(() => {
         axios.get('/products/productslist')
             .then(products => {
-                // console.log(products)
+                console.log('products',products)
                 setProducts(products.data)
             }).catch(err => {
                 console.log(err)
             })
     }, [])
+
 
     const callbackHandler = (result) => {
         setProducts(result)

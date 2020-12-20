@@ -12,6 +12,27 @@ exports.getProductsList = (req, res, next) => {
         })
 }
 
+// exports.getProductsList = (req, res, next) => {
+//     User.findById(mongoose.Types.ObjectId(req.user.userId))
+//         .then(user => {
+//             if (!user) {
+//                 return Products.find()
+//                     .then(products => {
+//                         res.status(201).json(products)
+//                     })
+//             }
+//             return user.populate('favoriteList.items.productId')
+//                 .execPopulate()
+//                 .then(result => {
+//                     console.log(result)
+//                     res.status(200).json(result.favoriteList.items)
+//                 })
+//         })
+//         .catch(err => {
+//             console.log('err', err)
+//         })
+// }
+
 exports.getProductsDetail = (req, res, next) => {
     const prodId = req.params.id;
     Products.find({ _id: prodId })
