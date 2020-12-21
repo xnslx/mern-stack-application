@@ -146,7 +146,7 @@ export const removeProductFromFavList = (productId) => (dispatch) => {
 export const getProductFavList = (userId) => (dispatch) => {
     axios.get('/products/favoritelist').then(result => {
             console.log(result)
-            dispatch({ type: 'GET_PRODUCT_FAVORITE_LIST', payload: result.data.map(item => item.productId) })
+            dispatch({ type: 'GET_PRODUCT_FAVORITE_LIST', payload: result.data.map(item => item.productId._id) })
         })
         .catch(err => {
             console.log(err)

@@ -100,13 +100,28 @@ exports.postRemoveFavorites = (req, res, next) => {
 }
 
 
+// exports.getFavoriteList = (req, res, next) => {
+//     User.findById(mongoose.Types.ObjectId(req.user.userId))
+//         .then(result => {
+//             console.log(result)
+//             res.status(200).json(result.favoriteList.items)
+//         })
+//         .catch(err => {
+//             console.log(err)
+//         })
+// }
+
 exports.getFavoriteList = (req, res, next) => {
     User.findById(mongoose.Types.ObjectId(req.user.userId))
-        .then(result => {
-            console.log(result)
-            res.status(200).json(result.favoriteList.items)
-        })
-        .catch(err => {
-            console.log(err)
+        .then(user => {
+            return user.populate('favoriteList.items.productId')
+                .execPopulate()
+                .then(result => {
+                    console.log(result)
+                    res.status(200).json(result.favoriteList.items)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         })
 }

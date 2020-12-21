@@ -26,10 +26,9 @@ const FavListDetail = (props) => {
         <div>
             {favList.map(product => (
                 <ul key={product._id}>
-                    {/* <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
+                    <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
                     <li>{product.productId.name}</li>
-                    <li>{product.productId.price}</li> */}
-                    <li>{product.productId}</li>
+                    <li>{product.productId.price}</li>
                     <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button>
                     <button>Add to shopping cart</button>
                 </ul>
