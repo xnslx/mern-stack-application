@@ -4,7 +4,7 @@ import setAuthToken from '../../middleware/middleware';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import { loginUser} from '../../action/action';
+import { loginUser,getProductFavList} from '../../action/action';
 import Dashboard from '../dashboard/Dashboard';
 import {SET_CURRENT_USER} from '../../action/type';
 

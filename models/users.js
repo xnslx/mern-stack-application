@@ -25,6 +25,7 @@ const userSchema = new Schema({
 })
 
 userSchema.methods.addToFavoritesList = function(product) {
+    console.log('product', product)
     const newlyAddedToFavListItemIndex = this.favoriteList.items.findIndex(prod => {
         return prod.productId.toString() === product._id.toString()
     })
@@ -34,10 +35,12 @@ userSchema.methods.addToFavoritesList = function(product) {
     } else {
         updatedFavListItems.push({ productId: product._id })
     }
+    console.log('updatedFavListItems', updatedFavListItems)
     const updatedList = {
         items: updatedFavListItems
     }
-    this.favoriteList = updatedList
+    console.log('updatedList', updatedList)
+    this.favoriteList = updatedList;
     return this.save()
 }
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../middleware/middleware';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA, ADD_PRODUCT_FAVORITE_LIST, REMOVE_PRODUCT_FAVORITE_LIST, GET_PRODUCT_FAVORITE_LIST } from './type';
+import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA, ADD_PRODUCT_FAVORITE_LIST, REMOVE_PRODUCT_FAVORITE_LIST, GET_PRODUCT_FAVORITE_LIST, EMPTY_PRODUCT_FAVORITE_LIST } from './type';
 
 export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
@@ -28,7 +28,8 @@ export const loginUser = (currentUser, history) => (dispatch) => {
             localStorage.setItem('jwtToken', token)
             setAuthToken(token)
             console.log('result', result);
-            dispatch(setCurrentUser(jwt.decode(token)))
+            dispatch(setCurrentUser(jwt.decode(token)));
+            dispatch(getProductFavList(user.userId))
             history.push('/')
         })
         .catch(err => {
@@ -142,10 +143,10 @@ export const removeProductFromFavList = (productId) => (dispatch) => {
         })
 }
 
-export const getProductFavList = (product) => (dispatch) => {
+export const getProductFavList = (userId) => (dispatch) => {
     axios.get('/products/favoritelist').then(result => {
             console.log(result)
-            dispatch({ type: 'GET_PRODUCT_FAVORITE_LIST', payload: product })
+            dispatch({ type: 'GET_PRODUCT_FAVORITE_LIST', payload: result.data.map(item => item.productId) })
         })
         .catch(err => {
             console.log(err)
@@ -154,4 +155,11 @@ export const getProductFavList = (product) => (dispatch) => {
                 payload: err.response.data
             })
         })
+}
+
+export const emptyProductFavList = userId => {
+    return {
+        type: 'EMPTY_PRODUCT_FAVORITE_LIST',
+        payload: userId
+    }
 }

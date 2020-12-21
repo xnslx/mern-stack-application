@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import axios from 'axios';
-import {removeProductFromFavList} from '../../action/action';
+import {removeProductFromFavList,getProductFavList} from '../../action/action';
 
 
 const FavListDetail = (props) => {
@@ -17,6 +17,7 @@ const FavListDetail = (props) => {
         })
     },[])
 
+
     const removeProductHandler = (e,productId) => {
         console.log(productId)
         props.dispatch(removeProductFromFavList(productId))
@@ -25,9 +26,10 @@ const FavListDetail = (props) => {
         <div>
             {favList.map(product => (
                 <ul key={product._id}>
-                    <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
+                    {/* <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
                     <li>{product.productId.name}</li>
-                    <li>{product.productId.price}</li>
+                    <li>{product.productId.price}</li> */}
+                    <li>{product.productId}</li>
                     <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button>
                     <button>Add to shopping cart</button>
                 </ul>

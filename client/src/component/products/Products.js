@@ -17,7 +17,13 @@ const Products = (props) => {
     const [like, setLike] = useState(false);
     const [favList, setFavList] = useState([]);
 
-
+    const likedProducts= props.favoriteList;
+    console.log('likedProducts', likedProducts)
+    // let likedProductsIdArray = []
+    // for(let item of likedProducts) {
+    //     likedProductsIdArray.push(item.productId)
+    // }
+    // console.log('likedProductsIdArray',likedProductsIdArray)
     useEffect(() => {
         axios.get('/products/productslist')
             .then(products => {
@@ -34,9 +40,32 @@ const Products = (props) => {
     }
 
 
+    // const toggleFavListHandler = (e, productId) => {
+    //     if(props.auth.isAuthenticated) {
+    //         if(props.favoriteList.includes(productId)) {
+    //         e.preventDefault()
+    //         props.dispatch(removeProductFromFavList(productId))
+    //         setLike(prev => ({
+    //             ...prev,
+    //             [productId]: false
+    //         }))
+    //     } else {
+    //         e.preventDefault()
+    //         props.dispatch(addProductToFavList(productId))
+    //         setLike(prev => ({
+    //             ...prev,
+    //             [productId]: true
+    //         }))
+    //     }
+    //     } else {
+    //         props.history.push('/login')
+    //     }
+        
+    // }
+
     const toggleFavListHandler = (e, productId) => {
         if(props.auth.isAuthenticated) {
-            if(props.favoriteList.includes(productId)) {
+            if(likedProducts.includes(productId)) {
             e.preventDefault()
             props.dispatch(removeProductFromFavList(productId))
             setLike(prev => ({
@@ -53,8 +82,7 @@ const Products = (props) => {
         }
         } else {
             props.history.push('/login')
-        }
-        
+        }        
     }
 
 
@@ -68,7 +96,7 @@ const Products = (props) => {
                             <a href={'/' + product._id}><img src={product.image} alt="" className={classes.Image} /></a>
                             <li className={classes.List}>{product.name}</li>
                             <li className={classes.List}>${product.price}</li>
-                            <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)} >{like[product._id]? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            
+                            <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)} >{likedProducts.includes(product._id)? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            
                             </button>
                         </ul>
                     </div>

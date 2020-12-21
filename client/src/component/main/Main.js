@@ -21,20 +21,9 @@ const Main = (props) => {
     const [showData, setShowData] = useState('')
 
     const showDetailHandler = () => {
-        // props.dispatch(getProductFavList())
         props.history.push('/favoritelist')
     }
 
-
-    // if(props.auth.isAuthenticated){
-    //     axios.get('/products/favoritelist').then(result => {
-    //         console.log(result)
-    //         setShowData(result.data.length)
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-    // } 
     
     
     return (
@@ -50,7 +39,7 @@ const Main = (props) => {
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'heart']} onClick={showDetailHandler}/>
-                    {/* <span>{props.auth.isAuthenticated? props.favoriteList.length : ''}</span> */}
+                    <span>{props.favoriteList.length>0? props.favoriteList.length: ''}</span>
                 </li>
             </ul>
             <Products/>

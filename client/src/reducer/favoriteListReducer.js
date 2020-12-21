@@ -18,6 +18,11 @@ const favoriteListReducer = (state = initialState, action) => {
             }
         case actionTypes.GET_PRODUCT_FAVORITE_LIST:
             return {...state, favoriteList: action.payload }
+        case actionTypes.EMPTY_PRODUCT_FAVORITE_LIST:
+            return {
+                ...state,
+                favoriteList: []
+            };
         default:
             return state
     }
