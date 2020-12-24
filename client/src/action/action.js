@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../middleware/middleware';
 import jwt from 'jsonwebtoken';
-import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA, ADD_PRODUCT_FAVORITE_LIST, REMOVE_PRODUCT_FAVORITE_LIST, GET_PRODUCT_FAVORITE_LIST, EMPTY_PRODUCT_FAVORITE_LIST } from './type';
+import { SET_CURRENT_USER, GET_ERROR, CLEAR_ERROR, RETRIEVE_PASSWORD, GET_BACKEND_DATA, ADD_PRODUCT_FAVORITE_LIST, REMOVE_PRODUCT_FAVORITE_LIST, GET_PRODUCT_FAVORITE_LIST, EMPTY_PRODUCT_FAVORITE_LIST, ADD_PRODUCT_SHOPPING_CART, REMOVE_PRODUCT_SHOPPING_CART, EMPTY_PRODUCT_SHOPPING_CART, GET_PRODUCT_SHOPPING_CART } from './type';
 
 export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
@@ -160,6 +160,60 @@ export const getProductFavList = (userId) => (dispatch) => {
 export const emptyProductFavList = userId => {
     return {
         type: 'EMPTY_PRODUCT_FAVORITE_LIST',
+        payload: userId
+    }
+}
+
+export const addProductToShoppingCart = (productId) => (dispatch) => {
+    // console.log('productId', productId)
+    axios.post('/products/addtoshoppingcart', { productId: productId })
+        .then(result => {
+            console.log('result', result)
+                // dispatch(getBackendData(result.data))
+            dispatch({ type: 'ADD_PRODUCT_SHOPPING_CART', payload: productId })
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
+        })
+}
+
+export const removeProductFromShoppingCart = (productId) => (dispatch) => {
+    console.log('productId', productId)
+    axios.post('/products/removefromshoppingcart', { productId: productId })
+        .then(result => {
+            console.log('result', result)
+            dispatch({ type: 'REMOVE_PRODUCT_SHOPPING_CART', payload: productId })
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
+        })
+}
+
+export const getProductShoppingCart = (userId) => (dispatch) => {
+    axios.get('/products/shoppingcart').then(result => {
+            // console.log(result)
+            dispatch({ type: 'GET_PRODUCT_SHOPPING_CART', payload: result.data.map(item => item.productId._id) })
+        })
+        .catch(err => {
+            console.log(err)
+            dispatch({
+                type: 'GET_ERROR',
+                payload: err.response.data
+            })
+        })
+}
+
+export const emptyProductShoppingCart = userId => {
+    return {
+        type: 'EMPTY_PRODUCT_SHOPPING_CART',
         payload: userId
     }
 }

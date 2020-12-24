@@ -15,6 +15,8 @@ router.get('/filteredproducts', productsController.getProductsSearchResult)
 
 router.post('/', productsController.postProductsSearchResult);
 
+
+
 router.post('/addfavorites', isAuth.authenticateToken, productsController.postAddFavorites);
 
 router.post('/removefavorites', isAuth.authenticateToken, productsController.postRemoveFavorites)
