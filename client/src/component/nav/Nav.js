@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import {bubble as Menu} from 'react-burger-menu';
 import classes from './Nav.module.css';
 import {connect} from 'react-redux';
-import {logoutUser,emptyProductFavList} from '../../action/action';
+import {logoutUser,emptyProductFavList,emptyProductShoppingCart} from '../../action/action';
 import {withRouter} from 'react-router';
 
 
@@ -61,7 +61,8 @@ let stateButton;
 
 const logoutHandler = () => {
         props.dispatch(logoutUser(props.history))
-        props.dispatch(emptyProductFavList(props.auth.user.userId))
+        props.dispatch(emptyProductFavList(props.auth.user.userId));
+        props.dispatch(emptyProductShoppingCart(props.auth.user.userId))
     }
     return (
         <Menu styles={styles}>

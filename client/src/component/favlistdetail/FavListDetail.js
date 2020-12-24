@@ -32,10 +32,10 @@ const FavListDetail = (props) => {
     return (
         <div className={classes.Container}>
             {favList.map(product => (
-                <ul key={product._id}>
+                <ul key={product._id} className={classes.List}>
                     <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
                     <li>{product.productId.name}</li>
-                    <li>{product.productId.price}</li>
+                    <li>$ {product.productId.price}</li>
                     <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button>
                     <button onClick={(e) =>addToCartHandler(e, product.productId._id)}>Add to shopping cart</button>
                 </ul>

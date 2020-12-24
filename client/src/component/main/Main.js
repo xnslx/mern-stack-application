@@ -36,6 +36,7 @@ const Main = (props) => {
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['fas', 'cart-plus']} />
+                    <span>{props.shoppingCart.length>0? props.shoppingCart.length: ''}</span>
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'heart']} onClick={showDetailHandler}/>
@@ -52,7 +53,8 @@ const mapStateToProps = (state) => {
     return {
         auth: state.auth,
         error: state.error.message,
-        favoriteList:state.favoriteList.favoriteList
+        favoriteList:state.favoriteList.favoriteList,
+        shoppingCart:state.shoppingCart.shoppingCart
     }
 }
 
