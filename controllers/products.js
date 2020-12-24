@@ -115,13 +115,53 @@ exports.getFavoriteList = (req, res, next) => {
 }
 
 exports.postAddToShoppingCart = (req, res, next) => {
-
+    const prodId = req.body.productId;
+    console.log('req.user', req.user)
+    console.log('prodId', prodId)
+    Products.findById(prodId)
+        .then(product => {
+            console.log('product', product)
+            return User.findById(mongoose.Types.ObjectId(req.user.userId))
+                .then(user => {
+                    return user.addToShoppingCart(product)
+                })
+        })
+        .then(result => {
+            console.log('result', result)
+            res.status(200).json({ result: result, message: 'Product is added to the shopping cart.' })
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 exports.postRemoveFromShoppingCart = (req, res, next) => {
-
+    const prodId = req.body.productId;
+    console.log('postRemoveFromShoppingCart', prodId)
+    User.findById(mongoose.Types.ObjectId(req.user.userId))
+        .then(user => {
+            return user.removeProductFromShoppingCart(prodId)
+        })
+        .then(result => {
+            console.log('result', result)
+            res.status(200).json('product has been removed from shopping cart.')
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 exports.getShoppingCart = (req, res, next) => {
-
+    User.findById(mongoose.Types.ObjectId(req.user.userId))
+        .then(user => {
+            return user.populate('shoppingCart.items.productId')
+                .execPopulate()
+                .then(result => {
+                    console.log(result)
+                    res.status(200).json(result.shoppingCart.items)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        })
 }
