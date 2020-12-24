@@ -3,9 +3,10 @@ import axios from 'axios';
 // import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import classes from './ProductDetail.module.css';
+import {connect} from 'react-redux';
+import {addProductToShoppingCart} from '../../action/action';
 
 const ProductDetail = (props) => {
-    // console.log('props', props)
     const [productDetail, setProductDetail] = useState([])
 
     useEffect(() => {
@@ -17,7 +18,11 @@ const ProductDetail = (props) => {
         })
     },[])
 
-    // console.log('productDetail', productDetail)
+    const addToCartHandler = (e,productId) => {
+        e.preventDefault()
+        props.dispatch(addProductToShoppingCart(productId))
+    }
+
     return (
         <>
             {/* <Link to='/' >BACK</Link> */}
@@ -28,7 +33,7 @@ const ProductDetail = (props) => {
                         <li>{prod.name}</li>
                         <li>$ {prod.price}</li>
                         <li>stock: {prod.stock}</li>
-                        <button>Add to cart</button>
+                        <button onClick={(e) => addToCartHandler(e,prod._id)}>Add to cart</button>
                     </ul>
                 ))}
             </div>
@@ -36,4 +41,14 @@ const ProductDetail = (props) => {
     )
 };
 
-export default ProductDetail;
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        auth: state.auth,
+        error: state.error.message,
+        favoriteList:state.favoriteList.favoriteList,
+        shoppingCart:state.shoppingCart.shoppingCart
+    }
+}
+
+export default connect(mapStateToProps)(ProductDetail);

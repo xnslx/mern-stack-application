@@ -93,7 +93,7 @@ const Products = (props) => {
                 {products.map(product => (
                     <div key={product._id} className={classes.Link}>
                         <ul id={product._id} className={classes.Product}>
-                            <a href={'/' + product._id}><img src={product.image} alt="" className={classes.Image} /></a>
+                            <Link to={'/' + product._id}><img src={product.image} alt="" className={classes.Image} /></Link>
                             <li className={classes.List}>{product.name}</li>
                             <li className={classes.List}>${product.price}</li>
                             <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)} >{likedProducts.includes(product._id)? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            

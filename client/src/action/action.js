@@ -29,7 +29,8 @@ export const loginUser = (currentUser, history) => (dispatch) => {
             setAuthToken(token)
             console.log('result', result);
             dispatch(setCurrentUser(jwt.decode(token)));
-            dispatch(getProductFavList(user.userId))
+            dispatch(getProductFavList(user.userId));
+            dispatch(getProductShoppingCart(user.userId))
             history.push('/')
         })
         .catch(err => {
