@@ -1,0 +1,9 @@
+.Container {
+    /* background-color: red; */
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+}

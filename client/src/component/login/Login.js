@@ -7,6 +7,8 @@ import {withRouter} from 'react-router';
 import { loginUser,getProductFavList} from '../../action/action';
 import Dashboard from '../dashboard/Dashboard';
 import {SET_CURRENT_USER} from '../../action/type';
+import Form from 'react-bootstrap/Form';
+import classes from './Login.module.css';
 
 
 const Login = (props) => {
@@ -38,14 +40,14 @@ const Login = (props) => {
     }
 
     return (
-        <div>
-            <Link to='/' >BACK TO HOME</Link>
-            <h3>Log in below</h3>
-            <h5>Don't have an account? <Link to='/signup'>Sign up</Link></h5>
+        <div className={classes.Container}>
+            <Link to='/' >X</Link>
+            <h3 style={{textAlign:'center'}}>Log In</h3>
+            {/* <h5>Don't have an account? <Link to='/signup'>Sign up</Link></h5> */}
             <br/>
             <br/>
             {error.length > 0? <ul>{error.map((err,index) => <li key={index}>{err.msg}</li>)}</ul> : null}
-            <div>
+            <div className={classes.Form}>
                 <form action="" onSubmit={loginSubmitHandler}>
                     <div>
                         <label htmlFor="email">Email</label>
@@ -69,6 +71,7 @@ const Login = (props) => {
                 </form>
             </div>
             <a href="/findpassword">Forget Password</a>
+            <h5>Don't have an account? <Link to='/signup'>Sign up</Link></h5>
         </div>
     )
 };

@@ -21,4 +21,12 @@ router.post('/removefavorites', isAuth.authenticateToken, productsController.pos
 
 router.get('/favoritelist', isAuth.authenticateToken, productsController.getFavoriteList)
 
+
+
+router.post('/addtoshoppingcart', isAuth.authenticateToken, productsController.postAddToShoppingCart)
+
+router.post('/removefromshoppingcart', isAuth.authenticateToken, productsController.postRemoveFromShoppingCart)
+
+router.get('/shoppingcart', isAuth.authenticateToken, productsController.getShoppingCart)
+
 module.exports = router;

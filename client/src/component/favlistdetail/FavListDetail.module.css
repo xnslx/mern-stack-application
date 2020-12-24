@@ -1,0 +1,9 @@
+.Container {
+    /* background-color: rebeccapurple; */
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+}

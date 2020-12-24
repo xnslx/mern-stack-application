@@ -1,0 +1,15 @@
+.Container {
+    /* background-color: red; */
+    margin-top: 80px;
+}
+
+.List {
+    /* background-color: yellow; */
+    list-style: none;
+}
+
+.Image {
+    margin-left: auto;
+    margin-right: auto;
+    object-fit: contain;
+}

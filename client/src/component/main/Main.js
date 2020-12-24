@@ -27,8 +27,8 @@ const Main = (props) => {
     
     
     return (
-        <nav>
-            <Nav />
+        <nav className={classes.Nav}>
+            {/* <Nav /> */}
             <ul className={classes.Container}>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']}/>

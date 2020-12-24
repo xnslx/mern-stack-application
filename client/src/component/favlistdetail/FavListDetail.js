@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import axios from 'axios';
 import {removeProductFromFavList,getProductFavList} from '../../action/action';
+import classes from './FavListDetail.module.css';
 
 
 const FavListDetail = (props) => {
@@ -23,7 +24,7 @@ const FavListDetail = (props) => {
         props.dispatch(removeProductFromFavList(productId))
     }
     return (
-        <div>
+        <div className={classes.Container}>
             {favList.map(product => (
                 <ul key={product._id}>
                     <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
