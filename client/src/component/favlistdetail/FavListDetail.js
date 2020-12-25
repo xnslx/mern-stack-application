@@ -17,7 +17,7 @@ const FavListDetail = (props) => {
         }).catch(err => {
             console.log(err)
         })
-    },[])
+    },[props.favoriteList.length])
 
 
     const removeProductHandler = (e,productId) => {

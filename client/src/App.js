@@ -13,6 +13,7 @@ import Dashboard from './component/dashboard/Dashboard';
 import PrivateRoute from './component/PrivateRoute';
 import FindPassword from './component/findpassword/FindPassword';
 import ResetPassword from './component/resetPassword/ResetPassword';
+import Products from './component/products/Products';
 // import Products from './component/products/Products';
 import ProductDetail from './component/products/ProductDetail';
 import FilteredProductsList from './component/products/FilteredProductsList';
@@ -35,13 +36,14 @@ function App() {
         <div>
           <Nav />
           <Route path='/favoritelist' component={FavListDetail}/>
-          <Route path='/shoppingcart' component={ShoppingCart}/>
+          {/* <Route path='/shoppingcart' component={ShoppingCart}/> */}
           <Switch>
             <Route path='/signup' component={Signup}/>
             <Route path='/login' component={Login}/>
             <PrivateRoute  exact path='/dashboard' component={Dashboard}/>
             <Route path='/' exact component={Main}/>
-            {/* <Route path='/products' component={Products}/> */}
+            {/* <Route path='/' component={Products}/> */}
+            <Route path='/shoppingcart' component={ShoppingCart}/>
             <Route path='/findpassword' component={FindPassword}/>
             <Route path='/reset/:token' component={ResetPassword}/>
             <Route path='/:prodId' component={ProductDetail}/>
