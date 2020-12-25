@@ -24,7 +24,9 @@ const Main = (props) => {
         props.history.push('/favoritelist')
     }
 
-    
+    const showCartHandler = () => {
+        props.history.push('/shoppingcart')
+    }
     
     return (
         <nav className={classes.Nav}>
@@ -35,7 +37,7 @@ const Main = (props) => {
                     <span>{props.auth.user.userName? props.auth.user.userName.split(" ")[0] : ''}</span>
                 </li>
                 <li className={classes.List}>
-                    <FontAwesomeIcon icon={['fas', 'cart-plus']} />
+                    <FontAwesomeIcon icon={['fas', 'cart-plus']} onClick={showCartHandler}/>
                     <span>{props.shoppingCart.length>0? props.shoppingCart.length: ''}</span>
                 </li>
                 <li className={classes.List}>

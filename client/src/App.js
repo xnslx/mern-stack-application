@@ -17,6 +17,7 @@ import ResetPassword from './component/resetPassword/ResetPassword';
 import ProductDetail from './component/products/ProductDetail';
 import FilteredProductsList from './component/products/FilteredProductsList';
 import FavListDetail from './component/favlistdetail/FavListDetail';
+import ShoppingCart from './component/shoppingcart/ShoppingCart';
 import {faFilter, faCartPlus, faStar} from '@fortawesome/free-solid-svg-icons';
 import {faHeart, faUser, faStart} from '@fortawesome/free-regular-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
@@ -34,6 +35,7 @@ function App() {
         <div>
           <Nav />
           <Route path='/favoritelist' component={FavListDetail}/>
+          <Route path='/shoppingcart' component={ShoppingCart}/>
           <Switch>
             <Route path='/signup' component={Signup}/>
             <Route path='/login' component={Login}/>
@@ -43,7 +45,6 @@ function App() {
             <Route path='/findpassword' component={FindPassword}/>
             <Route path='/reset/:token' component={ResetPassword}/>
             <Route path='/:prodId' component={ProductDetail}/>
-            {/* <Route path='/favoritelist' component={FavListDetail}/> */}
           </Switch>
         </div>
       </Router>
