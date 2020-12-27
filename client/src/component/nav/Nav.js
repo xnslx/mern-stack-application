@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Signup from '../signup/Signup';
 import Login from '../login/Login';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ import {withRouter} from 'react-router';
 
 const Nav = (props) => {
     // console.log('props',props)
+    
     var styles = {
   bmBurgerButton: {
     position: 'fixed',
@@ -57,6 +58,7 @@ const Nav = (props) => {
   }
 }
 
+
 let stateButton;
 
 const logoutHandler = () => {
@@ -64,8 +66,10 @@ const logoutHandler = () => {
         props.dispatch(emptyProductFavList(props.auth.user.userId));
         props.dispatch(emptyProductShoppingCart(props.auth.user.userId))
     }
+
+
     return (
-        <Menu styles={styles}>
+        <Menu styles={styles} isOpen={props.isOpen}>
             <ul className={classes.List}>
                 <li className={classes.ListItem}>Shop</li>
                 <li className={classes.ListItem}>Contact</li>

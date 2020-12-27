@@ -5,6 +5,8 @@ import axios from 'axios';
 import {removeProductFromFavList,getProductFavList} from '../../action/action';
 import classes from './FavListDetail.module.css';
 import {addProductToShoppingCart} from '../../action/action';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 
 
 const FavListDetail = (props) => {
@@ -36,7 +38,8 @@ const FavListDetail = (props) => {
                     <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
                     <li>{product.productId.name}</li>
                     <li>$ {product.productId.price}</li>
-                    <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button>
+                    {/* <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button> */}
+                    <FontAwesomeIcon icon={faTrashAlt} onClick={(e) =>removeProductHandler(e, product.productId._id)} className={classes.Button}/>
                     <button onClick={(e) =>addToCartHandler(e, product.productId._id)}>Add to shopping cart</button>
                 </ul>
             ))}

@@ -17,3 +17,9 @@
     margin: auto 12px;
     margin-right: 20px;
 }
+
+.Nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}

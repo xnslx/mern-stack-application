@@ -18,7 +18,9 @@ import {getProductFavList} from '../../action/action';
 const Main = (props) => {
     const [favList, setFavList] = useState([])
     const [isMounted, setIsMounted] = useState(false);
-    const [showData, setShowData] = useState('')
+    const [showData, setShowData] = useState('');
+
+    const [menuOpen, setMenuOpen] = useState(false)
 
     const showDetailHandler = () => {
         props.history.push('/favoritelist')
@@ -27,10 +29,11 @@ const Main = (props) => {
     const showCartHandler = () => {
         props.history.push('/shoppingcart')
     }
+
     
     return (
         <nav className={classes.Nav}>
-            <Nav />
+            <Nav/>
             <ul className={classes.Container}>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']}/>
@@ -45,7 +48,7 @@ const Main = (props) => {
                     <span>{props.favoriteList.length>0? props.favoriteList.length: ''}</span>
                 </li>
             </ul>
-            <Products/>
+            {/* <Products/> */}
         </nav>
     )
 };

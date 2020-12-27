@@ -20,9 +20,9 @@ import FilteredProductsList from './component/products/FilteredProductsList';
 import FavListDetail from './component/favlistdetail/FavListDetail';
 import ShoppingCart from './component/shoppingcart/ShoppingCart';
 import {faFilter, faCartPlus, faStar} from '@fortawesome/free-solid-svg-icons';
-import {faHeart, faUser, faStart} from '@fortawesome/free-regular-svg-icons';
+import {faHeart, faUser, faStart, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
-library.add(faFilter, faHeart,faCartPlus,faUser, faStar,faStar);
+library.add(faFilter, faHeart,faCartPlus,faUser, faStar,faStar,faTrashAlt);
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(thunk),
@@ -34,16 +34,16 @@ function App() {
     <Provider store={store}>
       <Router>
         <div>
-          <Nav />
-          <Route path='/favoritelist' component={FavListDetail}/>
-          {/* <Route path='/shoppingcart' component={ShoppingCart}/> */}
+          <Main />
+          {/* <Route path='/favoritelist' component={FavListDetail}/> */}
           <Switch>
             <Route path='/signup' component={Signup}/>
             <Route path='/login' component={Login}/>
             <PrivateRoute  exact path='/dashboard' component={Dashboard}/>
-            <Route path='/' exact component={Main}/>
-            {/* <Route path='/' component={Products}/> */}
+            {/* <Route path='/' exact component={Main}/> */}
+            <Route path='/' exact component={Products}/>
             <Route path='/shoppingcart' component={ShoppingCart}/>
+            <Route path='/favoritelist' component={FavListDetail}/>
             <Route path='/findpassword' component={FindPassword}/>
             <Route path='/reset/:token' component={ResetPassword}/>
             <Route path='/:prodId' component={ProductDetail}/>
