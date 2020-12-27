@@ -7,9 +7,11 @@ const initialState = {
 const shoppingCartReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_PRODUCT_SHOPPING_CART:
-            return {
-                ...state,
-                shoppingCart: [...state.shoppingCart, action.payload]
+            if (state.shoppingCart.includes(action.payload)) {
+                return {...state, shoppingCart: state.shoppingCart }
+            } else {
+                const updatedItem = state.shoppingCart.concat(action.payload)
+                return {...state, shoppingCart: updatedItem }
             }
         case actionTypes.REMOVE_PRODUCT_SHOPPING_CART:
             return {

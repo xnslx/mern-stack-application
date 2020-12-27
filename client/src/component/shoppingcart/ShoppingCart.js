@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {getProductShoppingCart,removeProductFromShoppingCart} from '../../action/action';
 import axios from 'axios';
 import classes from './ShoppingCart.module.css';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router';
 
 const ShoppingCart = (props) => {
     const [shoppingCartItem, setShoppingCartItem] = useState([]);
@@ -31,7 +33,7 @@ const ShoppingCart = (props) => {
             <div className={classes.Container}>
                 {shoppingCartItem.map(product => (
                     <ul key={product._id} className={classes.List}>
-                        <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
+                        <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/></Link>
                         <li>{product.productId.name}</li>
                         <li>$ {product.productId.price}</li>
                         <button onClick={(e) => removeProductHandler(e,product.productId._id)}>Remove From Shopping Cart</button>                   
@@ -57,4 +59,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ShoppingCart);
+export default withRouter(connect(mapStateToProps)(ShoppingCart));

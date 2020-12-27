@@ -7,6 +7,7 @@ import classes from './FavListDetail.module.css';
 import {addProductToShoppingCart} from '../../action/action';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTrashAlt} from '@fortawesome/free-regular-svg-icons';
+import {Link} from 'react-router-dom';
 
 
 const FavListDetail = (props) => {
@@ -35,7 +36,7 @@ const FavListDetail = (props) => {
         <div className={classes.Container}>
             {favList.map(product => (
                 <ul key={product._id} className={classes.List}>
-                    <img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/>
+                    <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/></Link>
                     <li>{product.productId.name}</li>
                     <li>$ {product.productId.price}</li>
                     {/* <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button> */}

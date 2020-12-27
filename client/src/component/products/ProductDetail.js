@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-// import {withRouter} from 'react-router';
+import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import classes from './ProductDetail.module.css';
 import {connect} from 'react-redux';
@@ -51,4 +51,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ProductDetail);
+export default withRouter(connect(mapStateToProps)(ProductDetail));
