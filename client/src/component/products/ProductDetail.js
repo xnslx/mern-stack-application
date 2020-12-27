@@ -4,10 +4,11 @@ import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import classes from './ProductDetail.module.css';
 import {connect} from 'react-redux';
-import {addProductToShoppingCart} from '../../action/action';
+import {addProductToShoppingCart,removeProductFromShoppingCart} from '../../action/action';
 
 const ProductDetail = (props) => {
-    const [productDetail, setProductDetail] = useState([])
+    const [productDetail, setProductDetail] = useState([]);
+    const shoppingCartItems = props.shoppingCart;
 
     useEffect(() => {
         axios.get('/products/productslist/'+ props.match.params.prodId).then(product => {
@@ -23,6 +24,11 @@ const ProductDetail = (props) => {
         props.dispatch(addProductToShoppingCart(productId))
     }
 
+    const removeFromCartHandler = (e, productId) => {
+        e.preventDefault();
+        props.dispatch(removeProductFromShoppingCart(productId))
+    }
+
     return (
         <>
             {/* <Link to='/' >BACK</Link> */}
@@ -33,7 +39,8 @@ const ProductDetail = (props) => {
                         <li>{prod.name}</li>
                         <li>$ {prod.price}</li>
                         <li>stock: {prod.stock}</li>
-                        <button onClick={(e) => addToCartHandler(e,prod._id)}>Add to cart</button>
+                        {/* <button onClick={(e) => addToCartHandler(e,prod._id)}>Add to cart</button> */}
+                        {shoppingCartItems.includes(prod._id) ? <button onClick={(e) => removeFromCartHandler(e, prod._id)}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,prod._id)}>Add to cart</button>}
                     </ul>
                 ))}
             </div>
