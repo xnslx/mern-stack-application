@@ -1,13 +1,18 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import {connect} from 'react-redux';
-import {getProductShoppingCart,removeProductFromShoppingCart} from '../../action/action';
+import {getProductShoppingCart,removeProductFromShoppingCart,addProductToFavList,removeProductFromFavList} from '../../action/action';
 import axios from 'axios';
 import classes from './ShoppingCart.module.css';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
+import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 
 const ShoppingCart = (props) => {
     const [shoppingCartItem, setShoppingCartItem] = useState([]);
+    const [like, setLike] = useState(false);
+    const likedProducts= props.favoriteList;
     let resultData;
 
     useEffect(() => {
@@ -24,6 +29,28 @@ const ShoppingCart = (props) => {
         e.preventDefault()
         props.dispatch(removeProductFromShoppingCart(productId));
     }
+
+    const toggleFavListHandler = (e, productId) => {
+        if(props.auth.isAuthenticated) {
+            if(likedProducts.includes(productId)) {
+            e.preventDefault()
+            props.dispatch(removeProductFromFavList(productId))
+            setLike(prev => ({
+                ...prev,
+                [productId]: false
+            }))
+        } else {
+            e.preventDefault()
+            props.dispatch(addProductToFavList(productId))
+            setLike(prev => ({
+                ...prev,
+                [productId]: true
+            }))
+        }
+        } else {
+            props.history.push('/login')
+        }        
+    }
     if(props.shoppingCart.length === 0) {
         resultData = (
             <p style={{width:'80vw', textAlign:'center'}}>Start adding some products to the shopping cart!</p>
@@ -36,6 +63,8 @@ const ShoppingCart = (props) => {
                         <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/></Link>
                         <li>{product.productId.name}</li>
                         <li>$ {product.productId.price}</li>
+                        <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product.productId._id)} >{likedProducts.includes(product.productId._id)? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            
+                            </button>
                         <button onClick={(e) => removeProductHandler(e,product.productId._id)}>Remove From Shopping Cart</button>                   
                     </ul>
                 ))}

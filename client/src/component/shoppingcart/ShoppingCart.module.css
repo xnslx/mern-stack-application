@@ -13,3 +13,13 @@
     padding-inline-start: 4px;
     list-style: none;
 }
+
+.Button {
+    background-color: transparent;
+    border-style: none;
+    position: absolute;
+    display: block;
+    margin-top: -20%;
+    margin-left: 2%;
+    font-size: 20px;
+}
