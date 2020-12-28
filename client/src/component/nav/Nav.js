@@ -10,7 +10,8 @@ import {withRouter} from 'react-router';
 
 
 const Nav = (props) => {
-    // console.log('props',props)
+    const [isMenuOpen, handleMenu] = useState(false)
+    
     
     var styles = {
   bmBurgerButton: {
@@ -64,17 +65,25 @@ let stateButton;
 const logoutHandler = () => {
         props.dispatch(logoutUser(props.history))
         props.dispatch(emptyProductFavList(props.auth.user.userId));
-        props.dispatch(emptyProductShoppingCart(props.auth.user.userId))
+        props.dispatch(emptyProductShoppingCart(props.auth.user.userId));
+        handleCloseMenu()
     }
 
+    const handleCloseMenu = () => {
+        handleMenu(false)
+    }
 
+    const handleStateChange = (state) => {
+        handleMenu(state.isOpen)
+    }
+    
     return (
-        <Menu styles={styles} isOpen={props.isOpen}>
+        <Menu styles={styles} isOpen={isMenuOpen} onStateChange={handleStateChange}>
             <ul className={classes.List}>
                 <li className={classes.ListItem}>Shop</li>
                 <li className={classes.ListItem}>Contact</li>
                 <li className={classes.ListItem}>About</li>
-                {props.auth.isAuthenticated? stateButton=(<button className={classes.Button} onClick={logoutHandler}>LOG OUT</button>) : stateButton=(<Link to='/login' ><button className={classes.Button}>LOG IN</button></Link>)}
+                {props.auth.isAuthenticated? stateButton=(<button className={classes.Button} onClick={logoutHandler}>LOG OUT</button>) : stateButton=(<Link to='/login'><button className={classes.Button} onClick={() => handleCloseMenu()}>LOG IN</button></Link>)}
                 <Link to='/signup' ><button className={classes.Button}>SIGN UP</button></Link>
             </ul>
         </Menu>
