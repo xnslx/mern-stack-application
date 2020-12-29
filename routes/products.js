@@ -31,4 +31,7 @@ router.post('/removefromshoppingcart', isAuth.authenticateToken, productsControl
 
 router.get('/shoppingcart', isAuth.authenticateToken, productsController.getShoppingCart)
 
+
+router.post('/order', isAuth.authenticateToken, productsController.postOrder)
+
 module.exports = router;

@@ -1,5 +1,6 @@
 const Products = require('../models/products');
 const User = require('../models/users');
+const Order = require('../models/order');
 const mongoose = require('mongoose')
 
 exports.getProductsList = (req, res, next) => {
@@ -163,5 +164,17 @@ exports.getShoppingCart = (req, res, next) => {
                 .catch(err => {
                     console.log(err)
                 })
+        })
+}
+
+exports.postOrder = (req, res, next) => {
+    User.findById(mongoose.Types.ObjectId(req.user.userId))
+        .then(user => {
+            console.log('postorder', user)
+            const newOrder = new Order({ orderItems: user.shoppingCart.items });
+            console.log(newOrder)
+        })
+        .catch(err => {
+            console.log(err)
         })
 }
