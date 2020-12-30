@@ -168,11 +168,48 @@ exports.getShoppingCart = (req, res, next) => {
 }
 
 exports.postOrder = (req, res, next) => {
+    console.log(req.user)
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const address = req.body.address;
+    const city = req.body.city;
+    const state = req.body.state;
+    const zipcode = req.body.zipcode;
     User.findById(mongoose.Types.ObjectId(req.user.userId))
         .then(user => {
-            console.log('postorder', user)
-            const newOrder = new Order({ orderItems: user.shoppingCart.items });
-            console.log(newOrder)
+            user.populate('shoppingCart.items.productId')
+                .execPopulate()
+                .then(result => {
+                    console.log('result', result.shoppingCart.items)
+                    const cartItems = result.shoppingCart.items.map(i => {
+                        return {
+                            product: i.productId._doc,
+                            quantity: i.quantity
+                        }
+                    })
+                    console.log('cartItems', cartItems)
+                    const newOrder = new Order({
+                        products: cartItems,
+                        user: {
+                            email: req.user.email,
+                            userId: req.user.userId
+                        },
+                        shippingInfo: {
+                            firstName: firstName,
+                            lastName: lastName,
+                            address: address,
+                            city: city,
+                            state: state,
+                            zipcode: zipcode
+                        }
+                    })
+                    console.log('newOrder', newOrder)
+                    return newOrder.save()
+                })
+                .then(result => {
+                    console.log(result)
+                    res.status(200).json('order has been processed!')
+                })
         })
         .catch(err => {
             console.log(err)
