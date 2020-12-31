@@ -24,7 +24,11 @@ const ShoppingCart = (props) => {
         })
     },[props.shoppingCart.length])
 
-
+    console.log('shoppingCartItem', shoppingCartItem);
+    let total = 0;
+    shoppingCartItem.forEach(i => {
+        total += i.productId.price * i.quantity
+    })
     const removeProductHandler = (e,productId) => {
         e.preventDefault()
         props.dispatch(removeProductFromShoppingCart(productId));
@@ -68,6 +72,8 @@ const ShoppingCart = (props) => {
                         <button onClick={(e) => removeProductHandler(e,product.productId._id)}>Remove From Shopping Cart</button>                   
                     </ul>
                 ))}
+                <p>Total Price:{total}</p>
+                <button>CONTINUE TO CHECKOUT</button>
             </div>
         )
     }

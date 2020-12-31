@@ -158,7 +158,7 @@ exports.getShoppingCart = (req, res, next) => {
             return user.populate('shoppingCart.items.productId')
                 .execPopulate()
                 .then(result => {
-                    console.log(result)
+                    console.log('getshoppingcart', result)
                     res.status(200).json(result.shoppingCart.items)
                 })
                 .catch(err => {
@@ -167,7 +167,7 @@ exports.getShoppingCart = (req, res, next) => {
         })
 }
 
-exports.postOrder = (req, res, next) => {
+exports.postCheckout = (req, res, next) => {
     console.log(req.user)
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
@@ -180,14 +180,13 @@ exports.postOrder = (req, res, next) => {
             user.populate('shoppingCart.items.productId')
                 .execPopulate()
                 .then(result => {
-                    console.log('result', result.shoppingCart.items)
                     const cartItems = result.shoppingCart.items.map(i => {
-                        return {
-                            product: i.productId._doc,
-                            quantity: i.quantity
-                        }
-                    })
-                    console.log('cartItems', cartItems)
+                            return {
+                                product: i.productId._doc,
+                                quantity: i.quantity
+                            }
+                        })
+                        // console.log('cartItems', cartItems)
                     const newOrder = new Order({
                         products: cartItems,
                         user: {
@@ -208,8 +207,19 @@ exports.postOrder = (req, res, next) => {
                 })
                 .then(result => {
                     console.log(result)
-                    res.status(200).json('order has been processed!')
+                    res.status(200).json({ result: result, message: 'order has been processed!' })
                 })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
+exports.getCheckoutSuccess = (req, res, next) => {
+    Order.find({ 'user.userId': mongoose.Types.ObjectId(req.user.userId) })
+        .then(order => {
+            console.log(order)
+            res.status(200).json({ order: order, message: 'Here is your order detail!' })
         })
         .catch(err => {
             console.log(err)
