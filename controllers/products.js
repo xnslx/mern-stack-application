@@ -189,6 +189,10 @@ exports.getCheckout = (req, res, next) => {
                     // console.log('total', total)
                     return request.requestBody({
                         "intent": "CAPTURE",
+                        "application_context": {
+                            "return_url": "http://localhost:3001/products/checkout/success",
+                            "cancel_url": "http://localhost:3001/products/checkout/fail"
+                        },
                         "purchase_units": [{
                             "amount": {
                                 "currency_code": "USD",
