@@ -5,6 +5,9 @@ const app = express();
 const mongodb = require('mongodb');
 const mongoose = require('mongoose');;
 const dbUrl = process.env.URL;
+const paypal = require('paypal-rest-sdk');
+const clientId = process.env.CLIENTID;
+const clientsecret = process.env.CLIENTSECRET;
 
 const authRoutes = require('./routes/auth');
 const productsRoutes = require('./routes/products');

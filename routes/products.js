@@ -32,6 +32,7 @@ router.post('/removefromshoppingcart', isAuth.authenticateToken, productsControl
 router.get('/shoppingcart', isAuth.authenticateToken, productsController.getShoppingCart)
 
 
+router.get('/checkout', isAuth.authenticateToken, productsController.getCheckout)
 router.post('/checkout', isAuth.authenticateToken, productsController.postCheckout)
 
 router.get('/checkout/success', isAuth.authenticateToken, productsController.getCheckoutSuccess)

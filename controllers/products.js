@@ -1,7 +1,11 @@
 const Products = require('../models/products');
 const User = require('../models/users');
 const Order = require('../models/order');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const clientId = process.env.CLIENTID;
+const clientsecret = process.env.CLIENTSECRET;
+const paypal = require('@paypal/checkout-server-sdk');
+const { response } = require('express');
 
 exports.getProductsList = (req, res, next) => {
     Products.find()
@@ -166,6 +170,47 @@ exports.getShoppingCart = (req, res, next) => {
                 })
         })
 }
+
+exports.getCheckout = (req, res, next) => {
+    let total = 0;
+    let environment = new paypal.core.SandboxEnvironment(clientId, clientsecret);
+    let client = new paypal.core.PayPalHttpClient(environment);
+    let request = new paypal.orders.OrdersCreateRequest()
+    User.findById(mongoose.Types.ObjectId(req.user.userId))
+        .then(user => {
+            user.populate('shoppingCart.items.productId')
+                .execPopulate()
+                .then(result => {
+                    const cartItems = result.shoppingCart.items;
+                    total = 0;
+                    cartItems.map(i => {
+                        total += i.quantity * i.productId.price
+                    });
+                    // console.log('total', total)
+                    return request.requestBody({
+                        "intent": "CAPTURE",
+                        "purchase_units": [{
+                            "amount": {
+                                "currency_code": "USD",
+                                "value": total
+                            }
+                        }]
+                    })
+                })
+                .then(result => {
+                    console.log('getcheckout', result)
+                    let createOrder = async function() {
+                        let response = await client.execute(request);
+                        console.log('response', response.result.links);
+                    }
+                    createOrder()
+                })
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}
+
 
 exports.postCheckout = (req, res, next) => {
     console.log(req.user)

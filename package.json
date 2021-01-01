@@ -17,6 +17,7 @@
         "@fortawesome/free-regular-svg-icons": "^5.15.1",
         "@fortawesome/free-solid-svg-icons": "^5.15.1",
         "@fortawesome/react-fontawesome": "^0.1.13",
+        "@paypal/checkout-server-sdk": "^1.0.2",
         "axios": "^0.20.0",
         "bcrypt": "^5.0.0",
         "body-parser": "^1.19.0",
