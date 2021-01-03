@@ -19,6 +19,7 @@ import ProductDetail from './component/products/ProductDetail';
 import FilteredProductsList from './component/products/FilteredProductsList';
 import FavListDetail from './component/favlistdetail/FavListDetail';
 import ShoppingCart from './component/shoppingcart/ShoppingCart';
+import Checkout from './component/checkout/Checkout';
 import {faFilter, faCartPlus, faStar} from '@fortawesome/free-solid-svg-icons';
 import {faHeart, faUser, faStart, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
@@ -35,6 +36,7 @@ function App() {
       <Router>
         <div>
           <Main />
+          <Route path='/checkout' component={Checkout}/>
           {/* <Route path='/favoritelist' component={FavListDetail}/> */}
           <Switch>
             <Route path='/signup' component={Signup}/>
@@ -47,6 +49,7 @@ function App() {
             <Route path='/findpassword' component={FindPassword}/>
             <Route path='/reset/:token' component={ResetPassword}/>
             <Route path='/:prodId' component={ProductDetail}/>
+            {/* <Route path='/checkout' component={Checkout}/> */}
           </Switch>
         </div>
       </Router>

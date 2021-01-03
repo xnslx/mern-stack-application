@@ -173,41 +173,21 @@ exports.getShoppingCart = (req, res, next) => {
 
 exports.getCheckout = (req, res, next) => {
     let total = 0;
-    let environment = new paypal.core.SandboxEnvironment(clientId, clientsecret);
-    let client = new paypal.core.PayPalHttpClient(environment);
-    let request = new paypal.orders.OrdersCreateRequest()
     User.findById(mongoose.Types.ObjectId(req.user.userId))
         .then(user => {
             user.populate('shoppingCart.items.productId')
                 .execPopulate()
                 .then(result => {
+                    console.log('getcheckout', result.shoppingCart.items)
                     const cartItems = result.shoppingCart.items;
-                    total = 0;
                     cartItems.map(i => {
                         total += i.quantity * i.productId.price
                     });
-                    // console.log('total', total)
-                    return request.requestBody({
-                        "intent": "CAPTURE",
-                        "application_context": {
-                            "return_url": "http://localhost:3001/products/checkout/success",
-                            "cancel_url": "http://localhost:3001/products/checkout/fail"
-                        },
-                        "purchase_units": [{
-                            "amount": {
-                                "currency_code": "USD",
-                                "value": total
-                            }
-                        }]
-                    })
+                    return total;
                 })
                 .then(result => {
-                    console.log('getcheckout', result)
-                    let createOrder = async function() {
-                        let response = await client.execute(request);
-                        console.log('response', response.result.links);
-                    }
-                    createOrder()
+                    console.log(result)
+                    res.status(200).json({ result: result, message: 'Getting ready for checking out!' })
                 })
         })
         .catch(err => {

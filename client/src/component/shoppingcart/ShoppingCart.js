@@ -8,6 +8,7 @@ import {withRouter} from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
 import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
+import PayPal from '../ui/paypal/PayPal';
 
 const ShoppingCart = (props) => {
     const [shoppingCartItem, setShoppingCartItem] = useState([]);
@@ -72,8 +73,9 @@ const ShoppingCart = (props) => {
                         <button onClick={(e) => removeProductHandler(e,product.productId._id)}>Remove From Shopping Cart</button>                   
                     </ul>
                 ))}
-                <p>Total Price:{total}</p>
-                <button>CONTINUE TO CHECKOUT</button>
+                <p>Total Price: ${total}</p>
+                <Link to='/checkout'><button>PROCEED TO CHECKOUT</button></Link>
+                {/* <PayPal payvalue={total}/> */}
             </div>
         )
     }
