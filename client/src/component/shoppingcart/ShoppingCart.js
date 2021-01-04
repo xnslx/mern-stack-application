@@ -35,6 +35,10 @@ const ShoppingCart = (props) => {
         props.dispatch(removeProductFromShoppingCart(productId));
     }
 
+    const processToCheckoutHandler = () => {
+        props.history.push('/checkout')
+    }
+
     const toggleFavListHandler = (e, productId) => {
         if(props.auth.isAuthenticated) {
             if(likedProducts.includes(productId)) {
@@ -74,7 +78,7 @@ const ShoppingCart = (props) => {
                     </ul>
                 ))}
                 <p>Total Price: ${total}</p>
-                <Link to='/checkout'><button>PROCEED TO CHECKOUT</button></Link>
+                <button onClick={processToCheckoutHandler}>PROCEED TO CHECKOUT</button>
                 {/* <PayPal payvalue={total}/> */}
             </div>
         )

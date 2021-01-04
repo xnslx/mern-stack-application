@@ -1,6 +1,8 @@
 import React from 'react';
+import classes from './PayPal.module.css';
 import ReactDOM from "react-dom";
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
+
 
 const PayPal = (props) => {
   console.log('paypal', props)
@@ -25,6 +27,7 @@ const PayPal = (props) => {
     
     return (
       <PayPalButton
+        className ={classes.Container}
         createOrder={(data, actions) => createOrder(data, actions)}
         onApprove={(data, actions) => onApprove(data, actions)}
       />

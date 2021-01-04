@@ -20,9 +20,11 @@ import FilteredProductsList from './component/products/FilteredProductsList';
 import FavListDetail from './component/favlistdetail/FavListDetail';
 import ShoppingCart from './component/shoppingcart/ShoppingCart';
 import Checkout from './component/checkout/Checkout';
+import Paypal from './component/payment/Payment';
 import {faFilter, faCartPlus, faStar} from '@fortawesome/free-solid-svg-icons';
 import {faHeart, faUser, faStart, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
+import PayPal from './component/ui/paypal/PayPal';
 library.add(faFilter, faHeart,faCartPlus,faUser, faStar,faStar,faTrashAlt);
 
 const store = createStore(rootReducer, compose(
@@ -36,8 +38,9 @@ function App() {
       <Router>
         <div>
           <Main />
-          <Route path='/checkout' component={Checkout}/>
           {/* <Route path='/favoritelist' component={FavListDetail}/> */}
+            <Route path='/checkout' component={Checkout}/>
+            <Route path='/payment' component={PayPal}/>
           <Switch>
             <Route path='/signup' component={Signup}/>
             <Route path='/login' component={Login}/>
@@ -49,7 +52,6 @@ function App() {
             <Route path='/findpassword' component={FindPassword}/>
             <Route path='/reset/:token' component={ResetPassword}/>
             <Route path='/:prodId' component={ProductDetail}/>
-            {/* <Route path='/checkout' component={Checkout}/> */}
           </Switch>
         </div>
       </Router>
