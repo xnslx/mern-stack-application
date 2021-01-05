@@ -14,7 +14,7 @@ const ShippingInfo = (props) => {
     const [state, setState] = useState('');
     const [zipcode, setZipcode] = useState('');
 
-    const currentUser = {
+    const currentUserShippingInfo = {
         firstName:firstName,
         lastName:lastName,
         address:address,
@@ -25,7 +25,7 @@ const ShippingInfo = (props) => {
 
     const submitShippingInfoHandler = (e) => {
         e.preventDefault();
-        props.dispatch(saveShippingInformation(currentUser))
+        props.dispatch(saveShippingInformation(currentUserShippingInfo))
         props.history.push('/payment')
     }
 

@@ -204,6 +204,7 @@ exports.postCheckout = (req, res, next) => {
     const city = req.body.city;
     const state = req.body.state;
     const zipcode = req.body.zipcode;
+    const payment = req.body.payment;
     User.findById(mongoose.Types.ObjectId(req.user.userId))
         .then(user => {
             user.populate('shoppingCart.items.productId')
@@ -229,6 +230,9 @@ exports.postCheckout = (req, res, next) => {
                             city: city,
                             state: state,
                             zipcode: zipcode
+                        },
+                        payment: {
+                            payment: payment
                         }
                     })
                     console.log('newOrder', newOrder)
