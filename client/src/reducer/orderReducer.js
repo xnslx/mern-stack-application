@@ -2,10 +2,12 @@ import * as actionTypes from '../action/type';
 
 const initialState = {
     shippingInfo: {},
-    paymentInfo: {}
+    paymentInfo: {},
+    order: {}
 }
 
 const orderReducer = (state = initialState, action) => {
+    console.log('action', action)
     switch (action.type) {
         case actionTypes.SAVE_SHIPPING_INFORMATION:
             return {
@@ -20,8 +22,7 @@ const orderReducer = (state = initialState, action) => {
         case actionTypes.ON_SUCCESS_BUY:
             return {
                 ...state,
-                shippingInfo: action.payload.shippingInfo,
-                paymentInfo: action.payload.paymentInfo
+                order: action.payload.data.result
             }
         default:
             return state
