@@ -44,8 +44,10 @@ const orderSchema = new Schema({
         }
     },
     payment: {
-        type: String,
-        required: true
+        paymentDetail: {
+            type: Array,
+            required: true
+        }
     }
 });
 

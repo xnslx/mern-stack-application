@@ -1,8 +1,7 @@
 import * as actionTypes from '../action/type';
 
 const initialState = {
-    shoppingCart: [],
-    shippingInfo: {}
+    shoppingCart: []
 }
 
 const shoppingCartReducer = (state = initialState, action) => {
@@ -26,11 +25,6 @@ const shoppingCartReducer = (state = initialState, action) => {
                 ...state,
                 shoppingCart: []
             };
-        case actionTypes.SAVE_SHIPPING_INFORMATION:
-            return {
-                ...state,
-                shippingInfo: action.payload
-            }
         default:
             return state
     }

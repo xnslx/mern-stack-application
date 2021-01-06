@@ -3,6 +3,9 @@ import PayPal from '../ui/paypal/PayPal';
 import {withRouter} from 'react-router';
 import classes from './Payment.module.css';
 import axios from 'axios';
+import {paySuccess} from '../../action/action';
+import {connect} from 'react-redux';
+
 
 const Payment = () => {
     const [total, setTotal] = useState('');
@@ -24,4 +27,15 @@ const Payment = () => {
     )
 };
 
-export default withRouter(Payment);
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        auth: state.auth,
+        error: state.error.message,
+        favoriteList:state.favoriteList.favoriteList,
+        shoppingCart:state.shoppingCart.shoppingCart,
+        order:state.order
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(Payment))

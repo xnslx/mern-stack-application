@@ -198,13 +198,14 @@ exports.getCheckout = (req, res, next) => {
 
 exports.postCheckout = (req, res, next) => {
     console.log(req.user)
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const address = req.body.address;
-    const city = req.body.city;
-    const state = req.body.state;
-    const zipcode = req.body.zipcode;
-    const payment = req.body.payment;
+    console.log('req.body', req.body)
+    const firstName = req.body.shippingInfo.firstName;
+    const lastName = req.body.shippingInfo.lastName;
+    const address = req.body.shippingInfo.address;
+    const city = req.body.shippingInfo.city;
+    const state = req.body.shippingInfo.state;
+    const zipcode = req.body.shippingInfo.zipcode;
+    const payment = req.body.paymentInfo;
     User.findById(mongoose.Types.ObjectId(req.user.userId))
         .then(user => {
             user.populate('shoppingCart.items.productId')
@@ -232,7 +233,7 @@ exports.postCheckout = (req, res, next) => {
                             zipcode: zipcode
                         },
                         payment: {
-                            payment: payment
+                            paymentDetail: req.body.paymentInfo
                         }
                     })
                     console.log('newOrder', newOrder)
