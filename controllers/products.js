@@ -250,12 +250,20 @@ exports.postCheckout = (req, res, next) => {
 }
 
 exports.getCheckoutSuccess = (req, res, next) => {
-    Order.find({ 'user.userId': mongoose.Types.ObjectId(req.user.userId) })
-        .then(order => {
-            console.log(order)
-            res.status(200).json({ order: order, message: 'Here is your order detail!' })
-        })
-        .catch(err => {
-            console.log(err)
-        })
+    // Order.find({ 'user.userId': mongoose.Types.ObjectId(req.user.userId) })
+    //     .then(order => {
+    //         console.log(order)
+    //         res.status(200).json({ order: order, message: 'Here is your order detail!' })
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+    const orderId = req.params.id;
+    console.log(orderId)
+    Order.find(orderId).then(result => {
+        console.log(result)
+        res.status(200).json(result)
+    }).catch(err => {
+        console.log(err)
+    })
 }
