@@ -19,33 +19,31 @@ const OrderSummary = (props) => {
 
     console.log('order', order)
     console.log('props.match.params.orderId',props.match.params.orderId)
-    let productDetail;
-    let shippingDetail;
+    let resultData;
+    const {payment, products, shippingInfo, user} = order;
+    console.log('products',products)
+    
     return (
         <div>
             <p>This is the review of your order!</p>
             <p>Order number:{order._id}</p>
             <p>Product details:</p>
-            {/* {props.order? productDetail = (
-                <div>
-                {order.products.map(product => (
-                    <ul>
+            {products? <div>
+                {products.map(product => (
+                    <ul key={product._id}>
                         <li>{product.product.name}</li>
                         <li>${product.product.price}</li>
                         <li>{product.product.quantity}</li>
                     </ul>
                 ))}
-            </div>
-            ) :''}
+            </div>:''}
             <p>Shipping Detail:</p>
-            {props.order? shippingDetail = (
-                <ul>
-                <li>{order.shippingInfo.address}</li>
-                <li>{order.shippingInfo.city}</li>
-                <li>{order.shippingInfo.state}</li>
-                <li>{order.shippingInfo.zipcode}</li>
-            </ul>
-            ) :''} */}
+            {shippingInfo? <ul>
+                     <li>{order.shippingInfo.address}</li>
+                     <li>{order.shippingInfo.city}</li>
+                     <li>{order.shippingInfo.state}</li>
+                     <li>{order.shippingInfo.zipcode}</li>
+                 </ul> : ''}
         </div>
     )
 };
