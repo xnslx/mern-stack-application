@@ -258,11 +258,12 @@ exports.getCheckoutSuccess = (req, res, next) => {
     //     .catch(err => {
     //         console.log(err)
     //     })
+    console.log('req.params', req.params)
+    console.log('req.query', req.query)
     const orderId = req.params.id;
-    console.log(orderId)
-    Order.find(orderId).then(result => {
+    Order.findById(orderId).then(result => {
         console.log(result)
-        res.status(200).json(result)
+        res.status(201).json(result)
     }).catch(err => {
         console.log(err)
     })

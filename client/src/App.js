@@ -41,7 +41,7 @@ function App() {
           <Main />
           {/* <Route path='/favoritelist' component={FavListDetail}/> */}
             <Route path='/checkout' component={Checkout}/>
-            <Route path='/checkout/:orderId' component={OrderSummary}/>
+            <Route path='/products/order/:orderId' component={OrderSummary}/>
             <Route path='/payment' component={Payment}/>
           <Switch>
             <Route path='/signup' component={Signup}/>

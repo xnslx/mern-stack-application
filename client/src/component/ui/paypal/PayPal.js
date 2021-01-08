@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {savePayment, onSuccessBuy} from '../../../action/action';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router';
 import classes from './PayPal.module.css';
 import ReactDOM from "react-dom";
 import {connect} from 'react-redux';
@@ -10,7 +12,8 @@ const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 const PayPal = (props) => {
   console.log('paypal', props)
   const shippingInfo = props.order.shippingInfo;
-  const [paySuccess, setPaySuccess] = useState(false)
+  const [paySuccess, setPaySuccess] = useState(false);
+  const [showResult, setShowResult] = useState(false)
 
 
     const createOrder = (data, actions) => {
@@ -37,10 +40,24 @@ const PayPal = (props) => {
         });
     };
 
+    const reviewOrderHandler = () => {
+        if(props.order) {
+          props.history.push(`/products/order/${props.order.order._id}`)
+        }
+    }
+
+    console.log('props.order.order._id',props.order.order._id)
     
-    const orderId = props.order.order._id;
+    let paymentResult;
     if(paySuccess) {
-      props.history.push('/checkout/:orderId')
+      paymentResult=(
+        <>
+          <span>Successfully buy!</span>
+          <button onClick={reviewOrderHandler}>Review your order</button>
+        </>
+      )
+    } else {
+      paymentResult=''
     }
 
     return (
@@ -53,6 +70,7 @@ const PayPal = (props) => {
           createOrder={(data, actions) => createOrder(data, actions)}
           onApprove={(data, actions) => onApprove(data, actions)}
         />
+        {paymentResult}
       </>
   );
 };
@@ -68,4 +86,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(PayPal);
+export default withRouter(connect(mapStateToProps)(PayPal));

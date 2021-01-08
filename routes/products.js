@@ -35,6 +35,6 @@ router.get('/shoppingcart', isAuth.authenticateToken, productsController.getShop
 router.get('/checkout', isAuth.authenticateToken, productsController.getCheckout)
 router.post('/checkout', isAuth.authenticateToken, productsController.postCheckout)
 
-router.get('/order', isAuth.authenticateToken, productsController.getCheckoutSuccess)
+router.get('/order/:id', isAuth.authenticateToken, productsController.getCheckoutSuccess)
 
 module.exports = router;
