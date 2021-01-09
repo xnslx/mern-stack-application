@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
+import classes from './OrderSummary.module.css';
 
 const OrderSummary = (props) => {
     console.log('props',props)
@@ -25,19 +26,21 @@ const OrderSummary = (props) => {
     
     return (
         <div>
-            <p>This is the review of your order!</p>
-            <p>Order number:{order._id}</p>
-            <p>Product details:</p>
-            {products? <div>
+            <h3><strong>Order:{order._id}</strong></h3>
+            <br/>
+            <h4>Product details:</h4>
+            {products? <div className={classes.Container}>
                 {products.map(product => (
                     <ul key={product._id}>
+                        <img src={product.product.image} alt="" />
                         <li>{product.product.name}</li>
                         <li>${product.product.price}</li>
-                        <li>{product.product.quantity}</li>
+                        <li>{product.quantity}</li>
+                        <hr />
                     </ul>
                 ))}
             </div>:''}
-            <p>Shipping Detail:</p>
+            <h4>Shipping Detail:</h4>
             {shippingInfo? <ul>
                      <li>{order.shippingInfo.address}</li>
                      <li>{order.shippingInfo.city}</li>
