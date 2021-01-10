@@ -62,7 +62,7 @@ const PayPal = (props) => {
 
     return (
       <>
-        <p>The total value of your order <strong>${props.payvalue}</strong></p>
+        <p className={classes.Price}>The total value of your order <strong>${props.payvalue}</strong></p>
         <br/>
         <h2>Place your order</h2>
         <PayPalButton

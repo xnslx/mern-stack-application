@@ -4,6 +4,7 @@ import { signupUser,getErrorMessage } from '../../action/action';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
+import classes from './Signup.module.css';
 
 const Signup = (props) => {
     // console.log('props', props)
@@ -40,52 +41,56 @@ const Signup = (props) => {
 
 
     return (
-        <div>
-            <Link to='/' >BACK TO HOME</Link>
-            <h3>Sign up below</h3>
-            <h5>Already have an account? <Link to='/login'>Log in</Link></h5>
-            <br/>
+        <div className={classes.Container}>
+            <Link to='/' className={classes.Link} >X</Link>
+            <h1 style={{textAlign:'center'}}>SIGN UP</h1>
+            {/* <br/> */}
             {error.length > 0? <ul>{error.map((err,index) => <li key={index}>{err.msg}</li>)}</ul> : null}
             <div>
                 <form action="" onSubmit={submitHandler}>
                     <div>
-                        <label htmlFor="name">Name</label>
+                        <p className={classes.LabelContainer}><label htmlFor="name" className={classes.Label}>Name</label></p>
                         <input 
                             type="text"
                             id="name"
+                            className={classes.Input}
                             value={name}
                             onChange={e => setName(e.target.value)}
                         />
                     </div>
                     <div>
-                        <label htmlFor="email">Email</label>
+                        <p className={classes.LabelContainer}><label htmlFor="email" className={classes.Label}>Email</label></p>
                         <input 
                             type="email"
                             id="email"
+                            className={classes.Input}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label>
+                        <p className={classes.LabelContainer}><label htmlFor="password" className={classes.Label}>Password</label></p>
                         <input 
                             type="password"
                             id="password"
+                            className={classes.Input}
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                         />
                     </div>
                     <div>
-                        <label htmlFor="confirmPassword">Confirm Password</label>
+                        <p className={classes.LabelContainer}><label htmlFor="confirmPassword" className={classes.Label}>Confirm Password</label></p>
                         <input 
                             type="password"
                             id="confirmPassword"
+                            className={classes.Input}
                             value={confirmPassword}
                             onChange={e => setConfirmPassword(e.target.value)}
                         />
                     </div>
-                    <button type="submit">SIGN UP</button>
+                    <button type="submit" className={classes.Button}>SIGN UP</button>
                 </form>
+                <h5 className={classes.Text}>Already have an account? <Link to='/login' className={classes.Link}>Log in</Link></h5>
             </div>
         </div>
     )

@@ -83,9 +83,9 @@ const logoutHandler = () => {
                 <li className={classes.ListItem}>Shop</li>
                 <li className={classes.ListItem}>Contact</li>
                 <li className={classes.ListItem}>About</li>
-                {props.auth.isAuthenticated? stateButton=(<button className={classes.Button} onClick={logoutHandler}>LOG OUT</button>) : stateButton=(<Link to='/login'><button className={classes.Button} onClick={() => handleCloseMenu()}>LOG IN</button></Link>)}
-                <Link to='/signup' ><button className={classes.Button}>SIGN UP</button></Link>
             </ul>
+            {props.auth.isAuthenticated? stateButton=(<button className={classes.Button} onClick={logoutHandler}>LOG OUT</button>) : stateButton=(<Link to='/login' className={classes.Alink}><button className={classes.Button} onClick={() => handleCloseMenu()}>LOG IN</button></Link>)}
+                <Link to='/signup' className={classes.Alink}><button className={classes.SignupButton}>SIGN UP</button></Link>
         </Menu>
     )
 };

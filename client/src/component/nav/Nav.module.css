@@ -1,14 +1,47 @@
 .List {
     list-style: none;
+    /* background-color: red; */
+    border: none;
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .ListItem {
+    /* background-color: green; */
     margin: 24px auto;
     color: #1a1918;
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .Button {
-    display: flex;
-    font-style: none;
-    flex-direction: column;
+    /* background-color: yellow; */
+    margin-top: 24px;
+    height: 44px;
+    width: 160px;
+    margin-bottom: 24px;
+    border: none;
+    background-color: #fc5359;
+    color: white;
+    font-weight: 600;
+}
+
+.SignupButton {
+    height: 44px;
+    width: 160px;
+    margin-bottom: 24px;
+    border: #fc5359;
+    background-color: #ffddde;
+    color: #fc5359;
+    font-weight: 600;
+}
+
+.Alink {
+    text-decoration: none;
+    color: black;
 }

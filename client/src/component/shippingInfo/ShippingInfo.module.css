@@ -1,7 +1,7 @@
 .Container {
     /* background-color: red; */
-    width: 90vw;
-    height: 100vh;
+    width: 80vw;
+    /* height: 100vh; */
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -14,7 +14,7 @@
 }
 
 .Input {
-    width: 88vw;
+    width: 78vw;
     height: 40px;
     margin-bottom: 12px;
     border-style: solid 1px black;
@@ -26,28 +26,10 @@
 
 .Button {
     margin-top: 12px;
-    width: 90vw;
+    width: 80vw;
     height: 48px;
     border: none;
     background-color: #fc5359;
     color: #1a1918;
     font-weight: 600;
-}
-
-.Link {
-    position: absolute;
-    right: 20px;
-    margin-right: 20px;
-    text-decoration: none;
-    color: black
-}
-
-.Alink {
-    text-decoration: none;
-    color: black;
-    padding-top: 8px;
-}
-
-.Alink:hover {
-    text-decoration: underline;
 }

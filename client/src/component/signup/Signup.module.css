@@ -41,13 +41,3 @@
     text-decoration: none;
     color: black
 }
-
-.Alink {
-    text-decoration: none;
-    color: black;
-    padding-top: 8px;
-}
-
-.Alink:hover {
-    text-decoration: underline;
-}

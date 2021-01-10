@@ -41,7 +41,7 @@ const Login = (props) => {
 
     return (
         <div className={classes.Container}>
-            <Link to='/' >X</Link>
+            <Link to='/' className={classes.Link}>X</Link>
             <h1 style={{textAlign:'center'}}>Log In</h1>
             {/* <h5>Don't have an account? <Link to='/signup'>Sign up</Link></h5> */}
             <br/>
@@ -50,28 +50,30 @@ const Login = (props) => {
             <div className={classes.Form}>
                 <form action="" onSubmit={loginSubmitHandler}>
                     <div>
-                        <p><label htmlFor="email">Email</label></p>
+                        <p className={classes.LabelContainer}><label htmlFor="email" className={classes.Label}>Email</label></p>
                         <input 
                             type="email"
                             id="email"
+                            className={classes.Input}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />
                     </div>
                     <div>
-                        <p><label htmlFor="password">Password</label></p>
+                        <p className={classes.LabelContainer}><label htmlFor="password" className={classes.Label}>Password</label></p>
                         <input 
                             type="password"
                             id="password"
+                            className={classes.Input}
                             value={password}
                             onChange={e => setPassword(e.target.value)}
                         />
                     </div>
-                    <button type="submit">LOG IN</button>
+                    <button type="submit" className={classes.Button}>LOG IN</button>
                 </form>
             </div>
-            <a href="/findpassword">Forget Password?</a>
-            <h5>Don't have an account? <Link to='/signup'>Sign up</Link></h5>
+            <a href="/findpassword" className={classes.Alink}>Forget Password?</a>
+            <h5>Don't have an account? <Link to='/signup' className={classes.Alink}>Sign up</Link></h5>
         </div>
     )
 };
