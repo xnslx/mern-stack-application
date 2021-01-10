@@ -1,9 +1,44 @@
 .Container {
     /* background-color: red; */
     width: 90vw;
+    height: 100vh;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 80px;
     display: flex;
     flex-direction: column;
+}
+
+form {
+    margin-top: -48px;
+}
+
+input {
+    width: 88vw;
+    height: 44px;
+    margin-bottom: 12px;
+    border-style: solid 1px black;
+}
+
+label {
+    /* background-color: yellowgreen; */
+    margin-left: -40px;
+}
+
+button {
+    margin-top: 12px;
+    width: 90vw;
+    height: 48px;
+    border: none;
+    background-color: #fc5359;
+    color: #1a1918;
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    text-decoration: underline;
 }

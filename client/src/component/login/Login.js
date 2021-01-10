@@ -42,7 +42,7 @@ const Login = (props) => {
     return (
         <div className={classes.Container}>
             <Link to='/' >X</Link>
-            <h3 style={{textAlign:'center'}}>Log In</h3>
+            <h1 style={{textAlign:'center'}}>Log In</h1>
             {/* <h5>Don't have an account? <Link to='/signup'>Sign up</Link></h5> */}
             <br/>
             <br/>
@@ -50,7 +50,7 @@ const Login = (props) => {
             <div className={classes.Form}>
                 <form action="" onSubmit={loginSubmitHandler}>
                     <div>
-                        <label htmlFor="email">Email</label>
+                        <p><label htmlFor="email">Email</label></p>
                         <input 
                             type="email"
                             id="email"
@@ -59,7 +59,7 @@ const Login = (props) => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label>
+                        <p><label htmlFor="password">Password</label></p>
                         <input 
                             type="password"
                             id="password"
@@ -70,7 +70,7 @@ const Login = (props) => {
                     <button type="submit">LOG IN</button>
                 </form>
             </div>
-            <a href="/findpassword">Forget Password</a>
+            <a href="/findpassword">Forget Password?</a>
             <h5>Don't have an account? <Link to='/signup'>Sign up</Link></h5>
         </div>
     )
