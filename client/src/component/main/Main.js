@@ -23,11 +23,19 @@ const Main = (props) => {
     const [menuOpen, setMenuOpen] = useState(false)
 
     const showFavDetailHandler = () => {
-        props.history.push('/favoritelist')
+        if(props.auth.isAuthenticated) {
+            props.history.push('/favoritelist')
+        } else {
+            props.history.push('/login')
+        }
     }
 
     const showCartHandler = () => {
-        props.history.push('/shoppingcart')
+        if(props.auth.isAuthenticated) {
+            props.history.push('/shoppingcart')
+        } else {
+            props.history.push('/login')
+        }
     }
 
     

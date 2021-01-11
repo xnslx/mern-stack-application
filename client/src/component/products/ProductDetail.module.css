@@ -13,3 +13,13 @@
     margin-right: auto;
     object-fit: contain;
 }
+
+.Button {
+    height: 44px;
+    width: 160px;
+    margin-top: 12px;
+    background-color: #333333;
+    color: #eeeeee;
+    font-weight: 300;
+    border: none;
+}

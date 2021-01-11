@@ -21,7 +21,11 @@ const ProductDetail = (props) => {
 
     const addToCartHandler = (e,productId) => {
         e.preventDefault()
-        props.dispatch(addProductToShoppingCart(productId))
+        if(props.auth.isAuthenticated) {
+            props.dispatch(addProductToShoppingCart(productId))
+        }
+        props.history.push('/login')
+        
     }
 
     const removeFromCartHandler = (e, productId) => {
@@ -40,7 +44,7 @@ const ProductDetail = (props) => {
                         <li>$ {prod.price}</li>
                         <li>stock: {prod.stock}</li>
                         {/* <button onClick={(e) => addToCartHandler(e,prod._id)}>Add to cart</button> */}
-                        {shoppingCartItems.includes(prod._id) ? <button onClick={(e) => removeFromCartHandler(e, prod._id)}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,prod._id)}>Add to cart</button>}
+                        {shoppingCartItems.includes(prod._id) ? <button onClick={(e) => removeFromCartHandler(e, prod._id)} className={classes.Button}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,prod._id)} className={classes.Button}>Add to cart</button>}
                     </ul>
                 ))}
             </div>
