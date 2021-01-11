@@ -243,6 +243,9 @@ export const onSuccessBuy = (data, shippingInfo) => (dispatch) => {
                 type: 'ON_SUCCESS_BUY',
                 payload: result
             })
+            dispatch({
+                type: 'EMPTY_PRODUCT_SHOPPING_CART'
+            })
         })
         .catch(err => {
             console.log(err)
