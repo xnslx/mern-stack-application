@@ -22,7 +22,7 @@ const Main = (props) => {
 
     const [menuOpen, setMenuOpen] = useState(false)
 
-    const showDetailHandler = () => {
+    const showFavDetailHandler = () => {
         props.history.push('/favoritelist')
     }
 
@@ -44,7 +44,7 @@ const Main = (props) => {
                     <span>{props.shoppingCart.length>0? props.shoppingCart.length: ''}</span>
                 </li>
                 <li className={classes.List}>
-                    <FontAwesomeIcon icon={['far', 'heart']} onClick={showDetailHandler}/>
+                    <FontAwesomeIcon icon={['far', 'heart']} onClick={showFavDetailHandler}/>
                     <span>{props.favoriteList.length>0? props.favoriteList.length: ''}</span>
                 </li>
             </ul>

@@ -23,3 +23,25 @@
     margin-left: 2%;
     font-size: 20px;
 }
+
+.ShoppingCartButton {
+    height: 44px;
+    width: 160px;
+    margin-top: 12px;
+    background-color: #333333;
+    color: #eeeeee;
+    font-weight: 300;
+    border: none;
+}
+
+.CheckoutButton {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    width: 90vw;
+    height: 44px;
+    border: none;
+    background-color: #fc5359;
+    color: #1a1918;
+    font-weight: 600;
+}

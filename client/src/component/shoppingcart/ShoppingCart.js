@@ -74,11 +74,11 @@ const ShoppingCart = (props) => {
                         <li>$ {product.productId.price}</li>
                         <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product.productId._id)} >{likedProducts.includes(product.productId._id)? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            
                             </button>
-                        <button onClick={(e) => removeProductHandler(e,product.productId._id)}>Remove From Shopping Cart</button>                   
+                        <button onClick={(e) => removeProductHandler(e,product.productId._id)} className={classes.ShoppingCartButton}>Remove From Shopping Cart</button>                   
                     </ul>
                 ))}
-                <p>Total Price: ${total}</p>
-                <button onClick={processToCheckoutHandler}>PROCEED TO CHECKOUT</button>
+                {/* <p>Total Price: ${total}</p> */}
+                <button onClick={processToCheckoutHandler} className={classes.CheckoutButton}>PROCEED TO CHECKOUT ${total}</button>
                 {/* <PayPal payvalue={total}/> */}
             </div>
         )

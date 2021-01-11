@@ -12,6 +12,7 @@
     /* background-color: yellow; */
     padding-inline-start: 4px;
     list-style: none;
+    font-size: 14px;
 }
 
 .Button {
@@ -22,4 +23,14 @@
     margin-top: -18%;
     margin-left: 2%;
     font-size: 20px;
+}
+
+.FavListButton {
+    height: 44px;
+    width: 160px;
+    margin-top: 12px;
+    background-color: #333333;
+    color: #eeeeee;
+    font-weight: 600;
+    border: none;
 }

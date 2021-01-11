@@ -48,7 +48,7 @@ const FavListDetail = (props) => {
                     {/* <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button> */}
                     <FontAwesomeIcon icon={faTrashAlt} onClick={(e) =>removeProductHandler(e, product.productId._id)} className={classes.Button}/>
                     {/* <button onClick={(e) =>addToCartHandler(e, product.productId._id)}>Add to shopping cart</button> */}
-                    {shoppingCartItems.includes(product.productId._id) ? <button onClick={(e) => removeFromCartHandler(e, product.productId._id)}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,product.productId._id)}>Add to cart</button>}
+                    {shoppingCartItems.includes(product.productId._id) ? <button onClick={(e) => removeFromCartHandler(e, product.productId._id)} className={classes.FavListButton}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,product.productId._id)} className={classes.FavListButton}>Add to cart</button>}
                 </ul>
             ))}
         </div>
