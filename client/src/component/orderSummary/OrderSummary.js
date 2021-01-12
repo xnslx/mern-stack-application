@@ -19,18 +19,18 @@ const OrderSummary = (props) => {
     },[])
 
     console.log('order', order)
-    console.log('props.match.params.orderId',props.match.params.orderId)
-    let resultData;
-    const [payment, products, shippingInfo, user, _id] = order;
-    console.log('payment',payment)
-    console.log('products',products);
+
+    // const [payment, products, shippingInfo, user, _id] = order;
+    // console.log('payment',payment)
+    const [item] = order;
+    console.log(item)
     return (
         <div>
-            <h3><strong>Order:{_id}</strong></h3>
+            {item? <h3><strong>Order:{item._id}</strong></h3> :''}
             <br/>
             <h4>Product details:</h4>
-            {products? <div className={classes.Container}>
-                {products.map(product => (
+            {item? <div className={classes.Container}>
+                {item.products.map(product => (
                     <ul key={product._id}>
                         <img src={product.product.image} alt="" />
                         <li>{product.product.name}</li>
@@ -41,11 +41,11 @@ const OrderSummary = (props) => {
                 ))}
             </div>:''}
             <h4>Shipping Detail:</h4>
-            {shippingInfo? <ul>
-                     <li>{shippingInfo.address}</li>
-                     <li>{shippingInfo.city}</li>
-                     <li>{shippingInfo.state}</li>
-                     <li>{shippingInfo.zipcode}</li>
+            {item? <ul>
+                     <li>{item.shippingInfo.address}</li>
+                     <li>{item.shippingInfo.city}</li>
+                     <li>{item.shippingInfo.state}</li>
+                     <li>{item.shippingInfo.zipcode}</li>
                  </ul> : ''}
         </div>
     )
