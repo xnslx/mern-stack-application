@@ -7,7 +7,7 @@ import classes from './OrderSummary.module.css';
 
 const OrderSummary = (props) => {
     console.log('props',props)
-    const [order, setOrder] = useState({});
+    const [order, setOrder] = useState([]);
 
     useEffect(() => {
         axios.get('/products/order/'+ props.match.params.orderId).then(result => {
@@ -21,12 +21,12 @@ const OrderSummary = (props) => {
     console.log('order', order)
     console.log('props.match.params.orderId',props.match.params.orderId)
     let resultData;
-    const {payment, products, shippingInfo, user} = order;
-    console.log('products',products)
-    
+    const [payment, products, shippingInfo, user, _id] = order;
+    console.log('payment',payment)
+    console.log('products',products);
     return (
         <div>
-            <h3><strong>Order:{order._id}</strong></h3>
+            <h3><strong>Order:{_id}</strong></h3>
             <br/>
             <h4>Product details:</h4>
             {products? <div className={classes.Container}>
@@ -42,10 +42,10 @@ const OrderSummary = (props) => {
             </div>:''}
             <h4>Shipping Detail:</h4>
             {shippingInfo? <ul>
-                     <li>{order.shippingInfo.address}</li>
-                     <li>{order.shippingInfo.city}</li>
-                     <li>{order.shippingInfo.state}</li>
-                     <li>{order.shippingInfo.zipcode}</li>
+                     <li>{shippingInfo.address}</li>
+                     <li>{shippingInfo.city}</li>
+                     <li>{shippingInfo.state}</li>
+                     <li>{shippingInfo.zipcode}</li>
                  </ul> : ''}
         </div>
     )

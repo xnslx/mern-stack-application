@@ -128,6 +128,7 @@ exports.postAddToShoppingCart = (req, res, next) => {
             console.log('product', product)
             return User.findById(mongoose.Types.ObjectId(req.user.userId))
                 .then(user => {
+                    console.log('postaddtoshoppingcart', user)
                     return user.addToShoppingCart(product)
                 })
         })
@@ -240,7 +241,13 @@ exports.postCheckout = (req, res, next) => {
                     return newOrder.save()
                 })
                 .then(result => {
-                    console.log(result)
+                    return User.findById(mongoose.Types.ObjectId(req.user.userId)).then(user => {
+                        console.log('user', user)
+                        return user.clearCart()
+                    })
+                })
+                .then(result => {
+                    console.log('postcheckout', result)
                     res.status(200).json({ result: result, message: 'order has been processed!' })
                 })
         })
@@ -260,9 +267,10 @@ exports.getCheckoutSuccess = (req, res, next) => {
     //     })
     console.log('req.params', req.params)
     console.log('req.query', req.query)
+    console.log('req.user', req.user)
     const orderId = req.params.id;
-    Order.findById(orderId).then(result => {
-        console.log(result)
+    Order.find({ 'user.userId': req.params.id }).then(result => {
+        console.log('result', result)
         res.status(201).json(result)
     }).catch(err => {
         console.log(err)

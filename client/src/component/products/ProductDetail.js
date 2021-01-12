@@ -23,9 +23,9 @@ const ProductDetail = (props) => {
         e.preventDefault()
         if(props.auth.isAuthenticated) {
             props.dispatch(addProductToShoppingCart(productId))
-        }
-        props.history.push('/login')
-        
+        } else {
+            props.history.push('/login')
+        }        
     }
 
     const removeFromCartHandler = (e, productId) => {

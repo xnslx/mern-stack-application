@@ -101,5 +101,10 @@ userSchema.methods.removeProductFromShoppingCart = function(productId) {
     return this.save()
 }
 
+userSchema.methods.clearCart = function() {
+    this.shoppingCart = { items: [] }
+    return this.save()
+}
+
 
 module.exports = mongoose.model('User', userSchema)
