@@ -62,7 +62,7 @@ const ShoppingCart = (props) => {
     }
     if(props.shoppingCart.length === 0) {
         resultData = (
-            <p style={{width:'80vw', textAlign:'center'}}>Start adding some products to the shopping cart!</p>
+            <p style={{width:'80vw', textAlign:'center', marginRight:'auto', marginLeft:'auto'}}>Start adding some products to the shopping cart!</p>
         )
     } else {
         resultData = (

@@ -6,6 +6,7 @@
 .List {
     /* background-color: yellow; */
     list-style: none;
+    margin-top: -60px;
 }
 
 .Image {

@@ -22,6 +22,7 @@ import ShoppingCart from './component/shoppingcart/ShoppingCart';
 import Checkout from './component/checkout/Checkout';
 import Payment from './component/payment/Payment';
 import OrderSummary from './component/orderSummary/OrderSummary';
+import OrderHistory from './component/orderhistory/OrderHistory';
 import {faFilter, faCartPlus, faStar} from '@fortawesome/free-solid-svg-icons';
 import {faHeart, faUser, faStart, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
@@ -42,6 +43,7 @@ function App() {
           {/* <Route path='/favoritelist' component={FavListDetail}/> */}
             <Route path='/checkout' component={Checkout}/>
             <Route path='/products/order/:orderId' component={OrderSummary}/>
+            <Route path='/orderhistory' component={OrderHistory}/>
             <Route path='/payment' component={Payment}/>
           <Switch>
             <Route path='/signup' component={Signup}/>

@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React,{useState, useEffect} from 'react';
 import axios from 'axios';
+import classes from './OrderHistory.module.css';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
-import classes from './OrderSummary.module.css';
 
-const OrderSummary = (props) => {
+const OrderHistory = (props) => {
     console.log('props',props)
     const [order, setOrder] = useState([]);
 
     useEffect(() => {
-        axios.get('/products/order/'+ props.match.params.orderId).then(result => {
+        axios.get('/products/order/'+ props.auth.user.userId).then(result => {
             console.log('result',result)
             setOrder(result.data)
         }).catch(err => {
@@ -18,7 +18,6 @@ const OrderSummary = (props) => {
     },[])
 
     console.log('order', order)
-
     return (
         <div className={classes.TopContainer}>
             {
@@ -63,4 +62,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(OrderSummary));
+export default withRouter(connect(mapStateToProps)(OrderHistory));

@@ -38,13 +38,21 @@ const Main = (props) => {
         }
     }
 
+    const showOrderHistoryHandler = () => {
+        if(props.auth.isAuthenticated) {
+            props.history.push('/orderhistory')
+        } else {
+            props.history.push('/login')
+        }
+    }
+
     
     return (
         <nav className={classes.Nav}>
             <Nav/>
             <ul className={classes.Container}>
                 <li className={classes.List}>
-                    <FontAwesomeIcon icon={['far', 'user']}/>
+                    <FontAwesomeIcon icon={['far', 'user']} onClick={showOrderHistoryHandler}/>
                     <span>{props.auth.user.userName? props.auth.user.userName.split(" ")[0] : ''}</span>
                 </li>
                 <li className={classes.List}>
