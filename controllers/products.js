@@ -6,6 +6,7 @@ const clientId = process.env.CLIENTID;
 const clientsecret = process.env.CLIENTSECRET;
 const paypal = require('@paypal/checkout-server-sdk');
 const { response } = require('express');
+const { ObjectID } = require('mongodb');
 
 exports.getProductsList = (req, res, next) => {
     Products.find()
@@ -275,4 +276,38 @@ exports.getCheckoutSuccess = (req, res, next) => {
     }).catch(err => {
         console.log(err)
     })
+
+    Order.find({ 'user.userId': req.params.id })
+        .then(order => {
+            console.log('order', order)
+            const purchasedProductsIdList = [];
+            const purchasedProducts = order.map(od => {
+                return od.products
+            })
+            console.log('purchasedProducts', purchasedProducts)
+            const mergedProducts = [].concat.apply([], purchasedProducts);
+            console.log('mergedProducts', mergedProducts)
+            mergedProducts.map(pd => {
+                return purchasedProductsIdList.push(pd.product._id);
+            })
+            const needToUpdatedProducts = mergedProducts.map(i => {
+                return i.product.stock
+            })
+            console.log('purchasedProductsIdList', purchasedProductsIdList);
+            Products.updateMany({ _id: { $in: purchasedProductsIdList } }, { $set: { stock: 0 } }, (err, data) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    console.log(data)
+                }
+            });
+            return order;
+        })
+        .then(result => {
+            console.log('result', result)
+            res.status(200).json(result)
+        })
+        .catch(err => {
+            console.log(err)
+        })
 }
