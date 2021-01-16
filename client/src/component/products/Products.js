@@ -96,6 +96,7 @@ const Products = (props) => {
                             <Link to={'/' + product._id}><img src={product.image} alt="" className={classes.Image} /></Link>
                             <li className={classes.List}>{product.name}</li>
                             <li className={classes.List}>${product.price}</li>
+                            {product.stock===0 ? <h5 className={classes.Text}>Out of stock</h5> :''}
                             <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product._id)} >{likedProducts.includes(product._id)? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            
                             </button>
                         </ul>

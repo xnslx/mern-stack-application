@@ -3,9 +3,15 @@
     border-style: none;
     position: absolute;
     display: block;
-    margin-top: -24%;
+    margin-top: -30%;
     margin-left: 2%;
     font-size: 20px;
+}
+
+.Text {
+    padding: 0;
+    margin: 0;
+    color: #fc5359;
 }
 
 .Container {

@@ -44,7 +44,7 @@ const ProductDetail = (props) => {
                         <li>$ {prod.price}</li>
                         <li>stock: {prod.stock}</li>
                         {/* <button onClick={(e) => addToCartHandler(e,prod._id)}>Add to cart</button> */}
-                        {shoppingCartItems.includes(prod._id) ? <button onClick={(e) => removeFromCartHandler(e, prod._id)} className={classes.Button}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,prod._id)} className={classes.Button}>Add to cart</button>}
+                        {shoppingCartItems.includes(prod._id)? <button onClick={(e) => removeFromCartHandler(e, prod._id)} className={classes.Button} disabled={prod.stock === 0}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,prod._id)} className={classes.Button} disabled={prod.stock === 0}>Add to cart</button>}
                     </ul>
                 ))}
             </div>
