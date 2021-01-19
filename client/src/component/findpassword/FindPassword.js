@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {retrievePassword} from '../../action/action';
 import {Link} from 'react-router-dom';
+import classes from './FindPassword.module.css';
 
 const FindPassword = (props) => {
     const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ const FindPassword = (props) => {
 
     return (
         <div>
-        <Link to='/' >BACK TO HOME</Link>
+        <Link to='/' className={classes.Link} >BACK TO HOME</Link>
         {/* {error.message !== null ? <ul>{error.message}</ul> : null} */}
         {props.error.hasError === true && (
             <div>
@@ -44,16 +45,17 @@ const FindPassword = (props) => {
                 <p>Please check your email to reset password!</p>
             </div>
         )}
-        <p>Type your email to reset the password.</p>
-            <form action="" onSubmit={findPasswordHandler}>
-                <label htmlFor="email">Email</label>
+        <p className={classes.Text}>Type your email to reset the password.</p>
+            <form action="" onSubmit={findPasswordHandler} className={classes.Container}>
+                <p className={classes.LabelContainer} ><label htmlFor="email" className={classes.Label}>Email</label></p>
                 <input 
                     type="email"
                     id="email"
+                    className={classes.Input}
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
-                <button type="submit">Submit</button>
+                <button type="submit" className={classes.Button}>Submit</button>
             </form>
         </div>
     )

@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
         .then(result => {
+            console.log('result', result)
             history.push('/login')
             console.log(result)
         })
@@ -24,17 +25,17 @@ export const signupUser = (userInfo, history) => (dispatch) => {
 export const loginUser = (currentUser, history) => (dispatch) => {
     axios.post('/login', currentUser)
         .then(result => {
+            console.log('result', result);
             const { token, user } = result.data;
             localStorage.setItem('jwtToken', token)
             setAuthToken(token)
-            console.log('result', result);
             dispatch(setCurrentUser(jwt.decode(token)));
             dispatch(getProductFavList(user.userId));
             dispatch(getProductShoppingCart(user.userId))
             history.push('/')
         })
         .catch(err => {
-            // console.log(err)
+            console.log('err', err)
             dispatch({
                 type: 'GET_ERROR',
                 payload: err.response.data

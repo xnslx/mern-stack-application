@@ -3,6 +3,7 @@ import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {resetPassword} from '../../action/action';
 import axios from 'axios';
+import classes from './ResetPassword.module.css';
 
 const ResetPassword = (props) => {
     const [password, setPassword] = useState('');

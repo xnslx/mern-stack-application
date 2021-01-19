@@ -63,13 +63,13 @@ exports.postLogin = (req, res, next) => {
     User.findOne({ email: email }).then(user => {
         console.log('user', user)
         if (!user) {
-            return res.status(401).json('Email not found!')
+            return res.status(401).json({ message: 'Email not found!' })
         }
         bcrypt
             .compare(password, user.password)
             .then(isMatch => {
                 if (!isMatch) {
-                    res.json('Password is wrong!')
+                    res.status(401).json({ message: 'Password is wrong!' })
                 } else {
                     const authUser = {
                         userId: user._id,
@@ -79,6 +79,9 @@ exports.postLogin = (req, res, next) => {
                     const token = jwt.sign(authUser, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
                     res.json({ token: token, user: authUser })
                 }
+            })
+            .catch(err => {
+                console.log(err)
             })
     })
 }

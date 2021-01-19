@@ -45,7 +45,7 @@ const Signup = (props) => {
             <Link to='/' className={classes.Link} >X</Link>
             <h1 style={{textAlign:'center'}}>SIGN UP</h1>
             {/* <br/> */}
-            {error.length > 0? <ul>{error.map((err,index) => <li key={index}>{err.msg}</li>)}</ul> : null}
+            {error.length > 0? <ul className={classes.ErrorMessageContainer}>{error.map((err,index) => <li key={index} className={classes.ErrorMessage}>{err.msg}</li>)}</ul> : null}
             <div>
                 <form action="" onSubmit={submitHandler}>
                     <div>

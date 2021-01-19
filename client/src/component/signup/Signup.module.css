@@ -37,3 +37,26 @@
     text-decoration: none;
     color: black
 }
+
+.ErrorMessageContainer {
+    background-color: red;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: auto;
+    width: 84vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 12px;
+    margin-bottom: 24px;
+    border: #fc5359;
+    background-color: #ffddde;
+    color: #fc5359;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.ErrorMessage {
+    /* background-color: yellow; */
+    text-align: center;
+}
