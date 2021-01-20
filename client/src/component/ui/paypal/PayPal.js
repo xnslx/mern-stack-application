@@ -6,6 +6,7 @@ import classes from './PayPal.module.css';
 import ReactDOM from "react-dom";
 import {connect} from 'react-redux';
 import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 
@@ -52,8 +53,8 @@ const PayPal = (props) => {
     if(paySuccess) {
       paymentResult=(
         <>
-          <span>Successfully buy!</span>
-          <button onClick={reviewOrderHandler}>Review your order</button>
+            <span>Successfully buy!</span>
+            <button onClick={reviewOrderHandler}>Review your order</button>
         </>
       )
     } else {

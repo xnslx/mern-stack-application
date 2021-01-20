@@ -28,7 +28,7 @@ const OrderSummary = (props) => {
                         <>
                             <p className={classes.Order}>order: <strong>{or._id}</strong></p>
                             <div className={classes.ProductsContainer}>{or.products.map(prd => (
-                                <ul key={prd._id} className={classes.ListContainer}>
+                                <ul key={prd.product._id} className={classes.ListContainer}>
                                     <img src={prd.product.image} alt="" style={{width:'60px', height:'auto'}} className={classes.Image}/>
                                     <li className={classes.List}>{prd.product.name}</li>
                                     <li className={classes.List}>${prd.product.price}</li>

@@ -40,16 +40,17 @@ function App() {
       <Router>
         <div>
           <Main />
-          {/* <Route path='/favoritelist' component={FavListDetail}/> */}
+            {/* <Route path='/checkout' component={Checkout}/>
+            <Route path='/products/order/:orderId' component={OrderSummary}/>
+            <Route path='/orderhistory' component={OrderHistory}/>
+            <Route path='/payment' component={Payment}/> */}
+          <Switch>
             <Route path='/checkout' component={Checkout}/>
             <Route path='/products/order/:orderId' component={OrderSummary}/>
             <Route path='/orderhistory' component={OrderHistory}/>
             <Route path='/payment' component={Payment}/>
-          <Switch>
             <Route path='/signup' component={Signup}/>
             <Route path='/login' component={Login}/>
-            <PrivateRoute  exact path='/dashboard' component={Dashboard}/>
-            {/* <Route path='/' exact component={Main}/> */}
             <Route path='/' exact component={Products}/>
             <Route path='/shoppingcart' component={ShoppingCart}/>
             <Route path='/favoritelist' component={FavListDetail}/>

@@ -35,7 +35,7 @@ const OrderHistory = (props) => {
                                 </ul>
                             ))}</div>
                             <div className={classes.ShipContainer}>
-                                <ul key={or._id} className={classes.ListContainer}>
+                                <ul key={or.index} className={classes.ListContainer}>
                                     <li className={classes.List}>{or.shippingInfo.address}</li>
                                     <li className={classes.List}>{or.shippingInfo.city}</li>
                                     <li className={classes.List}>{or.shippingInfo.state}</li>
