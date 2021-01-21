@@ -18,4 +18,11 @@ exports.authenticateToken = (req, res, next) => {
     } catch (err) {
         res.status(403).json({ message: 'Token is not valid!' })
     }
+
+    // jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    //     console.log(err)
+    //     if (err) return res.status(403).json({ message: 'Token is not valid!' })
+    //     req.user = user;
+    //     next()
+    // })
 }

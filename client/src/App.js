@@ -14,7 +14,6 @@ import PrivateRoute from './component/PrivateRoute';
 import FindPassword from './component/findpassword/FindPassword';
 import ResetPassword from './component/resetPassword/ResetPassword';
 import Products from './component/products/Products';
-// import Products from './component/products/Products';
 import ProductDetail from './component/products/ProductDetail';
 import FilteredProductsList from './component/products/FilteredProductsList';
 import FavListDetail from './component/favlistdetail/FavListDetail';

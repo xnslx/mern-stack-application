@@ -77,7 +77,7 @@ exports.postLogin = (req, res, next) => {
                         userName: user.name
                     }
                     const token = jwt.sign(authUser, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
-                    res.json({ token: token, user: authUser })
+                    res.status(200).json({ token: token, user: authUser })
                 }
             })
             .catch(err => {

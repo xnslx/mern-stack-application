@@ -30,7 +30,6 @@ export const loginUser = (currentUser, history) => (dispatch) => {
             localStorage.setItem('jwtToken', token)
             setAuthToken(token)
             dispatch(setCurrentUser(jwt.decode(token)));
-            console.log(jwt.decode(token))
             dispatch(getProductFavList(user.userId));
             dispatch(getProductShoppingCart(user.userId))
             history.push('/')
