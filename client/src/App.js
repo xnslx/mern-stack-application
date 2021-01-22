@@ -44,18 +44,18 @@ function App() {
             <Route path='/orderhistory' component={OrderHistory}/>
             <Route path='/payment' component={Payment}/> */}
           <Switch>
-            <Route path='/checkout' component={Checkout}/>
-            <Route path='/products/order/:orderId' component={OrderSummary}/>
-            <Route path='/orderhistory' component={OrderHistory}/>
-            <Route path='/payment' component={Payment}/>
+            <PrivateRoute path='/checkout' component={Checkout}/>
+            <PrivateRoute path='/products/order/:orderId' component={OrderSummary}/>
+            <PrivateRoute path='/orderhistory' component={OrderHistory}/>
+            <PrivateRoute path='/payment' component={Payment}/>
             <Route path='/signup' component={Signup}/>
             <Route path='/login' component={Login}/>
             <Route path='/' exact component={Products}/>
-            <Route path='/shoppingcart' component={ShoppingCart}/>
-            <Route path='/favoritelist' component={FavListDetail}/>
-            <Route path='/findpassword' component={FindPassword}/>
-            <Route path='/reset/:token' component={ResetPassword}/>
-            <Route path='/:prodId' component={ProductDetail}/>
+            <PrivateRoute path='/shoppingcart' component={ShoppingCart}/>
+            <PrivateRoute path='/favoritelist' component={FavListDetail}/>
+            <PrivateRoute path='/findpassword' component={FindPassword}/>
+            <PrivateRoute path='/reset/:token' component={ResetPassword}/>
+            <PrivateRoute path='/:prodId' component={ProductDetail}/>
           </Switch>
         </div>
       </Router>

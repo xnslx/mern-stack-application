@@ -27,6 +27,10 @@ export const loginUser = (currentUser, history) => (dispatch) => {
         .then(result => {
             console.log('result', result);
             const { token, user } = result.data;
+            dispatch({
+                type: 'LOGIN_SUCCESS',
+                payload: result.data
+            })
             localStorage.setItem('jwtToken', token)
             setAuthToken(token)
             dispatch(setCurrentUser(jwt.decode(token)));

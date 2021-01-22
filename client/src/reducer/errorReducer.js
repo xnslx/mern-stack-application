@@ -1,4 +1,4 @@
-import { GET_ERROR, CLEAR_ERROR } from '../action/type';
+import { GET_ERROR, CLEAR_ERROR, LOGIN_FAIL } from '../action/type';
 
 const initialState = {
     message: null,
@@ -9,6 +9,7 @@ const errorReducer = (state = initialState, action) => {
     console.log('action', action)
     switch (action.type) {
         case 'GET_ERROR':
+        case 'LOGIN_FAIL':
             return {
                 ...state,
                 message: action.payload,

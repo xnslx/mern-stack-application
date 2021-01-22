@@ -19,11 +19,6 @@ const Products = (props) => {
 
     const likedProducts= props.favoriteList;
     console.log('likedProducts', likedProducts)
-    // let likedProductsIdArray = []
-    // for(let item of likedProducts) {
-    //     likedProductsIdArray.push(item.productId)
-    // }
-    // console.log('likedProductsIdArray',likedProductsIdArray)
     useEffect(() => {
         axios.get('/products/productslist')
             .then(products => {
@@ -38,30 +33,6 @@ const Products = (props) => {
     const callbackHandler = (result) => {
         setProducts(result)
     }
-
-
-    // const toggleFavListHandler = (e, productId) => {
-    //     if(props.auth.isAuthenticated) {
-    //         if(props.favoriteList.includes(productId)) {
-    //         e.preventDefault()
-    //         props.dispatch(removeProductFromFavList(productId))
-    //         setLike(prev => ({
-    //             ...prev,
-    //             [productId]: false
-    //         }))
-    //     } else {
-    //         e.preventDefault()
-    //         props.dispatch(addProductToFavList(productId))
-    //         setLike(prev => ({
-    //             ...prev,
-    //             [productId]: true
-    //         }))
-    //     }
-    //     } else {
-    //         props.history.push('/login')
-    //     }
-        
-    // }
 
     const toggleFavListHandler = (e, productId) => {
         if(props.auth.isAuthenticated) {

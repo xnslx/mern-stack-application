@@ -4,17 +4,17 @@ import {Route, Redirect} from 'react-router-dom';
 // import Dashboard from './dashboard/Dashboard';
 import Products from './products/Products';
 
-const PrivateRoute = (props) => {
-    console.log('props', props);
-    const  isAuthenticated = props.auth.isAuthenticated;
-    console.log('isAuthenticated', isAuthenticated);
+const PrivateRoute = ({component:Component, auth:auth, ...rest}) => {
+    // console.log('props', props);
+    // const  isAuthenticated = props.auth.isAuthenticated;
+    // console.log('isAuthenticated', isAuthenticated);
 
     return (
         <Route 
-            {...props.rest}
+            {...rest}
             render={props => {
-                if(isAuthenticated === true) {
-                    return <Products {...props}/>
+                if(auth.isAuthenticated === true || localStorage.getItem('jwtToken')) {
+                    return <Component {...props}/>
                 } else {
                     return (
                         <Redirect 
