@@ -17,7 +17,11 @@ const ShoppingCart = (props) => {
     let resultData;
 
     useEffect(() => {
-        axios.get('/products/shoppingcart').then(result => {
+        axios.get('/products/shoppingcart', {
+            header: {
+                Authorization: `Bearer ${props.auth.user.token}`
+            }
+        }).then(result => {
             console.log(result)
             setShoppingCartItem(result.data)
         }).catch(err => {

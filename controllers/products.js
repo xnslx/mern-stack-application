@@ -266,16 +266,16 @@ exports.getCheckoutSuccess = (req, res, next) => {
     //     .catch(err => {
     //         console.log(err)
     //     })
-    console.log('req.params', req.params)
-    console.log('req.query', req.query)
-    console.log('req.user', req.user)
-    const orderId = req.params.id;
-    Order.find({ 'user.userId': req.params.id }).then(result => {
-        console.log('result', result)
-        res.status(201).json(result)
-    }).catch(err => {
-        console.log(err)
-    })
+    // console.log('req.params', req.params)
+    // console.log('req.query', req.query)
+    // console.log('req.user', req.user)
+    // const orderId = req.params.id;
+    // Order.find({ 'user.userId': req.params.id }).then(result => {
+    //     console.log('result', result)
+    //     res.status(201).json(result)
+    // }).catch(err => {
+    //     console.log(err)
+    // })
 
     Order.find({ 'user.userId': req.params.id })
         .then(order => {

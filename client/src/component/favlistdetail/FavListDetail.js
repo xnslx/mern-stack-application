@@ -15,7 +15,11 @@ const FavListDetail = (props) => {
     const [favList, setFavList] = useState([]);
     const shoppingCartItems = props.shoppingCart;
     useEffect(() => {
-        axios.get('/products/favoritelist').then(result => {
+        axios.get('/products/favoritelist', {
+            header: {
+                Authorization: `Bearer ${props.auth.user.token}`
+            }
+        }).then(result => {
             console.log(result.data)
             setFavList(result.data)
         }).catch(err => {

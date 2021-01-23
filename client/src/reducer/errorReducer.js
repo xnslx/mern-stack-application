@@ -10,6 +10,7 @@ const errorReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_ERROR':
         case 'LOGIN_FAIL':
+        case 'SIGNUP_FAIL':
             return {
                 ...state,
                 message: action.payload,

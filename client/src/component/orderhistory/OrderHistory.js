@@ -9,7 +9,11 @@ const OrderHistory = (props) => {
     const [order, setOrder] = useState([]);
 
     useEffect(() => {
-        axios.get('/products/order/'+ props.auth.user.userId).then(result => {
+        axios.get('/products/order/'+ props.auth.user.user.userId, {
+            header: {
+                Authorization: `Bearer ${props.auth.user.token}`
+            }
+        }).then(result => {
             console.log('result',result)
             setOrder(result.data)
         }).catch(err => {

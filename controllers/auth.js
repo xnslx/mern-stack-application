@@ -40,7 +40,8 @@ exports.postSignup = (req, res, next) => {
         })
         .then(result => {
             console.log('result', result)
-            res.status(201).json({ message: 'you successfully sign up!', userId: result._id });
+            const token = jwt.sign({ id: result._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
+            res.status(201).json({ message: 'you successfully sign up!', user: result, token: token });
         })
         .catch(err => {
             console.log(err)
@@ -74,7 +75,7 @@ exports.postLogin = (req, res, next) => {
                     const authUser = {
                         userId: user._id,
                         email: user.email,
-                        userName: user.name
+                        name: user.name
                     }
                     const token = jwt.sign(authUser, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' })
                     res.status(200).json({ token: token, user: authUser })

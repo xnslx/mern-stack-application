@@ -35,6 +35,14 @@ const authReducer = (state = initialState, action) => {
                 isAuthenticated: false,
                 user: action.payload
             }
+        case actionTypes.SIGNUP_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: action.payload.data
+            }
+        case actionTypes.USER_LOGOUT:
+            return {}
         default:
             return state
     }

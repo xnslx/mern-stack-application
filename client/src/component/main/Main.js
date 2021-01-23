@@ -53,7 +53,7 @@ const Main = (props) => {
             <ul className={classes.Container}>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']} onClick={showOrderHistoryHandler}/>
-                    <span>{props.auth.user.userName? props.auth.user.userName.split(" ")[0] : ''}</span>
+                    <span>{props.auth.user.user? props.auth.user.user.name.split(" ")[0] : ''}</span>
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['fas', 'cart-plus']} onClick={showCartHandler}/>

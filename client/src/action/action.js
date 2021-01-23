@@ -7,13 +7,17 @@ export const signupUser = (userInfo, history) => (dispatch) => {
     axios.post('/signup', userInfo)
         .then(result => {
             console.log('result', result)
+            dispatch({
+                type: 'SIGNUP_SUCCESS',
+                payload: result
+            })
             history.push('/login')
             console.log(result)
         })
         .catch(err => {
             // console.log(err)
             dispatch({
-                type: 'GET_ERROR',
+                type: 'SIGNUP_FAIL',
                 payload: err.response.data
             })
             dispatch({
@@ -61,6 +65,9 @@ export const logoutUser = (history) => (dispatch) => {
     localStorage.removeItem('jwtToken');
     setAuthToken(false);
     dispatch(setCurrentUser({}))
+        // dispatch({
+        //     type: 'USER_LOGOUT'
+        // })
     history.push('/')
 }
 
