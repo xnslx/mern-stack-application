@@ -26,23 +26,23 @@ import {faFilter, faCartPlus, faStar} from '@fortawesome/free-solid-svg-icons';
 import {faHeart, faUser, faStart, faTrashAlt} from '@fortawesome/free-regular-svg-icons';
 import{library} from '@fortawesome/fontawesome-svg-core';
 import PayPal from './component/ui/paypal/PayPal';
+import store from './reducer/index';
 library.add(faFilter, faHeart,faCartPlus,faUser, faStar,faStar,faTrashAlt);
 
-const store = createStore(rootReducer, compose(
-  applyMiddleware(thunk),
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-))
+// const store = createStore(rootReducer, compose(
+//   applyMiddleware(thunk),
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+// ))
+
+console.log('store',store)
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <div>
-          <Main />
-            {/* <Route path='/checkout' component={Checkout}/>
-            <Route path='/products/order/:orderId' component={OrderSummary}/>
-            <Route path='/orderhistory' component={OrderHistory}/>
-            <Route path='/payment' component={Payment}/> */}
+          {/* <Main /> */}
+          <Main exact component={Main}/>
           <Switch>
             <PrivateRoute path='/checkout' component={Checkout}/>
             <PrivateRoute path='/products/order/:orderId' component={OrderSummary}/>

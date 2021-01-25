@@ -93,6 +93,7 @@ const logoutHandler = () => {
 const mapStateToProps = (state) => {
     // console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error.message
     }

@@ -31,11 +31,15 @@ export const loginUser = (currentUser, history) => (dispatch) => {
         .then(result => {
             console.log('result', result);
             const { token, user } = result.data;
+            console.log(user)
             dispatch({
-                type: 'LOGIN_SUCCESS',
-                payload: result.data
-            })
-            localStorage.setItem('jwtToken', token)
+                    type: 'LOGIN_SUCCESS',
+                    payload: result.data
+                })
+                // localStorage.setItem('jwtToken', token)
+
+            // localStorage.setItem('userInfo', user.userId)
+            localStorage.setItem('userInfo', JSON.stringify(result.data))
             setAuthToken(token)
                 // dispatch(setCurrentUser(jwt.decode(token)));
             dispatch(getProductFavList(user.userId));

@@ -10,6 +10,7 @@ import FilterSort from '../ui/FilterSort';
 import {connect} from 'react-redux';
 import {addProductToFavList, removeProductFromFavList, getProductFavList} from '../../action/action';
 // import {Popover, OverlayTrigger} from 'react-bootstrap';
+import setAuthToken from '../../middleware/middleware';
 import {withRouter} from 'react-router';
 
 const Products = (props) => {
@@ -19,6 +20,8 @@ const Products = (props) => {
 
     const likedProducts= props.favoriteList;
     console.log('likedProducts', likedProducts)
+
+    
     useEffect(() => {
         axios.get('/products/productslist')
             .then(products => {

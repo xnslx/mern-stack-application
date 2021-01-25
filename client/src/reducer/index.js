@@ -5,8 +5,20 @@ import backendDataReducer from './backendDataReducer';
 import favoriteListReducer from './favoriteListReducer';
 import shoppingCartReducer from './shoppingCartReducer';
 import orderReducer from './orderReducer';
+import isUserLoginReducer from './isUserLoginReducer';
+
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+
+const initialState = {
+    isUserLogin: localStorage.getItem('userInfo') ?
+        JSON.parse(localStorage.getItem('userInfo')) : null
+}
+
+console.log(initialState)
 
 const rootReducer = combineReducers({
+    isUserLogin: isUserLoginReducer,
     auth: authReducer,
     error: errorReducer,
     backendData: backendDataReducer,
@@ -15,4 +27,9 @@ const rootReducer = combineReducers({
     order: orderReducer
 });
 
-export default rootReducer;
+const store = createStore(rootReducer, initialState, compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+))
+
+export default store;

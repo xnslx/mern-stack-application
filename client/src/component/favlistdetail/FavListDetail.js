@@ -17,7 +17,7 @@ const FavListDetail = (props) => {
     useEffect(() => {
         axios.get('/products/favoritelist', {
             header: {
-                Authorization: `Bearer ${props.auth.user.token}`
+                Authorization: `Bearer ${props.isUserLogin.token}`
             }
         }).then(result => {
             console.log(result.data)
@@ -62,6 +62,7 @@ const FavListDetail = (props) => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error.message,
         favoriteList:state.favoriteList.favoriteList,

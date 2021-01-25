@@ -54,6 +54,7 @@ const Main = (props) => {
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']} onClick={showOrderHistoryHandler}/>
                     <span>{props.auth.user.user? props.auth.user.user.name.split(" ")[0] : ''}</span>
+                    {/* <span>{props.isUserLogin? props.isUserLogin.user.user.name.split(" ")[0]: ''}</span> */}
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['fas', 'cart-plus']} onClick={showCartHandler}/>
@@ -72,6 +73,7 @@ const Main = (props) => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error.message,
         favoriteList:state.favoriteList.favoriteList,
