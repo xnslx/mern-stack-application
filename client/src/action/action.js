@@ -67,6 +67,9 @@ export const setCurrentUser = (user) => {
 
 export const logoutUser = (history) => (dispatch) => {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('userInfo');
+    localStorage.removeItem('favlist');
+    localStorage.removeItem('shoppingcart')
     setAuthToken(false);
     dispatch(setCurrentUser({}))
         // dispatch({
@@ -164,6 +167,7 @@ export const getProductFavList = (userId) => (dispatch) => {
     axios.get('/products/favoritelist').then(result => {
             // console.log(result)
             dispatch({ type: 'GET_PRODUCT_FAVORITE_LIST', payload: result.data.map(item => item.productId._id) })
+            localStorage.setItem('favlist', JSON.stringify(result.data.map(item => item.productId._id)))
         })
         .catch(err => {
             console.log(err)
@@ -218,6 +222,7 @@ export const getProductShoppingCart = (userId) => (dispatch) => {
     axios.get('/products/shoppingcart').then(result => {
             // console.log(result)
             dispatch({ type: 'GET_PRODUCT_SHOPPING_CART', payload: result.data.map(item => item.productId._id) })
+            localStorage.setItem('shoppingcart', JSON.stringify(result.data.map(item => item.productId._id)))
         })
         .catch(err => {
             console.log(err)

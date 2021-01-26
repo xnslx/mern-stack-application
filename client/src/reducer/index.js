@@ -11,8 +11,18 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 const initialState = {
-    isUserLogin: localStorage.getItem('userInfo') ?
-        JSON.parse(localStorage.getItem('userInfo')) : null
+    isUserLogin: {
+        user: localStorage.getItem('userInfo') ?
+            JSON.parse(localStorage.getItem('userInfo')) : null
+    },
+    favoriteList: {
+        favoriteList: localStorage.getItem('favlist') ?
+            JSON.parse(localStorage.getItem('favlist')) : []
+    },
+    shoppingCart: {
+        shoppingCart: localStorage.getItem('shoppingcart') ?
+            JSON.parse(localStorage.getItem('shoppingcart')) : []
+    }
 }
 
 console.log(initialState)

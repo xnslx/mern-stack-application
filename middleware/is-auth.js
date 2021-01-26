@@ -4,8 +4,10 @@ const User = require('../models/users');
 exports.authenticateToken = (req, res, next) => {
     // const token = req.header('Authorization');
     // console.log('token', token);
+    console.log('req.headers', req.headers)
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]
+    console.log(token)
     if (!token) {
         return res.status(401).json({ message: 'Authorization denied!' })
     }

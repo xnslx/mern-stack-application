@@ -11,15 +11,17 @@ import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import PayPal from '../ui/paypal/PayPal';
 
 const ShoppingCart = (props) => {
+    console.log('props',props)
     const [shoppingCartItem, setShoppingCartItem] = useState([]);
     const [like, setLike] = useState(false);
     const likedProducts= props.favoriteList;
     let resultData;
+    
 
     useEffect(() => {
         axios.get('/products/shoppingcart', {
-            header: {
-                Authorization: `Bearer ${props.isUserLogin.token}`
+            headers: {
+                Authorization: `Bearer ${props.isUserLogin.user.token}`
             }
         }).then(result => {
             console.log(result)

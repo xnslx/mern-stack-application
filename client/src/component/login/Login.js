@@ -33,8 +33,8 @@ const Login = (props) => {
         }
     }
 
-    console.log('error', error)
-    console.log('props.error', props.error)
+    // console.log('error', error)
+    // console.log('props.error', props.error)
 
     const loginSubmitHandler = (e) => {
         e.preventDefault();

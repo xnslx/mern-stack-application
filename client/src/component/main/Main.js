@@ -23,7 +23,7 @@ const Main = (props) => {
     const [menuOpen, setMenuOpen] = useState(false)
 
     const showFavDetailHandler = () => {
-        if(props.auth.isAuthenticated) {
+        if(props.isUserLogin.user) {
             props.history.push('/favoritelist')
         } else {
             props.history.push('/login')
@@ -31,7 +31,7 @@ const Main = (props) => {
     }
 
     const showCartHandler = () => {
-        if(props.auth.isAuthenticated) {
+        if(props.isUserLogin.user) {
             props.history.push('/shoppingcart')
         } else {
             props.history.push('/login')
@@ -39,7 +39,7 @@ const Main = (props) => {
     }
 
     const showOrderHistoryHandler = () => {
-        if(props.auth.isAuthenticated) {
+        if(props.isUserLogin.user) {
             props.history.push('/orderhistory')
         } else {
             props.history.push('/login')
@@ -53,16 +53,17 @@ const Main = (props) => {
             <ul className={classes.Container}>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']} onClick={showOrderHistoryHandler}/>
-                    <span>{props.auth.user.user? props.auth.user.user.name.split(" ")[0] : ''}</span>
-                    {/* <span>{props.isUserLogin? props.isUserLogin.user.user.name.split(" ")[0]: ''}</span> */}
+                    {/* <span>{props.auth.user.user? props.auth.user.user.name.split(" ")[0] : ''}</span> */}
+                    <span>{props.isUserLogin.user? props.isUserLogin.user.user.name.split(' ')[0]: ''}</span>
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['fas', 'cart-plus']} onClick={showCartHandler}/>
-                    <span>{props.shoppingCart.length>0? props.shoppingCart.length: ''}</span>
+                    {/* <span>{props.shoppingCart.length>0? props.shoppingCart.length: ''}</span> */}
+                    <span>{props.isUserLogin.user? props.shoppingCart.length: ''}</span>
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'heart']} onClick={showFavDetailHandler}/>
-                    <span>{props.favoriteList.length>0? props.favoriteList.length: ''}</span>
+                    <span>{props.isUserLogin.user? props.favoriteList.length: ''}</span>
                 </li>
             </ul>
             {/* <Products/> */}
