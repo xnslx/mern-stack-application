@@ -66,15 +66,15 @@ export const setCurrentUser = (user) => {
 }
 
 export const logoutUser = (history) => (dispatch) => {
-    localStorage.removeItem('jwtToken');
+    // localStorage.removeItem('jwtToken');
     localStorage.removeItem('userInfo');
     localStorage.removeItem('favlist');
     localStorage.removeItem('shoppingcart')
     setAuthToken(false);
-    dispatch(setCurrentUser({}))
-        // dispatch({
-        //     type: 'USER_LOGOUT'
-        // })
+    // dispatch(setCurrentUser({}))
+    dispatch({
+        type: 'USER_LOGOUT'
+    })
     history.push('/')
 }
 

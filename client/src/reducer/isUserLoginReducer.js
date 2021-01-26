@@ -20,6 +20,8 @@ const isUserLoginReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
             }
+        case actionTypes.USER_LOGOUT:
+            return {}
         default:
             return state
     }
