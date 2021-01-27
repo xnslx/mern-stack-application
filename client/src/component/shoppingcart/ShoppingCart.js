@@ -31,6 +31,8 @@ const ShoppingCart = (props) => {
         })
     },[props.shoppingCart.length])
 
+    const token = props.isUserLogin.user.token;
+
     console.log('shoppingCartItem', shoppingCartItem);
     let total = 0;
     shoppingCartItem.forEach(i => {
@@ -38,14 +40,13 @@ const ShoppingCart = (props) => {
     })
     const removeProductHandler = (e,productId) => {
         e.preventDefault()
-        props.dispatch(removeProductFromShoppingCart(productId));
+        props.dispatch(removeProductFromShoppingCart(productId,token));
     }
 
     const processToCheckoutHandler = () => {
         props.history.push('/checkout')
     }
 
-    const token = props.isUserLogin.user.token;
 
     const toggleFavListHandler = (e, productId) => {
         if(props.isUserLogin.user) {
