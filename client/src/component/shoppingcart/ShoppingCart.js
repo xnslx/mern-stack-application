@@ -45,18 +45,20 @@ const ShoppingCart = (props) => {
         props.history.push('/checkout')
     }
 
+    const token = props.isUserLogin.user.token;
+
     const toggleFavListHandler = (e, productId) => {
-        if(props.auth.isAuthenticated) {
+        if(props.isUserLogin.user) {
             if(likedProducts.includes(productId)) {
             e.preventDefault()
-            props.dispatch(removeProductFromFavList(productId))
+            props.dispatch(removeProductFromFavList(productId,token))
             setLike(prev => ({
                 ...prev,
                 [productId]: false
             }))
         } else {
             e.preventDefault()
-            props.dispatch(addProductToFavList(productId))
+            props.dispatch(addProductToFavList(productId,token))
             setLike(prev => ({
                 ...prev,
                 [productId]: true

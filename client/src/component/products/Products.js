@@ -17,6 +17,7 @@ const Products = (props) => {
     const [products, setProducts] = useState([]);
     const [like, setLike] = useState(false);
     const [favList, setFavList] = useState([]);
+    const [userToken, setUserToken] = useState('')
 
     const likedProducts= props.favoriteList;
     console.log('likedProducts', likedProducts)
@@ -32,23 +33,31 @@ const Products = (props) => {
             })
     }, [])
 
+    useEffect(() => {
+        if(props.isUserLogin.user) {
+            setUserToken(props.isUserLogin.user.token)
+        }
+    },[])
+
+    console.log('userToken', userToken)
+
 
     const callbackHandler = (result) => {
         setProducts(result)
     }
 
     const toggleFavListHandler = (e, productId) => {
-        if(props.auth.isAuthenticated) {
+        if(props.isUserLogin.user) {
             if(likedProducts.includes(productId)) {
             e.preventDefault()
-            props.dispatch(removeProductFromFavList(productId))
+            props.dispatch(removeProductFromFavList(productId, userToken))
             setLike(prev => ({
                 ...prev,
                 [productId]: false
             }))
         } else {
             e.preventDefault()
-            props.dispatch(addProductToFavList(productId))
+            props.dispatch(addProductToFavList(productId,userToken))
             setLike(prev => ({
                 ...prev,
                 [productId]: true
@@ -84,6 +93,7 @@ const Products = (props) => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error.message,
         favoriteList:state.favoriteList.favoriteList

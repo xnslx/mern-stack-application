@@ -9,6 +9,7 @@ import {addProductToShoppingCart,removeProductFromShoppingCart} from '../../acti
 const ProductDetail = (props) => {
     const [productDetail, setProductDetail] = useState([]);
     const shoppingCartItems = props.shoppingCart;
+    const [userToken, setUserToken] = useState('');
 
     useEffect(() => {
         axios.get('/products/productslist/'+ props.match.params.prodId).then(product => {
@@ -19,10 +20,20 @@ const ProductDetail = (props) => {
         })
     },[])
 
+    // useEffect(() => {
+    //     if(props.isUserLogin) {
+    //         setUserToken(props.isUserLogin.user.token)
+    //     }
+    // },[props.isUserLogin])
+
+    const token = props.isUserLogin.user.token
+
+    // console.log('userToken',userToken)
+
     const addToCartHandler = (e,productId) => {
         e.preventDefault()
-        if(props.auth.isAuthenticated) {
-            props.dispatch(addProductToShoppingCart(productId))
+        if(props.isUserLogin) {
+            props.dispatch(addProductToShoppingCart(productId,token))
         } else {
             props.history.push('/login')
         }        
@@ -30,7 +41,7 @@ const ProductDetail = (props) => {
 
     const removeFromCartHandler = (e, productId) => {
         e.preventDefault();
-        props.dispatch(removeProductFromShoppingCart(productId))
+        props.dispatch(removeProductFromShoppingCart(productId,token))
     }
 
     return (
@@ -55,6 +66,7 @@ const ProductDetail = (props) => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error.message,
         favoriteList:state.favoriteList.favoriteList,
