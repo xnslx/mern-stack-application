@@ -20,20 +20,20 @@ const ProductDetail = (props) => {
         })
     },[])
 
-    // useEffect(() => {
-    //     if(props.isUserLogin) {
-    //         setUserToken(props.isUserLogin.user.token)
-    //     }
-    // },[props.isUserLogin])
+    useEffect(() => {
+        if(props.isUserLogin.user) {
+            setUserToken(props.isUserLogin.user.token)
+        }
+    },[props.isUserLogin])
 
-    const token = props.isUserLogin.user.token
+    // const token = props.isUserLogin.user.token
 
     // console.log('userToken',userToken)
 
     const addToCartHandler = (e,productId) => {
         e.preventDefault()
         if(props.isUserLogin) {
-            props.dispatch(addProductToShoppingCart(productId,token))
+            props.dispatch(addProductToShoppingCart(productId,userToken))
         } else {
             props.history.push('/login')
         }        
@@ -41,7 +41,7 @@ const ProductDetail = (props) => {
 
     const removeFromCartHandler = (e, productId) => {
         e.preventDefault();
-        props.dispatch(removeProductFromShoppingCart(productId,token))
+        props.dispatch(removeProductFromShoppingCart(productId,userToken))
     }
 
     return (

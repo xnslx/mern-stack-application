@@ -1,14 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import PayPal from '../ui/paypal/PayPal';
 import ShippingInfo from '../shippingInfo/ShippingInfo';
+import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import axios from 'axios';
 import classes from './Checkout.module.css';
 
-const Checkout = () => {
+const Checkout = (props) => {
     const [total, setTotal ] = useState('');
+    
     useEffect(() => {
-        axios.get('/products/checkout').then(result => {
+        axios.get('/products/checkout',{
+            headers: {
+                Authorization: `Bearer ${props.isUserLogin.user.token}`
+            }
+        }).then(result => {
             console.log(result)
             setTotal(result.data.result)
         })
@@ -27,4 +33,15 @@ const Checkout = () => {
     )
 };
 
-export default withRouter(Checkout);
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        isUserLogin:state.isUserLogin,
+        auth: state.auth,
+        error: state.error.message,
+        favoriteList:state.favoriteList.favoriteList,
+        shoppingCart:state.shoppingCart.shoppingCart
+    }
+}
+
+export default withRouter(connect(mapStateToProps)(Checkout));
