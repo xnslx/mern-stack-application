@@ -32,7 +32,7 @@ const FavListDetail = (props) => {
 
     const removeProductHandler = (e,productId) => {
         console.log(productId)
-        props.dispatch(removeProductFromFavList(productId))
+        props.dispatch(removeProductFromFavList(productId,token))
     }
 
     const addToCartHandler = (e,productId) => {

@@ -130,8 +130,9 @@ export const resetPassword = (verifiedPassword, history) => (dispatch) => {
         })
 }
 
-export const addProductToFavList = (productId, token) => (dispatch) => {
+export const addProductToFavList = (productId, token) => (dispatch, getState) => {
     // console.log('productId', productId)
+    console.log('getState', getState())
     axios.post('/products/addfavorites', { productId: productId }, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -141,7 +142,7 @@ export const addProductToFavList = (productId, token) => (dispatch) => {
             console.log('result', result)
                 // dispatch(getBackendData(result.data))
             dispatch({ type: 'ADD_PRODUCT_FAVORITE_LIST', payload: productId })
-            localStorage.setItem('favlist', JSON.stringify(productId))
+            localStorage.setItem('favlist', JSON.stringify(getState().favoriteList.favoriteList))
         })
         .catch(err => {
             console.log(err)
@@ -152,7 +153,7 @@ export const addProductToFavList = (productId, token) => (dispatch) => {
         })
 }
 
-export const removeProductFromFavList = (productId, token) => (dispatch) => {
+export const removeProductFromFavList = (productId, token) => (dispatch, getState) => {
     console.log('productId', productId)
     axios.post('/products/removefavorites', { productId: productId }, {
             headers: {
@@ -162,7 +163,7 @@ export const removeProductFromFavList = (productId, token) => (dispatch) => {
         .then(result => {
             console.log('result', result)
             dispatch({ type: 'REMOVE_PRODUCT_FAVORITE_LIST', payload: productId })
-            localStorage.setItem('favlist', JSON.stringify(productId))
+            localStorage.setItem('favlist', JSON.stringify(getState().favoriteList.favoriteList))
         })
         .catch(err => {
             console.log(err)
@@ -199,7 +200,7 @@ export const emptyProductFavList = userId => {
     }
 }
 
-export const addProductToShoppingCart = (productId, token) => (dispatch) => {
+export const addProductToShoppingCart = (productId, token) => (dispatch, getState) => {
     // console.log('productId', productId)
     axios.post('/products/addtoshoppingcart', { productId: productId }, {
             headers: {
@@ -210,7 +211,7 @@ export const addProductToShoppingCart = (productId, token) => (dispatch) => {
             console.log('result', result)
                 // dispatch(getBackendData(result.data))
             dispatch({ type: 'ADD_PRODUCT_SHOPPING_CART', payload: productId })
-            localStorage.setItem('shoppingcart', JSON.stringify(productId))
+            localStorage.setItem('shoppingcart', JSON.stringify(getState().shoppingCart.shoppingCart))
         })
         .catch(err => {
             console.log(err)
@@ -221,7 +222,7 @@ export const addProductToShoppingCart = (productId, token) => (dispatch) => {
         })
 }
 
-export const removeProductFromShoppingCart = (productId, token) => (dispatch) => {
+export const removeProductFromShoppingCart = (productId, token) => (dispatch, getState) => {
     console.log('productId', productId)
     axios.post('/products/removefromshoppingcart', { productId: productId }, {
             headers: {
@@ -231,7 +232,7 @@ export const removeProductFromShoppingCart = (productId, token) => (dispatch) =>
         .then(result => {
             console.log('result', result)
             dispatch({ type: 'REMOVE_PRODUCT_SHOPPING_CART', payload: productId })
-            localStorage.setItem('shoppingcart', JSON.stringify(productId))
+            localStorage.setItem('shoppingcart', JSON.stringify(getState().shoppingCart.shoppingCart))
         })
         .catch(err => {
             console.log(err)
