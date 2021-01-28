@@ -40,28 +40,30 @@ const ResetPassword = (props) => {
 
 
     return (
-        <div>
+        <div className={classes.Container}>
         {error.length > 0? <ul>{error.map((err,index) => <li key={index}>{err.msg}</li>)}</ul> : null}
             <form action="" onSubmit={resetPasswordHandler}>
                 <div>
-                    <label htmlFor="password">Password</label>
+                    <p className={classes.LabelContainer}><label htmlFor="password" className={classes.Label}>Password</label></p>
                     <input 
                         type="password" 
                         id="password"
                         value={password}
+                        className={classes.Input}
                         onChange={e => setPassword(e.target.value)}
                     />
                 </div>
                 <div>
-                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <p className={classes.LabelContainer}><label htmlFor="confirmPassword" className={classes.Label}>Confirm Password</label></p>
                     <input 
                         type="password" 
                         id="confirmPassword"
                         value={confirmPassword}
+                        className={classes.Input}
                         onChange={e => setConfirmPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit" className={classes.Button}>Submit</button>
             </form>
         </div>
     )

@@ -41,7 +41,7 @@ const FindPassword = (props) => {
             </div>
         )}
         {props.backendData === 'Email sent!' && (
-            <div>
+            <div className={classes.TextContainer}>
                 <p>Please check your email to reset password!</p>
             </div>
         )}
@@ -64,6 +64,7 @@ const FindPassword = (props) => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error,
         backendData: state.backendData.backendData

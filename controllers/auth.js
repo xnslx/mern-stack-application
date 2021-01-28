@@ -92,44 +92,50 @@ exports.postLogout = (req, res, next) => {
 }
 
 exports.postFindPassword = (req, res, next) => {
+    const email = req.body.email
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() })
     }
-    const email = req.body.email
-    User.findOne({ email: email }).then(user => {
-        if (!user) {
-            return res.status(401).json('Email not found!')
-        }
-        const token = crypto.randomBytes(32).toString('hex');
-        user.resetToken = token;
-        user.resetTokenExpiration = Date.now() + 3600000;
-        return user.save()
-    }).then(result => {
-        console.log('result', result)
-        const token = result.resetToken
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASSWORD
+    User.findOne({ email: req.body.email })
+        .then(user => {
+            console.log('user', user)
+            if (!user) {
+                return res.status(404).json('Email not found!')
             }
+            const token = crypto.randomBytes(32).toString('hex');
+            user.resetToken = token;
+            user.resetTokenExpiration = Date.now() + 3600000;
+            return user.save()
         })
-        let mailOptions = {
-            from: 'MySonAndMyDaughterShop@gmail.com',
-            to: req.body.email,
-            subject: 'Reset Password',
-            html: `
+        .then(result => {
+            console.log('postfindpassword', result)
+            const token = result.resetToken
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL,
+                    pass: process.env.PASSWORD
+                }
+            })
+            let mailOptions = {
+                from: 'MySonAndMyDaughterShop@gmail.com',
+                to: req.body.email,
+                subject: 'Reset Password',
+                html: `
                 <p>Click this <a href="http://localhost:3000/reset/${token}">link</a> to set a new password. </p>
             `
-        }
-        transporter.sendMail(mailOptions, (err, data) => {
-            if (err) {
-                return console.log('error occurs', err)
             }
-            return res.status(201).json('Email sent!')
+            transporter.sendMail(mailOptions, (err, data) => {
+                if (err) {
+                    return console.log('error occurs', err)
+                }
+                return res.status(201).json('Email sent!')
+            })
         })
-    })
+        .catch(err => {
+            console.log(err)
+        })
 }
 
 // exports.getFindPassword = (req, res, next) => {
