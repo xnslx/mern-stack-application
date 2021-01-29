@@ -8,3 +8,13 @@
 .Price {
     margin-left: 8px;
 }
+
+.Button {
+    margin-top: 12px;
+    width: 80vw;
+    height: 48px;
+    border: none;
+    background-color: #fc5359;
+    color: #1a1918;
+    font-weight: 600;
+}

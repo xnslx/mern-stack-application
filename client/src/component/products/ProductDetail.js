@@ -32,7 +32,7 @@ const ProductDetail = (props) => {
 
     const addToCartHandler = (e,productId) => {
         e.preventDefault()
-        if(props.isUserLogin) {
+        if(props.isUserLogin.user) {
             props.dispatch(addProductToShoppingCart(productId,userToken))
         } else {
             props.history.push('/login')

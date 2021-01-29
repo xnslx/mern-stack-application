@@ -14,8 +14,14 @@ const PayPal = (props) => {
   console.log('paypal', props)
   const shippingInfo = props.order.shippingInfo;
   const [paySuccess, setPaySuccess] = useState(false);
-  const [showResult, setShowResult] = useState(false)
+  const [showResult, setShowResult] = useState(false);
+  const [userToken, setUserToken] = useState('')
 
+  // useEffect(() => {
+  //       if(props.isUserLogin.user) {
+  //           setUserToken(props.isUserLogin.user.token)
+  //       }
+  //   },[])
 
     const createOrder = (data, actions) => {
       console.log(data)
@@ -28,13 +34,15 @@ const PayPal = (props) => {
         });
     };
 
+    const token = props.isUserLogin.user.token;
+
     const onApprove = (data, actions) => {
       console.log(data)
       console.log(actions)
         return actions.order.capture().then(result => {
           props.dispatch(savePayment(result))
           console.log(result)
-          props.dispatch(onSuccessBuy(result, shippingInfo))
+          props.dispatch(onSuccessBuy(result, shippingInfo, token))
           setPaySuccess(true)
         }).catch(err =>{
           console.log(err)
@@ -53,8 +61,8 @@ const PayPal = (props) => {
     if(paySuccess) {
       paymentResult=(
         <>
-            <span>Successfully buy!</span>
-            <button onClick={reviewOrderHandler}>Review your order</button>
+            <p><span>Successfully buy!</span></p>
+            <button onClick={reviewOrderHandler} className={classes.Button}>Review your order</button>
         </>
       )
     } else {
@@ -79,6 +87,7 @@ const PayPal = (props) => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error.message,
         favoriteList:state.favoriteList.favoriteList,

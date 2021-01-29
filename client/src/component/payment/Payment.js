@@ -7,8 +7,9 @@ import {paySuccess} from '../../action/action';
 import {connect} from 'react-redux';
 
 
-const Payment = () => {
+const Payment = (props) => {
     const [total, setTotal] = useState('');
+    const [userToken, setUserToken] = useState('');
 
     useEffect(() => {
         axios.get('/products/checkout').then(result => {
@@ -30,6 +31,7 @@ const Payment = () => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error.message,
         favoriteList:state.favoriteList.favoriteList,

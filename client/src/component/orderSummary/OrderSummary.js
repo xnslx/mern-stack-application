@@ -9,7 +9,11 @@ const OrderSummary = (props) => {
     const [order, setOrder] = useState([]);
 
     useEffect(() => {
-        axios.get('/products/order/'+ props.match.params.orderId).then(result => {
+        axios.get('/products/order/'+ props.match.params.orderId,{
+            headers: {
+                Authorization: `Bearer ${props.isUserLogin.user.token}`
+            }
+        }).then(result => {
             console.log('result',result)
             setOrder(result.data)
         }).catch(err => {
@@ -25,7 +29,7 @@ const OrderSummary = (props) => {
                 order? 
                 <div className={classes.SubContainer}>
                     {order.map(or => (
-                        <>
+                        <div key={or._id}>
                             <p className={classes.Order}>order: <strong>{or._id}</strong></p>
                             <div className={classes.ProductsContainer}>{or.products.map(prd => (
                                 <ul key={prd.product._id} className={classes.ListContainer}>
@@ -35,7 +39,7 @@ const OrderSummary = (props) => {
                                     <li className={classes.List}>{prd.product.quantity}</li>
                                 </ul>
                             ))}</div>
-                            <div className={classes.ShipContainer}>
+                            <div className={classes.ShipContainer} >
                                 <ul key={or._id} className={classes.ListContainer}>
                                     <li className={classes.List}>{or.shippingInfo.address}</li>
                                     <li className={classes.List}>{or.shippingInfo.city}</li>
@@ -44,7 +48,7 @@ const OrderSummary = (props) => {
                                 </ul>
                             </div>
                             <hr/>
-                        </>
+                        </div>
                     ))}
                 </div> : ''
             }
@@ -55,6 +59,7 @@ const OrderSummary = (props) => {
 const mapStateToProps = (state) => {
     console.log('state', state)
     return {
+        isUserLogin:state.isUserLogin,
         auth: state.auth,
         error: state.error.message,
         favoriteList:state.favoriteList.favoriteList,

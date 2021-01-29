@@ -286,8 +286,12 @@ export const savePayment = (paymentInfo, shippingInfo) => (dispatch) => {
     }
 }
 
-export const onSuccessBuy = (data, shippingInfo) => (dispatch) => {
-    axios.post('/products/checkout', { paymentInfo: data, shippingInfo: shippingInfo }).then(result => {
+export const onSuccessBuy = (data, shippingInfo, token) => (dispatch, getState) => {
+    axios.post('/products/checkout', { paymentInfo: data, shippingInfo: shippingInfo }, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then(result => {
             console.log(result)
             dispatch({
                 type: 'ON_SUCCESS_BUY',
@@ -296,6 +300,7 @@ export const onSuccessBuy = (data, shippingInfo) => (dispatch) => {
             dispatch({
                 type: 'EMPTY_PRODUCT_SHOPPING_CART'
             })
+            localStorage.setItem('shoppingcart', JSON.stringify(getState().shoppingCart.shoppingCart))
         })
         .catch(err => {
             console.log(err)
