@@ -22,6 +22,8 @@ const FilterSort = (props) => {
 
     const [checkedItems, setCheckedItems] = useState({});
 
+    const [filterResult, setFilterResult] = useState('')
+
     // console.log('checkedItems', checkedItems)
 
 
@@ -54,8 +56,9 @@ const FilterSort = (props) => {
     const submitHandler = () => {
         axios.post('/products?' + params)
             .then(result => {
-                // console.log(result)
+                console.log('filtersort',result)
                 props.parentCallback(result.data)
+                setFilterResult(result.data.length)
             })
             .catch(err => {
                 console.log(err)
@@ -108,6 +111,7 @@ const FilterSort = (props) => {
                 <Modal.Footer>
                     <Button className={classes.ApplyButton} onClick={submitHandler}>
                         APPLY
+                        {filterResult}
                     </Button>
                 </Modal.Footer>
             </Modal>

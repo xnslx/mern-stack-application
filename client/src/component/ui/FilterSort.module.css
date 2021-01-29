@@ -58,3 +58,12 @@
     margin-left: 50vw;
     padding-right: 8px;
 }
+
+@media only screen and (min-width: 768px) {
+    .FilterIcon {
+        /* position: relative; */
+        /* margin-right: 10vw; */
+        margin-left: 72vw;
+        padding-right: 8px;
+    }
+}
