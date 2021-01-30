@@ -28,15 +28,4 @@
     border: none;
 }
 
-@media only screen and (min-width: 768px) {
-    body {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    .Image {
-        width: 480px;
-        height: auto;
-        /* float: left; */
-    }
-}
+@media only screen and (min-width: 768px) {}

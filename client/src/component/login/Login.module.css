@@ -62,3 +62,18 @@
     font-weight: 400;
     font-size: 14px;
 }
+
+@media only screen and (min-width: 768px) {
+    .Container {
+        width: 40vw;
+    }
+    .Input {
+        width: 40vw;
+    }
+    .Button {
+        width: 41vw;
+    }
+    .ErrorMessage {
+        width: 38vw;
+    }
+}

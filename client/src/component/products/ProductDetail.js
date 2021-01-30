@@ -50,11 +50,10 @@ const ProductDetail = (props) => {
             <div className={classes.Container}>
                 {productDetail.map(prod => (
                     <ul key={prod._id} className={classes.List}>
-                        <div><img src={prod.image} className={classes.Image}/></div>
-                        <li>{prod.name}</li>
-                        <li>$ {prod.price}</li>
-                        <li>stock: {prod.stock}</li>
-                        {/* <button onClick={(e) => addToCartHandler(e,prod._id)}>Add to cart</button> */}
+                        <li className={classes.ImageContainer}><img src={prod.image} className={classes.Image}/></li>
+                        <li className={classes.ListItem}>{prod.name}</li>
+                        <li className={classes.ListItem}>$ {prod.price}</li>
+                        <li className={classes.ListItem}>stock: {prod.stock}</li>
                         {shoppingCartItems.includes(prod._id)? <button onClick={(e) => removeFromCartHandler(e, prod._id)} className={classes.Button} disabled={prod.stock === 0}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,prod._id)} className={classes.Button} disabled={prod.stock === 0}>Add to cart</button>}
                     </ul>
                 ))}

@@ -38,6 +38,14 @@
     color: black
 }
 
+.CloseLink {
+    position: absolute;
+    right: 20px;
+    margin-right: 20px;
+    text-decoration: none;
+    color: black
+}
+
 .ErrorMessageContainer {
     background-color: red;
     margin: 0;
@@ -59,4 +67,22 @@
 .ErrorMessage {
     /* background-color: yellow; */
     text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .Container {
+        width: 40vw;
+    }
+    .Input {
+        width: 40vw;
+    }
+    .Button {
+        width: 41vw;
+    }
+    .ErrorMessage {
+        width: 38vw;
+    }
+    .Link {
+        margin-right: 440px;
+    }
 }

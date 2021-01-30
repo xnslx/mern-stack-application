@@ -15,6 +15,11 @@
     font-size: 14px;
 }
 
+.Image {
+    width: 160px;
+    height: auto;
+}
+
 .Button {
     background-color: transparent;
     border-style: none;
@@ -33,4 +38,28 @@
     color: #eeeeee;
     font-weight: 600;
     border: none;
+}
+
+@media only screen and (min-width: 768px) {
+    .Container {
+        /* background-color: red; */
+        margin-top: 24px;
+        grid-template-columns: 33% 33% 33%;
+    }
+    .Button {
+        margin-top: -12%;
+    }
+    .Image {
+        width: 24vw;
+        height: auto;
+    }
+    .List {
+        /* background-color: green; */
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 16px;
+    }
+    .Product {
+        padding-inline-start: 50px;
+    }
 }

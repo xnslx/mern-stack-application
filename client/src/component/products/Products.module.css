@@ -55,36 +55,20 @@
 
 @media only screen and (min-width: 768px) {
     .ProductContainer {
-        /* background-color: yellow; */
         margin-top: 24px;
         grid-template-columns: 30% 30% 30%;
     }
     .Button {
-        background-color: transparent;
-        border-style: none;
-        position: absolute;
-        display: block;
         margin-top: -12%;
-        margin-left: 2%;
-        font-size: 20px;
     }
     .Image {
         width: 24vw;
         height: auto;
     }
-    .Container {
-        /* background-color: red; */
-        position: relative;
-        width: 90vw;
-        margin-left: auto;
-        margin-right: auto;
-    }
     .List {
         font-size: 16px;
     }
     .Product {
-        list-style: none;
-        text-decoration: none;
         padding-inline-start: 50px;
     }
 }
