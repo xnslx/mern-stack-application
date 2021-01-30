@@ -50,7 +50,7 @@ const ProductDetail = (props) => {
             <div className={classes.Container}>
                 {productDetail.map(prod => (
                     <ul key={prod._id} className={classes.List}>
-                        <img src={prod.image} style={{height: 'auto', width:'300px'}} className={classes.Image}/>
+                        <div><img src={prod.image} className={classes.Image}/></div>
                         <li>{prod.name}</li>
                         <li>$ {prod.price}</li>
                         <li>stock: {prod.stock}</li>
