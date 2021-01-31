@@ -44,20 +44,33 @@ const FavListDetail = (props) => {
         e.preventDefault();
         props.dispatch(removeProductFromShoppingCart(productId,token))
     }
+
+    let resultData;
+    if(props.favoriteList.length ===0) {
+        resultData = (
+            <p style={{width:'80vw', textAlign:'center', marginRight:'auto', marginLeft:'auto'}}>Start adding some products to the favorite list!</p>
+        )
+    } else {
+        resultData = (
+            <div className={classes.Container}>
+                {favList.map(product => (
+                    <ul key={product._id} className={classes.List}>
+                        <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" className={classes.Image}/></Link>
+                        <li>{product.productId.name}</li>
+                        <li>$ {product.productId.price}</li>
+                        <li>stock: {product.productId.stock}</li>
+                        {/* <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button> */}
+                        <FontAwesomeIcon icon={faTrashAlt} onClick={(e) =>removeProductHandler(e, product.productId._id)} className={classes.Button}/>
+                        {/* <button onClick={(e) =>addToCartHandler(e, product.productId._id)}>Add to shopping cart</button> */}
+                        {shoppingCartItems.includes(product.productId._id) ? <button onClick={(e) => removeFromCartHandler(e, product.productId._id)} className={classes.FavListButton} disabled={product.productId.stock ===0}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,product.productId._id)} className={classes.FavListButton} disabled={product.productId.stock ===0}>Add to cart</button>}
+                    </ul>
+                ))}
+            </div>
+        )
+    }
     return (
-        <div className={classes.Container}>
-            {favList.map(product => (
-                <ul key={product._id} className={classes.List}>
-                    <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" className={classes.Image}/></Link>
-                    <li>{product.productId.name}</li>
-                    <li>$ {product.productId.price}</li>
-                    <li>stock: {product.productId.stock}</li>
-                    {/* <button onClick={(e) =>removeProductHandler(e, product.productId._id)}>Remove</button> */}
-                    <FontAwesomeIcon icon={faTrashAlt} onClick={(e) =>removeProductHandler(e, product.productId._id)} className={classes.Button}/>
-                    {/* <button onClick={(e) =>addToCartHandler(e, product.productId._id)}>Add to shopping cart</button> */}
-                    {shoppingCartItems.includes(product.productId._id) ? <button onClick={(e) => removeFromCartHandler(e, product.productId._id)} className={classes.FavListButton} disabled={product.productId.stock ===0}>Remove product from shopping cart</button> :<button onClick={(e) => addToCartHandler(e,product.productId._id)} className={classes.FavListButton} disabled={product.productId.stock ===0}>Add to cart</button>}
-                </ul>
-            ))}
+        <div style={{marginTop:'80px'}}>
+            {resultData}
         </div>
     )
 };
