@@ -78,7 +78,7 @@ const ShoppingCart = (props) => {
             <div className={classes.Container}>
                 {shoppingCartItem.map(product => (
                     <ul key={product._id} className={classes.List}>
-                        <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/></Link>
+                        <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" className={classes.Image}/></Link>
                         <li>{product.productId.name}</li>
                         <li>$ {product.productId.price}</li>
                         <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product.productId._id)} >{likedProducts.includes(product.productId._id)? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            

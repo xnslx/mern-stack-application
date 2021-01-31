@@ -21,3 +21,22 @@
 hr {
     border: 1px solid #eeeeee;
 }
+
+@media only screen and (min-width: 768px) {
+    .SubContainer {
+        /* background-color: yellow; */
+        width: 80vw;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    .ListContainer {
+        /* background-color: red; */
+        padding-inline-start: 0;
+    }
+    .Image {
+        width: 180px;
+        height: auto;
+    }
+}

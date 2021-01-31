@@ -47,10 +47,10 @@
         grid-template-columns: 33% 33% 33%;
     }
     .Button {
-        margin-top: -12%;
+        margin-top: -10%;
     }
     .Image {
-        width: 24vw;
+        width: 28vw;
         height: auto;
     }
     .List {

@@ -8,6 +8,11 @@
     margin-top: -60px;
 }
 
+.Image {
+    width: 160px;
+    height: auto;
+}
+
 .List {
     /* background-color: yellow; */
     padding-inline-start: 4px;
@@ -44,4 +49,29 @@
     background-color: #fc5359;
     color: #1a1918;
     font-weight: 600;
+}
+
+@media only screen and (min-width: 768px) {
+    .Container {
+        grid-template-columns: 33% 33% 33%;
+    }
+    .Button {
+        margin-top: -10%;
+    }
+    .Image {
+        width: 28vw;
+        height: auto;
+    }
+    .List {
+        /* background-color: green; */
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 16px;
+    }
+    .Product {
+        padding-inline-start: 50px;
+    }
+    .ShoppingCartButton {
+        width: 28vw;
+    }
 }

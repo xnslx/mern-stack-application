@@ -48,7 +48,7 @@ const FavListDetail = (props) => {
         <div className={classes.Container}>
             {favList.map(product => (
                 <ul key={product._id} className={classes.List}>
-                    <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" style={{width: '160px', height: 'auto'}}/></Link>
+                    <Link to={'/' + product.productId._id}><img src={product.productId.image} alt="" className={classes.Image}/></Link>
                     <li>{product.productId.name}</li>
                     <li>$ {product.productId.price}</li>
                     <li>stock: {product.productId.stock}</li>
