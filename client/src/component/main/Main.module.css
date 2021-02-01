@@ -12,6 +12,12 @@
     box-shadow: 0px 10px 20px 0px rgba(240, 240, 240, 1); */
 }
 
+.Logo {
+    position: absolute;
+    top: 20px;
+    right: 70vw;
+}
+
 .List {
     list-style: none;
     margin: auto 12px;
@@ -22,4 +28,12 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+@media only screen and (min-width: 768px) {
+    .Logo {
+        position: absolute;
+        top: 12px;
+        right: 84vw;
+    }
 }

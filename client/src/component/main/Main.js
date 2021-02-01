@@ -14,6 +14,7 @@ import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {getProductFavList} from '../../action/action';
+import logo from '../../assets/profile.png';
 
 const Main = (props) => {
     const [favList, setFavList] = useState([])
@@ -51,6 +52,7 @@ const Main = (props) => {
         <nav className={classes.Nav}>
             <Nav/>
             <ul className={classes.Container}>
+                <Link to='/'><img src={logo} style={{width:'48px', height:'auto'}} className={classes.Logo}/></Link>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']} onClick={showOrderHistoryHandler}/>
                     {/* <span>{props.auth.user.user? props.auth.user.user.name.split(" ")[0] : ''}</span> */}

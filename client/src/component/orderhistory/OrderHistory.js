@@ -28,7 +28,7 @@ const OrderHistory = (props) => {
                 order? 
                 <div className={classes.SubContainer}>
                     {order.map(or => (
-                        <>
+                        <div key={or._id}>
                             <p className={classes.Order}>order: <strong>{or._id}</strong></p>
                             <div className={classes.ProductsContainer}>{or.products.map(prd => (
                                 <ul key={prd._id} className={classes.ListContainer}>
@@ -47,7 +47,7 @@ const OrderHistory = (props) => {
                                 </ul>
                             </div>
                             <hr/>
-                        </>
+                        </div>
                     ))}
                 </div> : ''
             }
