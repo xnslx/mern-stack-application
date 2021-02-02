@@ -9,6 +9,8 @@ import {connect} from 'react-redux';
 const Payment = (props) => {
     const [total, setTotal] = useState('');
 
+    
+
     useEffect(() => {
         axios.get('/products/checkout').then(result => {
             setTotal(result.data.result)

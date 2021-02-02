@@ -8,7 +8,6 @@ const crypto = require('crypto');
 const mongoose = require('mongoose')
 
 exports.getSignup = (req, res, next) => {
-    // console.log('req.body', req.body)
     User
         .find()
         .then(result => {
@@ -56,8 +55,6 @@ exports.postLogin = (req, res, next) => {
     const errors = validationResult(req);
     const email = req.body.email;
     const password = req.body.password;
-    // console.log(errors.errors)
-    // let loadedUser;
     if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() })
     }
@@ -138,21 +135,6 @@ exports.postFindPassword = (req, res, next) => {
         })
 }
 
-// exports.getFindPassword = (req, res, next) => {
-//     const token = req.params.token;
-//     console.log('token', token)
-//     User.findOne({ resetToken: token }).then(user => {
-//         console.log('user', user)
-//         if (user === null) {
-//             res.json('password link is invalid')
-//         } else {
-//             res.status(201).json({
-//                 message: 'password link accepted',
-//                 userId: user._id
-//             })
-//         }
-//     })
-// }
 
 exports.postUpdatePassword = (req, res, next) => {
     console.log('req.body', req.body)

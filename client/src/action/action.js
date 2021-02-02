@@ -116,7 +116,6 @@ export const resetPassword = (verifiedPassword, history) => (dispatch) => {
 }
 
 export const addProductToFavList = (productId, token) => (dispatch, getState) => {
-    console.log('getState', getState())
     axios.post('/products/addfavorites', { productId: productId }, {
             headers: {
                 Authorization: `Bearer ${token}`

@@ -23,7 +23,6 @@ exports.getProductsDetail = (req, res, next) => {
     Products.find({ _id: prodId })
         .then(product => {
             res.status(201).json(product)
-            console.log(product)
         })
         .catch(err => {
             console.log(err)
@@ -40,9 +39,7 @@ exports.postProductsSearchResult = (req, res, next) => {
     if (payload.category && payload.category.length > 0) query.category = { $in: payload.category }
     if (payload.size && payload.size.length > 0) query.size = { $in: payload.size };
     if (payload.gender && payload.gender.length > 0) query.gender = { $in: payload.gender };
-    console.log('query', query)
     Products.find(query).then(product => {
-        // console.log(product)
         res.status(201).json(product)
     }).catch(err => {
         console.log(err)
@@ -60,7 +57,6 @@ exports.getProductsSearchResult = (req, res, next) => {
     if (payload.gender && payload.gender.length > 0) query.gender = { $in: payload.gender };
     console.log('query', query)
     Products.find(query).then(product => {
-        // console.log(product)
         res.status(201).json(product)
     }).catch(err => {
         console.log(err)
@@ -69,18 +65,14 @@ exports.getProductsSearchResult = (req, res, next) => {
 
 exports.postAddFavorites = (req, res, next) => {
     const prodId = req.body.productId;
-    console.log('req.user', req.user)
-    console.log('prodId', prodId)
     Products.findById(prodId)
         .then(product => {
-            console.log('product', product)
             return User.findById(mongoose.Types.ObjectId(req.user.userId))
                 .then(user => {
                     return user.addToFavoritesList(product)
                 })
         })
         .then(result => {
-            console.log('result', result)
             res.status(200).json({ result: result, message: 'Product is added to the favorite list.' })
         })
         .catch(err => {
@@ -91,7 +83,6 @@ exports.postAddFavorites = (req, res, next) => {
 
 exports.postRemoveFavorites = (req, res, next) => {
     const prodId = req.body.productId;
-    console.log('postRemoveFavorites', prodId)
     User.findById(mongoose.Types.ObjectId(req.user.userId))
         .then(user => {
             return user.removeProductFromFavList(prodId)
@@ -122,8 +113,6 @@ exports.getFavoriteList = (req, res, next) => {
 
 exports.postAddToShoppingCart = (req, res, next) => {
     const prodId = req.body.productId;
-    console.log('req.user', req.user)
-    console.log('prodId', prodId)
     Products.findById(prodId)
         .then(product => {
             console.log('product', product)
@@ -144,7 +133,6 @@ exports.postAddToShoppingCart = (req, res, next) => {
 
 exports.postRemoveFromShoppingCart = (req, res, next) => {
     const prodId = req.body.productId;
-    console.log('postRemoveFromShoppingCart', prodId)
     User.findById(mongoose.Types.ObjectId(req.user.userId))
         .then(user => {
             return user.removeProductFromShoppingCart(prodId)
@@ -199,8 +187,6 @@ exports.getCheckout = (req, res, next) => {
 
 
 exports.postCheckout = (req, res, next) => {
-    console.log(req.user)
-    console.log('req.body', req.body)
     const firstName = req.body.shippingInfo.firstName;
     const lastName = req.body.shippingInfo.lastName;
     const address = req.body.shippingInfo.address;
@@ -214,12 +200,11 @@ exports.postCheckout = (req, res, next) => {
                 .execPopulate()
                 .then(result => {
                     const cartItems = result.shoppingCart.items.map(i => {
-                            return {
-                                product: i.productId._doc,
-                                quantity: i.quantity
-                            }
-                        })
-                        // console.log('cartItems', cartItems)
+                        return {
+                            product: i.productId._doc,
+                            quantity: i.quantity
+                        }
+                    })
                     const newOrder = new Order({
                         products: cartItems,
                         user: {
@@ -238,7 +223,6 @@ exports.postCheckout = (req, res, next) => {
                             paymentDetail: req.body.paymentInfo
                         }
                     })
-                    console.log('newOrder', newOrder)
                     return newOrder.save()
                 })
                 .then(result => {
@@ -248,7 +232,6 @@ exports.postCheckout = (req, res, next) => {
                     })
                 })
                 .then(result => {
-                    console.log('postcheckout', result)
                     res.status(200).json({ result: result, message: 'order has been processed!' })
                 })
         })
@@ -258,42 +241,19 @@ exports.postCheckout = (req, res, next) => {
 }
 
 exports.getCheckoutSuccess = (req, res, next) => {
-    // Order.find({ 'user.userId': mongoose.Types.ObjectId(req.user.userId) })
-    //     .then(order => {
-    //         console.log(order)
-    //         res.status(200).json({ order: order, message: 'Here is your order detail!' })
-    //     })
-    //     .catch(err => {
-    //         console.log(err)
-    //     })
-    // console.log('req.params', req.params)
-    // console.log('req.query', req.query)
-    // console.log('req.user', req.user)
-    // const orderId = req.params.id;
-    // Order.find({ 'user.userId': req.params.id }).then(result => {
-    //     console.log('result', result)
-    //     res.status(201).json(result)
-    // }).catch(err => {
-    //     console.log(err)
-    // })
-
     Order.find({ 'user.userId': req.params.id })
         .then(order => {
-            console.log('order', order)
             const purchasedProductsIdList = [];
             const purchasedProducts = order.map(od => {
                 return od.products
             })
-            console.log('purchasedProducts', purchasedProducts)
             const mergedProducts = [].concat.apply([], purchasedProducts);
-            console.log('mergedProducts', mergedProducts)
             mergedProducts.map(pd => {
                 return purchasedProductsIdList.push(pd.product._id);
             })
             const needToUpdatedProducts = mergedProducts.map(i => {
                 return i.product.stock
             })
-            console.log('purchasedProductsIdList', purchasedProductsIdList);
             Products.updateMany({ _id: { $in: purchasedProductsIdList } }, { $set: { stock: 0 } }, (err, data) => {
                 if (err) {
                     console.log(err)
@@ -304,7 +264,6 @@ exports.getCheckoutSuccess = (req, res, next) => {
             return order;
         })
         .then(result => {
-            console.log('result', result)
             res.status(200).json(result)
         })
         .catch(err => {
