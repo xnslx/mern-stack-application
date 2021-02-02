@@ -34,7 +34,6 @@ const FindPassword = (props) => {
     return (
         <div>
         <Link to='/' className={classes.Link} >BACK TO HOME</Link>
-        {/* {error.message !== null ? <ul>{error.message}</ul> : null} */}
         {props.error.hasError === true && (
             <div>
                 <p>{error.message}</p>
@@ -62,7 +61,6 @@ const FindPassword = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         isUserLogin:state.isUserLogin,
         auth: state.auth,

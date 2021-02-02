@@ -1,4 +1,4 @@
-import React, {useState, useEffect,useContext} from 'react';
+import React, {useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,10 +6,8 @@ import classes from './FilterSort.module.css';
 import axios from 'axios';
 import {gender, size, category} from './objects';
 import {useHistory} from 'react-router-dom';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const FilterSort = (props) => {
-    // console.log(props)
     const [show, setShow] = useState(false);
     const handleClose = () => {
         setShow(false);
@@ -24,8 +22,6 @@ const FilterSort = (props) => {
 
     const [filterResult, setFilterResult] = useState('')
 
-    // console.log('checkedItems', checkedItems)
-
 
     const changeHandler = (e) => {
         setCheckedItems({...checkedItems, [e.target.value]: e.target.checked});
@@ -38,10 +34,7 @@ const FilterSort = (props) => {
         }
     });
 
-    // console.log(queryArray);
-
     let params = queryArray.map(item => {
-        // console.log('item' ,item)
         if(productsGender.find(prod => prod.value === item)){
             return 'gender=' + item
         } else if (productsSize.find(prod => prod.value === item)) {
@@ -56,7 +49,6 @@ const FilterSort = (props) => {
     const submitHandler = () => {
         axios.post('/products?' + params)
             .then(result => {
-                console.log('filtersort',result)
                 props.parentCallback(result.data)
                 setFilterResult(result.data.length)
             })

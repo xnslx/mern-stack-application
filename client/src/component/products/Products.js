@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
-import ProductDetail from '../products/ProductDetail';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
@@ -8,25 +7,20 @@ import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
 import classes from '../products/Products.module.css';
 import FilterSort from '../ui/FilterSort';
 import {connect} from 'react-redux';
-import {addProductToFavList, removeProductFromFavList, getProductFavList} from '../../action/action';
-// import {Popover, OverlayTrigger} from 'react-bootstrap';
-import setAuthToken from '../../middleware/middleware';
+import {addProductToFavList, removeProductFromFavList} from '../../action/action';
 import {withRouter} from 'react-router';
 
 const Products = (props) => {
     const [products, setProducts] = useState([]);
     const [like, setLike] = useState(false);
-    const [favList, setFavList] = useState([]);
     const [userToken, setUserToken] = useState('')
 
     const likedProducts= props.favoriteList;
-    console.log('likedProducts', likedProducts)
 
     
     useEffect(() => {
         axios.get('/products/productslist')
             .then(products => {
-                console.log('products',products)
                 setProducts(products.data)
             }).catch(err => {
                 console.log(err)
@@ -37,9 +31,7 @@ const Products = (props) => {
         if(props.isUserLogin.user) {
             setUserToken(props.isUserLogin.user.token)
         }
-    },[])
-
-    console.log('userToken', userToken)
+    },[props.isUserLogin.user])
 
 
     const callbackHandler = (result) => {
@@ -91,7 +83,6 @@ const Products = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         isUserLogin:state.isUserLogin,
         auth: state.auth,

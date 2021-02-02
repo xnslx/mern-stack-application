@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {resetPassword} from '../../action/action';
-import axios from 'axios';
 import classes from './ResetPassword.module.css';
 
 const ResetPassword = (props) => {
@@ -20,22 +19,10 @@ const ResetPassword = (props) => {
         setError(props.error.errors);
         }
     }
-
-    console.log('error', error)
     
     const resetPasswordHandler = (e) => {
         e.preventDefault();
         props.dispatch(resetPassword({password: password, confirmPassword: confirmPassword, passwordToken: token},props.history))
-        // axios.post('/updatepassword', {
-        //     password:password,confirmPassword:confirmPassword,passwordToken:token
-        // }).then(result => {
-        //     console.log('result', result)
-        //     if(result.data.message === 'password updated') {
-        //         props.history.push('/login')
-        //     }
-        // }).catch(err => {
-        //     console.log(err)
-        // })
     }
 
 

@@ -1,25 +1,13 @@
-import React, {useState, useEffect} from 'react';
-// import { Link } from 'react-router-dom';
-// import Signup from '../signup/Signup';
-// import Login from '../login/Login';
-import Products from '../products/Products';
+import React, {useState} from 'react';
 import classes from './Main.module.css';
-// import ProductDetail from '../products/ProductDetail';
-// import {Switch, Route} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Nav from '../nav/Nav';
-import favoriteList from '../favlistdetail/FavListDetail';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
-import {getProductFavList} from '../../action/action';
 import logo from '../../assets/profile.png';
 
 const Main = (props) => {
-    const [favList, setFavList] = useState([])
-    const [isMounted, setIsMounted] = useState(false);
-    const [showData, setShowData] = useState('');
 
     const [menuOpen, setMenuOpen] = useState(false)
 
@@ -55,12 +43,10 @@ const Main = (props) => {
                 <Link to='/'><img src={logo} style={{width:'48px', height:'auto'}} className={classes.Logo}/></Link>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['far', 'user']} onClick={showOrderHistoryHandler}/>
-                    {/* <span>{props.auth.user.user? props.auth.user.user.name.split(" ")[0] : ''}</span> */}
                     <span>{props.isUserLogin.user? props.isUserLogin.user.user.name.split(' ')[0]: ''}</span>
                 </li>
                 <li className={classes.List}>
                     <FontAwesomeIcon icon={['fas', 'cart-plus']} onClick={showCartHandler}/>
-                    {/* <span>{props.shoppingCart.length>0? props.shoppingCart.length: ''}</span> */}
                     <span>{props.isUserLogin.user? props.shoppingCart.length: ''}</span>
                 </li>
                 <li className={classes.List}>
@@ -68,13 +54,11 @@ const Main = (props) => {
                     <span>{props.isUserLogin.user? props.favoriteList.length: ''}</span>
                 </li>
             </ul>
-            {/* <Products/> */}
         </nav>
     )
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         isUserLogin:state.isUserLogin,
         auth: state.auth,

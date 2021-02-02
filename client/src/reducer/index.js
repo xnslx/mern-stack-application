@@ -25,8 +25,6 @@ const initialState = {
     }
 }
 
-console.log(initialState)
-
 const rootReducer = combineReducers({
     isUserLogin: isUserLoginReducer,
     auth: authReducer,

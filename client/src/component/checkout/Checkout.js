@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import PayPal from '../ui/paypal/PayPal';
 import ShippingInfo from '../shippingInfo/ShippingInfo';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
@@ -15,7 +14,6 @@ const Checkout = (props) => {
                 Authorization: `Bearer ${props.isUserLogin.user.token}`
             }
         }).then(result => {
-            console.log(result)
             setTotal(result.data.result)
         })
         .catch(err => {
@@ -28,13 +26,11 @@ const Checkout = (props) => {
         <div className={classes.Container}>
             <p>The total price is ${total}</p>
             <ShippingInfo />
-            {/* <PayPal payvalue={total}/> */}
         </div>
     )
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         isUserLogin:state.isUserLogin,
         auth: state.auth,

@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import { signupUser,getErrorMessage } from '../../action/action';
+import { signupUser } from '../../action/action';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
 import { Link } from 'react-router-dom';
 import classes from './Signup.module.css';
 
 const Signup = (props) => {
-    // console.log('props', props)
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -31,8 +29,6 @@ const Signup = (props) => {
         setError(props.error.errors)
         }
     }
-
-    // console.log('error', error)
         
     const submitHandler = (e) => {
         e.preventDefault();
@@ -97,7 +93,6 @@ const Signup = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    // console.log('state', state)
     return {
         auth: state.auth,
         error: state.error.message

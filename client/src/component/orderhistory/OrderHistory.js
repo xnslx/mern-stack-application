@@ -14,12 +14,11 @@ const OrderHistory = (props) => {
                 Authorization: `Bearer ${props.isUserLogin.user.token}`
             }
         }).then(result => {
-            console.log('result',result)
             setOrder(result.data)
         }).catch(err => {
             console.log(err)
         })
-    },[])
+    },[props.isUserLogin.user.token,props.isUserLogin.user.user.userId])
 
     console.log('order', order)
     return (

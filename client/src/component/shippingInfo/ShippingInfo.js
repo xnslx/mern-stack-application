@@ -1,7 +1,4 @@
 import React, {useState} from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import axios from 'axios';
 import {withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import {saveShippingInformation} from '../../action/action';
@@ -102,7 +99,6 @@ const ShippingInfo = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         auth: state.auth,
         error: state.error.message,

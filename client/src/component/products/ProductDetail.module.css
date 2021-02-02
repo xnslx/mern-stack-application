@@ -28,4 +28,18 @@
     border: none;
 }
 
-@media only screen and (min-width: 768px) {}
+.FavButton {
+    background-color: transparent;
+    border-style: none;
+    position: absolute;
+    display: block;
+    margin-top: -28%;
+    margin-left: 2%;
+    font-size: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+    .FavButton {
+        margin-top: -10%;
+    }
+}

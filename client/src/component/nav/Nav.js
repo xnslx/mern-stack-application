@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-import Signup from '../signup/Signup';
-import Login from '../login/Login';
 import { Link } from 'react-router-dom';
 import {bubble as Menu} from 'react-burger-menu';
 import classes from './Nav.module.css';

@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const orderReducer = (state = initialState, action) => {
-    console.log('action', action)
     switch (action.type) {
         case actionTypes.SAVE_SHIPPING_INFORMATION:
             return {

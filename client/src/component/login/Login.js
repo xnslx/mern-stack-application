@@ -1,13 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
-import setAuthToken from '../../middleware/middleware';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router';
-import { loginUser,getProductFavList,getErrorMessage} from '../../action/action';
-import Dashboard from '../dashboard/Dashboard';
-import {SET_CURRENT_USER} from '../../action/type';
-import Form from 'react-bootstrap/Form';
+import { loginUser} from '../../action/action';
 import classes from './Login.module.css';
 
 
@@ -32,9 +27,6 @@ const Login = (props) => {
         setError(props.error.message);
         }
     }
-
-    // console.log('error', error)
-    // console.log('props.error', props.error)
 
     const loginSubmitHandler = (e) => {
         e.preventDefault();
@@ -80,7 +72,6 @@ const Login = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         auth: state.auth,
         error: state.error.message

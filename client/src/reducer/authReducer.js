@@ -8,7 +8,6 @@ const initialState = {
 }
 
 const authReducer = (state = initialState, action) => {
-    console.log('action', action)
     switch (action.type) {
         case actionTypes.LOGIN_REQUEST:
             return {
@@ -41,8 +40,6 @@ const authReducer = (state = initialState, action) => {
                 isAuthenticated: false,
                 user: action.payload.data
             }
-            // case actionTypes.USER_LOGOUT:
-            //     return {}
         default:
             return state
     }

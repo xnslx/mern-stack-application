@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import {getProductShoppingCart,removeProductFromShoppingCart,addProductToFavList,removeProductFromFavList} from '../../action/action';
 import axios from 'axios';
@@ -8,10 +8,8 @@ import {withRouter} from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faStar as fasStar} from '@fortawesome/free-solid-svg-icons';
 import {faStar as farStar} from '@fortawesome/free-regular-svg-icons';
-import PayPal from '../ui/paypal/PayPal';
 
 const ShoppingCart = (props) => {
-    console.log('props',props)
     const [shoppingCartItem, setShoppingCartItem] = useState([]);
     const [like, setLike] = useState(false);
     const likedProducts= props.favoriteList;
@@ -24,7 +22,6 @@ const ShoppingCart = (props) => {
                 Authorization: `Bearer ${props.isUserLogin.user.token}`
             }
         }).then(result => {
-            console.log(result)
             setShoppingCartItem(result.data)
         }).catch(err => {
             console.log(err)
@@ -33,7 +30,6 @@ const ShoppingCart = (props) => {
 
     const token = props.isUserLogin.user.token;
 
-    console.log('shoppingCartItem', shoppingCartItem);
     let total = 0;
     shoppingCartItem.forEach(i => {
         total += i.productId.price * i.quantity
@@ -82,13 +78,11 @@ const ShoppingCart = (props) => {
                         <li>{product.productId.name}</li>
                         <li>$ {product.productId.price}</li>
                         <button className={classes.Button} onClick={(e) =>toggleFavListHandler(e, product.productId._id)} >{likedProducts.includes(product.productId._id)? <FontAwesomeIcon icon={fasStar} /> : <FontAwesomeIcon icon={farStar} />}                            
-                            </button>
+                        </button>
                         <button onClick={(e) => removeProductHandler(e,product.productId._id)} className={classes.ShoppingCartButton}>Remove From Shopping Cart</button>                   
                     </ul>
                 ))}
-                {/* <p>Total Price: ${total}</p> */}
                 <button onClick={processToCheckoutHandler} className={classes.CheckoutButton}>PROCEED TO CHECKOUT ${total}</button>
-                {/* <PayPal payvalue={total}/> */}
             </div>
         )
     }
@@ -100,7 +94,6 @@ const ShoppingCart = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         isUserLogin:state.isUserLogin,
         auth: state.auth,

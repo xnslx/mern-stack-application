@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import classes from './OrderSummary.module.css';
 
 const OrderSummary = (props) => {
-    console.log('props',props)
     const [order, setOrder] = useState([]);
 
     useEffect(() => {
@@ -14,14 +13,12 @@ const OrderSummary = (props) => {
                 Authorization: `Bearer ${props.isUserLogin.user.token}`
             }
         }).then(result => {
-            console.log('result',result)
             setOrder(result.data)
         }).catch(err => {
             console.log(err)
         })
-    },[])
+    },[props.isUserLogin.user.token])
 
-    console.log('order', order)
 
     return (
         <div className={classes.TopContainer}>
@@ -57,7 +54,6 @@ const OrderSummary = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log('state', state)
     return {
         isUserLogin:state.isUserLogin,
         auth: state.auth,
