@@ -4,7 +4,7 @@
     "description": "mern stack",
     "main": "app.js",
     "engines": {
-        "node": "v12.18.2"
+        "node": "12.18.2"
     },
     "scripts": {
         "client-install": "npm install --prefix client",
