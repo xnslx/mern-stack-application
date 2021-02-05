@@ -8,7 +8,8 @@
     },
     "scripts": {
         "client-install": "npm install --prefix client",
-        "start": "nodemon app.js",
+        "start": "node app.js",
+        "start:dev": "nodemon app.js",
         "server": "node app.js",
         "client": "npm start --prefix client",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
