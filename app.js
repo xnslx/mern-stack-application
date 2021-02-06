@@ -30,6 +30,13 @@ app.use((req, res, next) => {
 app.use('/', authRoutes);
 app.use('/products', productsRoutes);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '/client/build/index.html'))
+    })
+}
+
 
 
 app.use((error, req, res, next) => {
@@ -50,13 +57,6 @@ mongoose.connect(dbUrl, {
 }).catch(err => {
     console.log(err)
 })
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'client/build')));
-    app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '/client/build/index.html'))
-    })
-}
 
 app.use((req, res, next) => {
     const error = new Error('Not found!');
