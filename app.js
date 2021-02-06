@@ -51,16 +51,17 @@ mongoose.connect(dbUrl, {
     console.log(err)
 })
 
-app.use(express.static(path.join(__dirname, '/client/build')));
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'))
-})
-
-app.listen(port)
-
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '/client/build/index.html'))
+    })
+}
 
 app.use((req, res, next) => {
     const error = new Error('Not found!');
     error.status = 404;
     next(error);
 })
+
+app.listen(port)
