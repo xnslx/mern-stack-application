@@ -69,4 +69,7 @@
     .ApplyButton {
         width: 90vw;
     }
+    .Title {
+        padding-top: 60px;
+    }
 }
