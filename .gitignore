@@ -1,4 +1,4 @@
-node_modules
+node_modules/
 
 .env
 
@@ -6,5 +6,3 @@ keys.js
 
 .DS_Store
 
-
-client/node_modules
