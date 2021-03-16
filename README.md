@@ -6,4 +6,4 @@
 <p>The stack: MongoDB, Express, React, Node.js. Redux for the global state management. </p>
 <p>Here is the deomo. 👉<strong>https://morning-castle-57375.herokuapp.com/</strong></p>
 
-<p>If you like the project, don't forget to give me a star!🌟</p>
+<p>If you like the project, don't forget to give me a star🌟 or <a href="https://www.buymeacoffee.com/xianl">buy me a coffee</a>. ☕️/p>
